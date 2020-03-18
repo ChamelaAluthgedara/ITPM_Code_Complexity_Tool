@@ -128,11 +128,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\ComplexitySizeController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CdueToSize.cs" />
     <Compile Include="Models\Code_Container_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,6 +150,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
@@ -1979,6 +1982,7 @@
     <Content Include="StartPage\vendor\slick\slick.css" />
     <Content Include="StartPage\vendor\slick\slick.js" />
     <Content Include="StartPage\vendor\slick\slick.min.js" />
+    <Content Include="uploadedFiles\lol.java" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2101,10 +2105,11 @@
     <Content Include="StartPage\vendor\slick\slick-theme.scss" />
     <Content Include="StartPage\vendor\slick\slick.less" />
     <Content Include="StartPage\vendor\slick\slick.scss" />
+    <Content Include="Views\ComplexitySize\ComplexitySize.cshtml" />
+    <Content Include="Views\Upload\UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
-    <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

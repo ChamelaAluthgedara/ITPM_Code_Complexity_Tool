@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.CdueToSize>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<body>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            /*background-color: #dddddd;*/
+        }
+    </style>
+
+    <h2>Displaying the complexity of a program due to size </h2>
+    <table>
+        <tr>
+            <td>Line No</td>
+            <td>Code Line</td>
+            <td>No.of Keywords</td>
+            <td>No.of Identifers</td>
+            <td>No.of operators</td>
+            <td>No.of Numerical Values</td>
+            <td>No.of String Literal</td>
+            <td>Cs</td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr style="padding:23px;">
+                    <td> @item.lineNo </td>
+                    <td> @item.CODELINE </td>
+                    @if (item.keywordCount != 0)
+                    {
+                        <td> @item.keywordCount </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.identifires != 0)
+                    {
+                        <td> @item.identifires </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.operatorCount != 0)
+                    {
+                        <td> @item.operatorCount </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.variableCount != 0)
+                    {
+                        <td> @item.variableCount </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.stringLiteral != 0)
+                    {
+                        <td> @item.stringLiteral </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td> @item.CI </td>
+
+                </tr>
+
+
+            }
+
+
+        }
+    </table>
+</body>
