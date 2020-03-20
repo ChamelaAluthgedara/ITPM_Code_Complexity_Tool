@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.CdueToVariables>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<body>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            /*background-color: #dddddd;*/
+        }
+    </style>
+
+    <h2>Displaying the complexity of a program due to size </h2>
+    <table>
+        <tr>
+            <td>Line No</td>
+            <td>Code Line</td>
+            <td>Wvs </td>
+            <td>Npdtv </td>
+            <td>Ncdtv </td>
+            <td>Cv </td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr style="padding:23px;">
+                    <td> @item.lineNo </td>
+                    <td> @item.CODELINE </td>
+
+                    @if (item.WeightDueToVScope != 0 && item.NoPrimitiveDataTypeVariables > 0 || item.NoCompositeDataTypeVariables > 0)
+                    {
+                        <td> @item.WeightDueToVScope </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                    @if (item.NoPrimitiveDataTypeVariables != 0)
+                    {
+                        <td> @item.NoPrimitiveDataTypeVariables </td>
+                    }
+                    else if (item.WeightDueToVScope != 0 && item.NoCompositeDataTypeVariables != 0)
+                    {
+                        <td> 0 </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                    @if (item.NoCompositeDataTypeVariables != 0)
+                    {
+                        <td> @item.NoCompositeDataTypeVariables </td>
+                    }
+                    else if (item.WeightDueToVScope != 0 && item.NoPrimitiveDataTypeVariables != 0)
+                    {
+                        <td> 0 </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td> @item.Cv </td>
+
+                </tr>
+
+
+            }
+
+
+        }
+    </table>
+</body>

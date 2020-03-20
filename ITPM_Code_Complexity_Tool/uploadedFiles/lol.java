@@ -4,6 +4,8 @@ public class Calculator {
 
     public static void main(String[] args) {
 
+    int arr[];
+    public int rows = 5;
         Scanner reader = new Scanner(System.in);
         System.out.print("Enter two numbers: ");
 

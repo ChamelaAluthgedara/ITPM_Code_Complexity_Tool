@@ -12,7 +12,6 @@ namespace ITPM_Code_Complexity_Tool.Models
         int lineNo = 0;
         int keywordCount = 0;
         int operatorCount = 0;
-        int variableCount = 0;
         int numricalCount = 0;
         int identifires = 0;
         int stringLiteral = 0;

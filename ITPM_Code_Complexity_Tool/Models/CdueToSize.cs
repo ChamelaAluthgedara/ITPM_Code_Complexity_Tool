@@ -30,4 +30,25 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.CI = cs;
         }
     }
+
+    public class CdueToVariables
+    {
+        public int lineNo;
+        public String CODELINE;
+        public int WeightDueToVScope;
+        public int NoPrimitiveDataTypeVariables;
+        public int NoCompositeDataTypeVariables;
+        public int Cv;
+
+
+        public CdueToVariables(int lineNo, String codeline, int WeightDueToVScope, int NoPrimitiveDataTypeVariables, int NoCompositeDataTypeVariables, int cv)
+        {
+            this.lineNo = lineNo;
+            this.CODELINE = codeline;
+            this.WeightDueToVScope = WeightDueToVScope;
+            this.NoPrimitiveDataTypeVariables = NoPrimitiveDataTypeVariables;
+            this.NoCompositeDataTypeVariables = NoCompositeDataTypeVariables;
+            this.Cv = cv;
+        }
+    }
 }

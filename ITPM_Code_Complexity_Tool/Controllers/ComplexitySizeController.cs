@@ -19,6 +19,16 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             var retVal = detector.showData();
             return View(retVal);
         }
+        public ActionResult ComplexityVariables()
+        {
+            //Model Class
+
+            var detector = new Models.ComplexityVariables();
+            detector.SetFileName("pop.txt");
+            detector.ProcessFile();
+            var retVal = detector.showData();
+            return View(retVal);
+        }
 
     }
 }
