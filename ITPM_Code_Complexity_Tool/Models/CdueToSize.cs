@@ -26,7 +26,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.operatorCount = operatorCount;
             this.stringLiteral = stringLiteral;
             this.numricalCount = numricalCount;
-            this.numricalCount = identifires;
+            this.identifires = identifires;
             this.CI = cs;
         }
     }

@@ -17,12 +17,22 @@ namespace ITPM_Code_Complexity_Tool.Models
         int stringLiteral = 0;
         int cs = 0;
 
+
+        public int Wkw = 1;
+        public int Wid = 1;
+        public int Wop = 1;
+        public int Wnv = 1;
+        public int Wsl = 1;
+
+
+
         public static string rootFolder = "C:\\Users\\Chamela Aluthgedara\\Desktop\\ITPM_2020_1\\ITPM_2020\\ITPM_2020\\uploadedFiles\\";
         private String FILE_NAME;
 
+       
         public static string[] numericalArray =
         {
-            "+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9" ,"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9" ,"1", "2", "3", "4", "5", "6", "7", "8", "9" , "0"
+            "+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9" ,"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9" ,"1", "2", "3", "4", "5", "6", "7", "8", "9" , "0"," 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9" , " 0"
         };
         public static string[] identifiresArray = {
 
@@ -88,11 +98,11 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         };
 
-        public static string[] stringLiteralArray = { "System.out.printf(", "System.out.printf( ", "System.out.print( ", "System.out.println( ", "System.out.print(", "System.out.println(" };
+        public static string[] stringLiteralArray = { "System.out.printf", "System.out.printf ", "System.out.print ", "System.out.println ", "System.out.print", "System.out.println" };
         public static string[] wordAray = { "class", "static", "public", "void", "true", "else", "default", "return", "null", "break", "this" };
         public static string[] operatorAray = {  "+", "-", "*", "/", "%", "%.", "++","--",  "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
          "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ".", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
-         "^="  };
+         "^=", "."};
 
 
         List<CdueToSize> completeList = new List<CdueToSize>();
@@ -143,9 +153,9 @@ namespace ITPM_Code_Complexity_Tool.Models
         {
             string[] wordNm = line.Split(new char[] { '(', ')', '\r', '\n', ',', ';', '=', ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-            string[] wordSl = line.Split(new char[] { ' ', '"', '\r', '\n', ',' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+            string[] wordSl = line.Split(new char[] { ' ', '"', '\r', '\n', ',', '(' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-            string[] wordOp = line.Split(new char[] { ' ', '\r', '\n', ',', ';', '"', '.' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+            string[] wordOp = line.Split(new char[] { ' ', '\r', '\n', ',', ';', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
             string[] words = line.Split(new char[] { ' ', '\r', '\n', ',' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
             try
@@ -214,8 +224,9 @@ namespace ITPM_Code_Complexity_Tool.Models
                     }
                 }
                 lineNo++;
-                cs = keywordCount + operatorCount + stringLiteral + numricalCount + identifires;
+                cs = (Wkw* keywordCount) + (Wid*operatorCount) + (Wop*stringLiteral) + (Wnv*numricalCount) + (Wsl*identifires);
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
+                System.Diagnostics.Debug.WriteLine("numerical" + numricalCount);
                 keywordCount = 0;
                 operatorCount = 0;
                 stringLiteral = 0;
