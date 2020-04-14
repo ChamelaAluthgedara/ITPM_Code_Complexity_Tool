@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ControlStrctureController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -148,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Controlstructure.cs" />
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
@@ -2101,9 +2103,11 @@
     <Content Include="StartPage\vendor\slick\slick-theme.scss" />
     <Content Include="StartPage\vendor\slick\slick.less" />
     <Content Include="StartPage\vendor\slick\slick.scss" />
+    <Content Include="Views\ControlStrcture\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>

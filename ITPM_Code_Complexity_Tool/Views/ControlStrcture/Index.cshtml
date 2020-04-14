@@ -1,0 +1,84 @@
+﻿@using System.IdentityModel.Tokens
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<br />
+
+@using (Html.BeginForm("Index", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
+    <div>
+        @Html.TextBox("file", "", new {type = "file"}) <br/>
+
+        <input type="submit" value="Upload and Calculate"/>
+        @ViewBag.Message
+
+    </div>
+
+
+
+    <br/>
+    <br/>
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Line no</th>
+            <th scope="col">Program Statements</th>
+            <th scope="col">Wtcs</th>
+            <th scope="col">NC</th>
+            <th scope="col">Ccspps</th>
+            <th scope="col">Ccs</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @{
+
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.LineNO</th>
+                        <td>@item.ProgramStatment</td>
+                        <td>@item.Wtcs</td>
+                        <td>@item.NC</td>
+                        <td>@item.Ccpps
+                        <td>@item.Ccs</td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <th scope="row">null</th>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>null<td>
+                    <td>null</td>
+
+                </tr>
+
+            }
+
+        }
+
+        </tbody>
+    </table>
+}
+
+
+@using (Html.BeginForm("Reset", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <input type="submit" value="Reset"/>
+
+}
