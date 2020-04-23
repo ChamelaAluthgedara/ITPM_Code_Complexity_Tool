@@ -2235,6 +2235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
+    <Folder Include="Views\TilesSelection\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
