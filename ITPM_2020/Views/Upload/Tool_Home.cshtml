@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "Tool_Home";
+}
+
+
+<head>
+    <title>Code Complexity Finder</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+
+
+
+
+<h2>Tool_Home</h2>
+
+@{
+    if (ViewData["File_Name"] != null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            ViewData["File_Name"] = @name.FILE_NAME;
+        }
+    }
+    else
+    {
+
+    }
+
+}
+
+
+
+<div class="container-fluid">
+    
+    <div class="container-fluid">
+        <div class="row">
+
+            <form method="get" action="">
+                <div class="col-sm-3 col-md-6 col-lg-4 bg-success">
+                    <input type="submit" name="Inheritance" value="Inheritance" />
+                </div>
+            </form>
+              
+            <form method="get" action="">
+                <div class="col-sm-9 col-md-6 col-lg-8 bg-warning">
+                    <input type="submit" name="Size" value="Size" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

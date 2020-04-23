@@ -1,0 +1,77 @@
+﻿ 
+
+
+@model List<ITPM_2020.Models.Inheritance>
+
+<!DOCTYPE html>
+
+<head>
+    <title> Experimental </title>
+</head>
+
+<body>
+
+    <h1> Inheritance </h1>
+
+
+    <br /> <br />
+
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+
+    <table>
+        <tr>
+            <td> <strong> Code Line </strong> </td>
+            <td> <strong> No. of Direct Inheritances </strong> </td>
+            <td> <strong> No. of Indirect Inheritances </strong> </td>
+            <td> <strong> Ci </strong> </td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+        <tr style="padding:23px;">
+
+
+
+            @{ if (@item.CODELINE == "Total")
+                {
+                    <td style="color:white;font-weight:bold;background-color:black;"> @item.CODELINE </td>
+                    <td style="color:white;font-weight:bold;background-color:black;"> @item.DIRECT  </td>
+                    <td style="color:white;font-weight:bold;background-color:black;"> @item.INDIRECT </td>
+                    <td style="color:white;font-weight:bold;background-color:black;"> @item.CI </td>
+                }
+
+                else
+                {
+                    <td> @item.CODELINE </td>
+                    <td> @item.DIRECT </td>
+                    <td> @item.INDIRECT </td>
+                    <td> @item.CI </td>
+                }
+            }
+
+        </tr>
+            }
+
+
+        }
+    </table>
+</body>

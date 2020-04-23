@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "MultipleFiles";
+}
+
+<h2> Complexity Finder </h2>
+
+
+
+
+@{
+    foreach (var pop in ViewBag.FILES_FROM_UPLOAD)
+    {
+        <h3>  @pop.FILE_NAME </h3>
+    }
+}
+
+
+
