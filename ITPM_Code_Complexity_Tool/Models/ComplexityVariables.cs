@@ -1,4 +1,5 @@
-﻿using System;
+﻿using java.util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,13 +25,13 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public static string[] primitiveDataTypes = {
 
-            "int ",
-            "float ",
-            "double ",
-            "char ",
-            "string ",
-            "long ",
-            "Boolean ",
+            "int",
+            "float",
+            "double",
+            "char",
+            "string",
+            "long",
+            "Boolean",
 
 
         };
@@ -44,6 +45,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             "string[ ",
             "long[ ",
             "Boolean[ ",
+            "ArrayList ",
 
              "int[",
             "float[",
@@ -121,15 +123,19 @@ namespace ITPM_Code_Complexity_Tool.Models
         {
            try
             {
-                string[] words = line.Split(new char[] { ' ', '(', ')', '\r', '\n', ',' , ';', ']'}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+                string[] words = line.Split(new char[] { ' '}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
                 try
                 {
                     for (int j = 0; j < primitiveDataTypes.Length; j++)
                     {
                         for (int i = 0; i < words.Length; i++)
                         {
-                            if (words[i] + " " == primitiveDataTypes[j])
+
+                            if (words[i] == primitiveDataTypes[j])
                             {
+                                
+                                System.Diagnostics.Debug.WriteLine("line: " + words[i]);
+
                                 NoPrimitiveDataTypeVariables++;
                             }
                         }
@@ -140,24 +146,24 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                 }
 
-                try
-                {
-                    for (int j = 0; j < compositeDataTypes.Length; j++)
-                    {
-                        for (int i = 0; i < words.Length; i++)
-                        {
-                            if (words[i] + " " == compositeDataTypes[j])
-                            {
-                                NoCompositeDataTypeVariables++;
-                            }
-                        }
-                    }
-                }
+                //try
+                //{
+                //    for (int j = 0; j < compositeDataTypes.Length; j++)
+                //    {
+                //        for (int i = 0; i < words.Length; i++)
+                //        {
+                //            if (words[i] + " " == compositeDataTypes[j])
+                //            {
+                //                NoCompositeDataTypeVariables++;
+                //            }
+                //        }
+                //    }
+                //}
 
-                finally
-                {
+                //finally
+                //{
 
-                }
+                //}
 
                 lineNo++;
                 Cv= (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + ( Wcdtv * NoCompositeDataTypeVariables ) ));
