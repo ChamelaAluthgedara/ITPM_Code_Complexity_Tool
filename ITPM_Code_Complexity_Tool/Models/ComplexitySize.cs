@@ -35,12 +35,19 @@ namespace ITPM_Code_Complexity_Tool.Models
             "+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9" ,"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9" ,"1", "2", "3", "4", "5", "6", "7", "8", "9" , "0"," 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9" , " 0"
         };
         public static string[] identifiresArray = {
+            "+", "-",
             "class ",
             "class",
 
             "public",
             "private",
             "protected",
+
+            "System",
+            "out",
+            "println",
+             "printf",
+             "print",
 
             //"for",
             //"for ",
@@ -66,51 +73,51 @@ namespace ITPM_Code_Complexity_Tool.Models
             //"long",
             //"Boolean",
 
-            "int float ",
-            "public float ",
-            "public double ",
-            "public string ",
-            "public long ",
-            "public Boolean ",
+            //"int float ",
+            //"public float ",
+            //"public double ",
+            //"public string ",
+            //"public long ",
+            //"public Boolean ",
 
-            "private int ",
-            "private float ",
-            "private double",
-            "private string",
-            "private long",
-            "private Boolean",
+            //"private int ",
+            //"private float ",
+            //"private double",
+            //"private string",
+            //"private long",
+            //"private Boolean",
 
-            "protected int ",
-            "protected float ",
-            "protected double ",
-            "protected string ",
-            "protected long ",
-            "protected Boolean ",
+            //"protected int ",
+            //"protected float ",
+            //"protected double ",
+            //"protected string ",
+            //"protected long ",
+            //"protected Boolean ",
 
-            "public static int ",
-            "public static float ",
-            "public static double ",
-            "public static string ",
-            "public static long ",
-            "public static Boolean ",
+            //"public static int ",
+            //"public static float ",
+            //"public static double ",
+            //"public static string ",
+            //"public static long ",
+            //"public static Boolean ",
 
-            "private static int ",
-            "private static float ",
-            "private static double ",
-            "private static string ",
-            "private static long ",
-            "private static Boolean ",
+            //"private static int ",
+            //"private static float ",
+            //"private static double ",
+            //"private static string ",
+            //"private static long ",
+            //"private static Boolean ",
 
-            "protected static int ",
-            "protected static float ",
-            "protected static double ",
-            "protected static string ",
-            "protected static long ",
-            "protected static Boolean ",
+            //"protected static int ",
+            //"protected static float ",
+            //"protected static double ",
+            //"protected static string ",
+            //"protected static long ",
+            //"protected static Boolean ",
 
-            "public static void main",
-            "public static void main ",
-            "public static void main ( ",
+            //"public static void main",
+            //"public static void main ",
+            //"public static void main ( ",
 
         };
 
@@ -120,7 +127,7 @@ namespace ITPM_Code_Complexity_Tool.Models
          "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ".", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
          "^=", "."};
 
-        public String[] controlStrucures = { "if", "while", "do", "switch", "for" };
+        public String[] controlStrucures = { "if", "while", "do", "switch", "for"};
 
         List<CdueToSize> completeList = new List<CdueToSize>();
 
@@ -175,7 +182,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             string[] wordOp = line.Trim().Split(new char[] { ' ', '\r', '\n', ',', ';', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
             string[] words = line.Trim().Split(new char[] { ' ', '\r', '\n', ',' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-            string[] wordIdenti = line.Trim().Split(new string[] { " ", "\r", "\n", ",", "(", "int" }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+            string[] wordIdenti = line.Split(new char[] { ' ', '\r', '\n', ',', '(', '.', ')', '"', '"', ';' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
             try
             {
@@ -222,6 +229,11 @@ namespace ITPM_Code_Complexity_Tool.Models
                     {
                         if (wordIdenti[i] == controlStrucures[j])
                         {
+                            if(wordIdenti[i] == "for")
+                            {
+                                System.Diagnostics.Debug.WriteLine("line:" + lineNo + " identifer: " + wordIdenti[i]);
+                                identifires = +3;
+                            }
                             identifires++;
 
                         }
@@ -233,6 +245,8 @@ namespace ITPM_Code_Complexity_Tool.Models
                     {
                         if (wordIdenti[i] == identifiresArray[j])
                         {
+                            System.Diagnostics.Debug.WriteLine("line:" + lineNo + " identifer: " + wordIdenti[i]);
+
                             identifires++;
 
                         }
@@ -268,14 +282,14 @@ namespace ITPM_Code_Complexity_Tool.Models
                 }
                 lineNo++;
 
-                identifires = stringLiteral + operatorCount + identifires;
+               // identifires = stringLiteral + identifires;
 
                 cs = (Wkw* keywordCount) + (Wid*operatorCount) + (Wop*stringLiteral) + (Wnv*numricalCount) + (Wsl*identifires);
 
                 
 
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
-                System.Diagnostics.Debug.WriteLine("identifires: " + identifires);
+                
                 keywordCount = 0;
                 operatorCount = 0;
                 stringLiteral = 0;
