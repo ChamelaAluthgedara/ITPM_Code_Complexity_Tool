@@ -30,5 +30,16 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             return View(retVal);
         }
 
+        public ActionResult ComplexityMethods()
+        {
+            //Model Class
+
+            var detector = new Models.ComplexityMethods();
+            detector.SetFileName("pop.txt");
+            detector.ProcessFile();
+            var retVal = detector.showData();
+            return View(retVal);
+        }
+
     }
 }

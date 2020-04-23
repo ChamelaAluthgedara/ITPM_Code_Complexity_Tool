@@ -50,5 +50,28 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.NoCompositeDataTypeVariables = NoCompositeDataTypeVariables;
             this.Cv = cv;
         }
+
+    }
+
+    public class CdueToMethod
+    {
+        public int lineNo;
+        public String CODELINE;
+        public int NumberOfCompositeDataTypeParameters;
+        public int NumberOfPrimitiveDataTypeParameters;
+        public int methodReturnType;
+        public int Cm;
+
+
+        public CdueToMethod(int lineNo, String codeline, int NumberOfCompositeDataTypeParameters, int NoPrimitiveDataTypeVariables, int methodReturnType, int Cm)
+        {
+            this.lineNo = lineNo;
+            this.CODELINE = codeline;
+            this.NumberOfCompositeDataTypeParameters = NumberOfCompositeDataTypeParameters;
+            this.NumberOfPrimitiveDataTypeParameters = NoPrimitiveDataTypeVariables;
+            this.methodReturnType = methodReturnType;
+            this.Cm = Cm;
+        }
+
     }
 }

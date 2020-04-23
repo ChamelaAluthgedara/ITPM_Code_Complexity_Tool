@@ -234,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComplexityMethods.cs" />
     <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\ComplexityVariables.cs" />
     <Compile Include="Models\Table.cs">
@@ -2230,6 +2231,7 @@
     <Content Include="Views\ComplexitySize\ComplexitySize.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="Views\ComplexitySize\ComplexityVariables.cshtml" />
+    <Content Include="Views\ComplexitySize\ComplexityMethods.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
