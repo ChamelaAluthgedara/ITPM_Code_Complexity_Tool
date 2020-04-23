@@ -18,6 +18,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         [HttpGet]
         public ActionResult UploadFile()
         {
+
             return View();
         }
 
@@ -27,16 +28,20 @@ namespace ITPM_Code_Complexity_Tool.Controllers
 
             try
             {
-                if (file.ContentLength > 0)
+                if (!file.Equals(null))
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/uploadedFiles"), _FileName);
+                 
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extension = Path.GetExtension(file.FileName);
+                    fileName =  "userUploadFile" + extension;
+                    string _path = Path.Combine(Server.MapPath("~/uploadedFiles"), fileName);
                     file.SaveAs(_path);
+
                 }
                 ViewBag.Message = "File Uploaded Successfully!!";
-                return View();
+                return RedirectToAction("ComplexitySize", "ComplexitySize");
             }
-            catch
+            catch(Exception e)
             {
                 ViewBag.Message = "File upload failed!!";
                 return View();

@@ -20,7 +20,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         int NoCompositeDataTypeVariables = 0;
         int Cv = 0;
 
-        public static string rootFolder = "C:\\Users\\Chamela Aluthgedara\\Desktop\\ITPM_2020_1\\ITPM_2020\\ITPM_2020\\uploadedFiles\\";
+        public static string rootFolder = "../uploadedFiles";
         private String FILE_NAME;
 
         public static string[] primitiveDataTypes = {
@@ -90,8 +90,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public void ProcessFile()
         {
 
-            this.FILE_NAME = "lol.java";
-            Console.WriteLine("TikTok");
+            this.FILE_NAME = "userUploadFile.java";
 
             try
             {

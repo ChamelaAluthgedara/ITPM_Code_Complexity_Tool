@@ -19,7 +19,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Wcdtp = 2;
 
 
-        public static string rootFolder = "C:\\Users\\Chamela Aluthgedara\\Desktop\\ITPM_2020_1\\ITPM_2020\\ITPM_2020\\uploadedFiles\\";
+        public static string rootFolder = "../uploadedFiles";
         private String FILE_NAME;
 
         List<CdueToMethod> completeList = new List<CdueToMethod>();
@@ -68,8 +68,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public void ProcessFile()
         {
 
-            this.FILE_NAME = "lol.java";
-            Console.WriteLine("TikTok");
+            this.FILE_NAME = "userUploadFile.java";
 
             try
             {

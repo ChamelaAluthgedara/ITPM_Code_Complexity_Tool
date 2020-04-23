@@ -2105,7 +2105,6 @@
     <Content Include="StartPage\vendor\slick\slick.css" />
     <Content Include="StartPage\vendor\slick\slick.js" />
     <Content Include="StartPage\vendor\slick\slick.min.js" />
-    <Content Include="uploadedFiles\lol.java" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2235,6 +2234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
+    <Folder Include="uploadedFiles\" />
     <Folder Include="Views\TilesSelection\" />
   </ItemGroup>
   <ItemGroup>
