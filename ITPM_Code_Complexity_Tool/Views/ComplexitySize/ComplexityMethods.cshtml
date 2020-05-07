@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.CdueToMethod>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<body>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            /*background-color: #dddddd;*/
+        }
+    </style>
+
+    <h2>Displaying the complexity of a program due to Method </h2>
+
+    <div align="right">
+        <input type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySize/ComplexitySize'" />   &nbsp;  &nbsp;    <input type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySize/ComplexityVariables'" />
+    </div><br /><br />
+
+    <table>
+        <tr>
+            <td>Line No</td>
+            <td>Code Line</td>
+            <td>Wmrt</td>
+            <td>Npdtp</td>
+            <td>Ncdtp</td>
+            <td>Cm</td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr style="padding:23px;">
+                    <td> @item.lineNo </td>
+                    <td> @item.CODELINE </td>
+                    @if (item.methodReturnType != 0)
+                    {
+                        <td> @item.methodReturnType </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.NumberOfPrimitiveDataTypeParameters != 0)
+                    {
+                        <td> @item.NumberOfPrimitiveDataTypeParameters </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.NumberOfCompositeDataTypeParameters != 0)
+                    {
+                        <td> @item.NumberOfCompositeDataTypeParameters </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.Cm != 0)
+                    {
+                        <td> @item.Cm </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                </tr>
+
+
+            }
+
+
+        }
+    </table>
+</body>
