@@ -212,8 +212,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+
     <Compile Include="Controllers\ComplexitySizeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -234,9 +236,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Compile>
+
     <Compile Include="Models\ComplexityMethods.cs" />
     <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\ComplexityVariables.cs" />
+
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
@@ -2227,6 +2231,7 @@
     <Content Include="StartPage\vendor\slick\slick-theme.scss" />
     <Content Include="StartPage\vendor\slick\slick.less" />
     <Content Include="StartPage\vendor\slick\slick.scss" />
+
     <Content Include="Views\ComplexitySize\ComplexitySize.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="Views\ComplexitySize\ComplexityVariables.cshtml" />
@@ -2236,6 +2241,7 @@
     <Folder Include="AppFiles\Files\" />
     <Folder Include="uploadedFiles\" />
     <Folder Include="Views\TilesSelection\" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
