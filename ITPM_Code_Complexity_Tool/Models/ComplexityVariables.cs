@@ -10,10 +10,12 @@ namespace ITPM_Code_Complexity_Tool.Models
     public class ComplexityVariables
     {
         int lineNo = 0;
+        public int totalCv;
 
         int WeightDueToVScope = 1;
         int Wpdv = 1;
         int Wcdtv = 1;
+
 
 
         int NoPrimitiveDataTypeVariables = 0;
@@ -165,11 +167,14 @@ namespace ITPM_Code_Complexity_Tool.Models
                 //}
 
                 lineNo++;
-                Cv= (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + ( Wcdtv * NoCompositeDataTypeVariables ) ));
+                Cv = (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + ( Wcdtv * NoCompositeDataTypeVariables ) ));
+                totalCv = totalCv + Cv;
                 completeList.Add(new CdueToVariables(lineNo, line, WeightDueToVScope, NoPrimitiveDataTypeVariables, NoCompositeDataTypeVariables, Cv));
                 NoPrimitiveDataTypeVariables = 0;
                 NoCompositeDataTypeVariables = 0;
                 Cv = 0;
+                CdueToVariables c = new CdueToVariables(this.totalCv);
+                System.Diagnostics.Debug.WriteLine("totalCv: " + totalCv);
             }
             finally
             {

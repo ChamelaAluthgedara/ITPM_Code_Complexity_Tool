@@ -212,7 +212,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ComplexitySizeController.cs" />
+    <Compile Include="Controllers\ComplexitySizeVariablesMethodsController.cs" />
     <Compile Include="Controllers\ControlStrctureController.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -2231,10 +2231,10 @@
     <Content Include="StartPage\vendor\slick\slick-theme.scss" />
     <Content Include="StartPage\vendor\slick\slick.less" />
     <Content Include="StartPage\vendor\slick\slick.scss" />
-    <Content Include="Views\ComplexitySize\ComplexitySize.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\ComplexitySize.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
-    <Content Include="Views\ComplexitySize\ComplexityVariables.cshtml" />
-    <Content Include="Views\ComplexitySize\ComplexityMethods.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\ComplexityVariables.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\ComplexityMethods.cshtml" />
     <Content Include="Views\ControlStrcture\Index.cshtml" />
     <Content Include="Views\Function\Index.cshtml" />
   </ItemGroup>

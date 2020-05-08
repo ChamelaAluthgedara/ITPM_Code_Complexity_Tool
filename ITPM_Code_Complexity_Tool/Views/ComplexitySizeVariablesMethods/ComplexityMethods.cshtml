@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.CdueToMethod>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/Content/style1.css" rel="stylesheet" />
+<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
+<body>
+   
+
+    <h1 style="color:white;">Displaying the complexity of a program due to Method </h1>
+
+    <div align="right">
+        <input class="button button3" type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexitySize'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables'" />
+    </div><br /><br />
+
+                <table style="color: black;">
+                    <tr id="ROW1">
+                        <td>Line No</td>
+                        <td>Code Line</td>
+                        <td>Wmrt</td>
+                        <td>Npdtp</td>
+                        <td>Ncdtp</td>
+                        <td>Cm</td>
+                    </tr>
+
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr style="padding:23px;">
+                                <td> @item.lineNo </td>
+                                <td> @item.CODELINE </td>
+                                @if (item.methodReturnType != 0)
+                                {
+                                    <td> @item.methodReturnType </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @if (item.NumberOfPrimitiveDataTypeParameters != 0)
+                                {
+                                    <td> @item.NumberOfPrimitiveDataTypeParameters </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @if (item.NumberOfCompositeDataTypeParameters != 0)
+                                {
+                                    <td> @item.NumberOfCompositeDataTypeParameters </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @if (item.Cm != 0)
+                                {
+                                    <td> @item.Cm </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+
+                            </tr>
+
+
+                        }
+
+
+                    }
+                    <tr id="ROW1">
+                        <td> Total </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @ViewBag.TotalCm
+                        </td>
+
+                    </tr>
+                </table>
+</body>

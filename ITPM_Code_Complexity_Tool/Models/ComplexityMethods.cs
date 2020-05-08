@@ -10,6 +10,7 @@ namespace ITPM_Code_Complexity_Tool.Models
     {
         int lineNo = 0;
         public int Cm;
+        public int totalCm;
 
         public int Wmrt;
         public int Npdtp;
@@ -142,12 +143,12 @@ namespace ITPM_Code_Complexity_Tool.Models
                 System.Diagnostics.Debug.WriteLine("composite: " + Ncdtp);
                 lineNo++;
                 Cm = Wmrt + (Wpdtp * Npdtp) + (Wcdtp * Ncdtp);
+                totalCm = totalCm + Cm;
                 completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, Cm));
-                
-                
                 Npdtp = 0;
                 Ncdtp = 0;
                 Cm = 0;
+                CdueToMethod c = new CdueToMethod(this.totalCm);
             }
             finally
             {

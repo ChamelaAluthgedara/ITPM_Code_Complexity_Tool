@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Collections;
+using javax.swing.text;
 
 namespace ITPM_Code_Complexity_Tool.Models
 {
@@ -16,7 +17,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         int identifires = 0;
         int stringLiteral = 0;
         int cs = 0;
-
+        public int totalCS;
 
         public int Wkw = 1;
         public int Wid = 1;
@@ -285,9 +286,9 @@ namespace ITPM_Code_Complexity_Tool.Models
                // identifires = stringLiteral + identifires;
 
                 cs = (Wkw* keywordCount) + (Wid*operatorCount) + (Wop*stringLiteral) + (Wnv*numricalCount) + (Wsl*identifires);
+                totalCS = totalCS + cs;
 
-                
-
+               
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
                 
                 keywordCount = 0;
@@ -296,7 +297,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 numricalCount = 0;
                 identifires = 0;
                 cs = 0;
-
+                CdueToSize c = new CdueToSize(this.totalCS);
 
             }
             finally

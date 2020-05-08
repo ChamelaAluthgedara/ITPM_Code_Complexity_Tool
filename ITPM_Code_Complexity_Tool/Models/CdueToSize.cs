@@ -16,6 +16,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int identifires;
         public int stringLiteral;
         public int CI;
+        public  int totalCSCal;
 
 
         public CdueToSize(int lineNo, String codeline, int keywordCount, int operatorCount, int numricalCount, int identifires, int stringLiteral, int cs)
@@ -29,6 +30,12 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.identifires = identifires;
             this.CI = cs;
         }
+        public CdueToSize(int totalCS)
+        {
+            
+            this.totalCSCal = totalCS;
+        }
+
     }
 
     public class CdueToVariables
@@ -39,6 +46,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int NoPrimitiveDataTypeVariables;
         public int NoCompositeDataTypeVariables;
         public int Cv;
+        public int totalVCCal;
 
 
         public CdueToVariables(int lineNo, String codeline, int WeightDueToVScope, int NoPrimitiveDataTypeVariables, int NoCompositeDataTypeVariables, int cv)
@@ -49,6 +57,11 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.NoPrimitiveDataTypeVariables = NoPrimitiveDataTypeVariables;
             this.NoCompositeDataTypeVariables = NoCompositeDataTypeVariables;
             this.Cv = cv;
+        }
+        public CdueToVariables(int totalVCCal)
+        {
+
+            this.totalVCCal = totalVCCal;
         }
 
     }
@@ -61,6 +74,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int NumberOfPrimitiveDataTypeParameters;
         public int methodReturnType;
         public int Cm;
+        public int totalCMCal;
 
 
         public CdueToMethod(int lineNo, String codeline, int NumberOfCompositeDataTypeParameters, int NoPrimitiveDataTypeVariables, int methodReturnType, int Cm)
@@ -71,6 +85,11 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.NumberOfPrimitiveDataTypeParameters = NoPrimitiveDataTypeVariables;
             this.methodReturnType = methodReturnType;
             this.Cm = Cm;
+        }
+        public CdueToMethod(int totalCMCal)
+        {
+
+            this.totalCMCal = totalCMCal;
         }
 
     }
