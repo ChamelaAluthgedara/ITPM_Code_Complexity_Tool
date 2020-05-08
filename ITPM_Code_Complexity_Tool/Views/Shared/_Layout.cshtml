@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+
+    <title></title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Online Code Complexity Measuring Tool", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -27,12 +29,21 @@
             </div>
         </div>
     </div>
+
+ 
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        @* <hr />*@
+        @*<footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        </footer>*@
+        <!-- Back to top -->
+        <div class="btn-back-to-top bg0-hov" id="myBtn">
+            <span class="symbol-btn-back-to-top">
+                <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+            </span>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

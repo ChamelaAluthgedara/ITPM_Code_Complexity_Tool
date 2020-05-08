@@ -1,6 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Lily+Script+One';
 body {
-    background: url('/images/unname.jpg');
+    /*background-image: url('../StartPage/images/slide1-01.png');*/
+    background: url('../StartPage/images/slide1-01.png');
     background-attachment: fixed;
     background-repeat: repeat;
     font-family: 'Montserrat', sans-serif;

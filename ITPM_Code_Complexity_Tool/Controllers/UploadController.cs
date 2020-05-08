@@ -36,7 +36,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
                     file.SaveAs(_path);
 
                     ViewBag.Message = "File Uploaded Successfully!!";
-                    return RedirectToAction("ComplexitySize", "ComplexitySize");
+                    return RedirectToAction("Index", "Function");
                 }
                 else
                 {

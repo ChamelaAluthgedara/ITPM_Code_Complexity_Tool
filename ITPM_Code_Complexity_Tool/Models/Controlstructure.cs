@@ -7,8 +7,8 @@ namespace ITPM_Code_Complexity_Tool.Models
 {
     public class Controlstructure
     {
-        
-        public int  LineNO { get; set; }
+
+        public int LineNO { get; set; }
 
         public string ProgramStatment { get; set; }
 

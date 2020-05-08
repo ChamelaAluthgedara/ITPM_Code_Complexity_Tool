@@ -6,35 +6,19 @@
 }
 
 <!DOCTYPE html>
-
-
+<link href="~/Content/style1.css" rel="stylesheet" />
+<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
 <body>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+   
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            /*background-color: #dddddd;*/
-        }
-    </style>
-
-    <h2>Displaying the complexity of a program due to Method </h2>
+    <h1 style="color:white;">Displaying the complexity of a program due to Method </h1>
 
     <div align="right">
-        <input type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySize/ComplexitySize'" />   &nbsp;  &nbsp;    <input type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySize/ComplexityVariables'" />
+        <input class="button button3" type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySize/ComplexitySize'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySize/ComplexityVariables'" />
     </div><br /><br />
 
-    <table>
-        <tr>
+    <table style="color: black;">
+        <tr id="ROW1">
             <td>Line No</td>
             <td>Code Line</td>
             <td>Wmrt</td>
