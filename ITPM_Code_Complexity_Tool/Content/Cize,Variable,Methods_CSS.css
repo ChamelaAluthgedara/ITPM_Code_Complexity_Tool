@@ -1,0 +1,53 @@
+﻿
+
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Blue */
+.button3 {
+    background-color: #f44336;
+}
+
+
+
+table tr#ROW1 {
+    background-color: red;
+    color: white;
+}
+
+table {
+    border: ridge 5px red;
+    background-color: #F6F6F6;
+    color: #FFF;
+}
+
+    table td {
+        border: inset 1px #000;
+    }
+
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    /*background-color: #dddddd;*/
+}
