@@ -11,10 +11,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         // GET: ComplexitySizeController
         public ActionResult ComplexitySize()
         {
-            //Model Class
-
             var detector = new Models.ComplexitySize();
-            detector.SetFileName("pop.txt");
             detector.ProcessFile();
             var retVal = detector.showData();
             ViewBag.TotalCs = detector.totalCS;
@@ -23,10 +20,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         // GET: ComplexityVariablesController
         public ActionResult ComplexityVariables()
         {
-            //Model Class
-
             var detector = new Models.ComplexityVariables();
-            detector.SetFileName("pop.txt");
             detector.ProcessFile();
             var retVal = detector.showData();
             ViewBag.TotalCv = detector.totalCv;
@@ -35,10 +29,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         // GET: ComplexityMethodsController
         public ActionResult ComplexityMethods()
         {
-            //Model Class
-
             var detector = new Models.ComplexityMethods();
-            detector.SetFileName("pop.txt");
             detector.ProcessFile();
             var retVal = detector.showData();
             ViewBag.TotalCm = detector.totalCm;
