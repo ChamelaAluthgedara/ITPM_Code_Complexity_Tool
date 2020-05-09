@@ -18,6 +18,12 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int CI;
         public  int totalCSCal;
 
+        public static int Wkw = 1;
+        public static int Wid = 1;
+        public static int Wop = 1;
+        public static int Wnv = 1;
+        public static int Wsl = 1;
+
 
         public CdueToSize(int lineNo, String codeline, int keywordCount, int operatorCount, int numricalCount, int identifires, int stringLiteral, int cs)
         {

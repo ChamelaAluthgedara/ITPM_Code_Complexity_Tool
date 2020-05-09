@@ -19,11 +19,11 @@ namespace ITPM_Code_Complexity_Tool.Models
         int cs = 0;
         public int totalCS;
 
-        public int Wkw = 1;
-        public int Wid = 1;
-        public int Wop = 1;
-        public int Wnv = 1;
-        public int Wsl = 1;
+        public static int Wkw = CdueToSize.Wkw;
+        public static int Wid = CdueToSize.Wid;
+        public static int Wop = CdueToSize.Wop;
+        public static int Wnv = CdueToSize.Wnv;
+        public static int Wsl = CdueToSize.Wsl;
 
 
 

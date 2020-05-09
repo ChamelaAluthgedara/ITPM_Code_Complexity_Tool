@@ -215,6 +215,7 @@
     <Compile Include="Controllers\ComplexitySizeVariablesMethodsController.cs" />
     <Compile Include="Controllers\ControlStrctureController.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
+    <Compile Include="Controllers\InheritanceController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +241,8 @@
     <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\ComplexityVariables.cs" />
     <Compile Include="Models\Controlstructure.cs" />
+    <Compile Include="Models\Inheritance.cs" />
+    <Compile Include="Models\Inheritance_Detector.cs" />
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
@@ -2237,9 +2240,9 @@
     <Content Include="Views\ComplexitySizeVariablesMethods\ComplexityMethods.cshtml" />
     <Content Include="Views\ControlStrcture\Index.cshtml" />
     <Content Include="Views\Function\Index.cshtml" />
+    <Content Include="Views\Inheritance\Inheritance_viewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AppFiles\Files\" />
     <Folder Include="uploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
