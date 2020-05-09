@@ -3,6 +3,17 @@
 
 @{
     Layout = null;
+
+    var fromURL = Request.Params["fileName"];
+
+    if (fromURL == null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            fromURL = name.FILE_NAME;
+        }
+
+    }
 }
 
 <!DOCTYPE html>
@@ -14,7 +25,7 @@
     <h1 style="color:white;">Displaying the complexity of a program due to Method </h1>
 
     <div align="right">
-        <input class="button button3" type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexitySize'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables'" />
+        <input class="button button3" type="button" value="Calculate Complexity due to Size" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexitySize?fileName=@fromURL'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables?fileName=@fromURL'" />
     </div><br /><br />
 
                 <table style="color: black;">
@@ -57,14 +68,8 @@
                                 {
                                     <td></td>
                                 }
-                                @if (item.Cm != 0)
-                                {
                                     <td> @item.Cm </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
+                                
 
                             </tr>
 

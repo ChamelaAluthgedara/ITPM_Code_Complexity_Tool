@@ -2,6 +2,17 @@
 
 @{
     Layout = null;
+
+    var fromURL = Request.Params["fileName"];
+
+    if (fromURL == null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            fromURL = name.FILE_NAME;
+        }
+
+    }
 }
 
 <!DOCTYPE html>
@@ -12,7 +23,7 @@
     <h1 style="color:white;">Displaying the complexity of a program due to Size</h1>
 
     <div align="right">
-        <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Methods" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityMethods'" />
+        <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables?fileName=@fromURL'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Methods" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityMethods?fileName=@fromURL'" />
     </div><br /><br />
 
 
