@@ -16,8 +16,6 @@ namespace ITPM_Code_Complexity_Tool.Models
         int Wpdv = 1;
         int Wcdtv = 1;
 
-
-
         int NoPrimitiveDataTypeVariables = 0;
         int NoCompositeDataTypeVariables = 0;
         int Cv = 0;
@@ -76,7 +74,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
                 try
                 {
-                    foreach (string rowLine in line.Split('\n'))
+                    foreach (string rowLine in line.Split('\n' ))
                     {
                         System.Diagnostics.Debug.WriteLine("Line code " + rowLine);
 
@@ -158,6 +156,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                             {
                                 NoPrimitiveDataTypeVariables++;
                             }
+
                             if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
                             {
                                 NoPrimitiveDataTypeVariables++;
@@ -200,26 +199,22 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                         for (int i = 0; i < compositeDataTypes.Length; i++)
                         {
-
                             if (rowLine.Contains(compositeDataTypes[i]) && rowLine.Contains("=") && !rowLine.Contains("new") && rowLine.Contains(";") && !rowLine.Contains("."))
                             {
                                 NoCompositeDataTypeVariables++;
                             }
-
-
-
                         }
-                            if (rowLine.Contains("=") && rowLine.Contains("new") && rowLine.Contains("(") && rowLine.Contains(";") && !rowLine.Contains("."))
-                            {
-                                NoCompositeDataTypeVariables++;
-                             }
+                        if (rowLine.Contains("=") && rowLine.Contains("new") && rowLine.Contains("(") && rowLine.Contains(";") && !rowLine.Contains("."))
+                        {
+                            NoCompositeDataTypeVariables++;
+                        }
                     }
                 }
                 catch (Exception)
                 {
 
                 }
-                
+
 
                 lineNo++;
                 Cv = (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + (Wcdtv * NoCompositeDataTypeVariables)));

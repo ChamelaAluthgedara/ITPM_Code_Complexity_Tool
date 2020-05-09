@@ -25,110 +25,16 @@ namespace ITPM_Code_Complexity_Tool.Models
         public static int Wnv = CdueToSize.Wnv;
         public static int Wsl = CdueToSize.Wsl;
 
-
-
-        //public static string rootFolder = "../uploadedFiles";
         private String FILE_NAME;
 
-       
-        public static string[] numericalArray =
-        {
-            "+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9" ,"-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9" ,"1", "2", "3", "4", "5", "6", "7", "8", "9" , "0"," 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9" , " 0"
-        };
-        public static string[] identifiresArray = {
-            "+", "-",
-            "class ",
-            "class",
+        public static string[] numericalArray = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
-            "public",
-            "private",
-            "protected",
-
-            "System",
-            "out",
-            "println",
-             "printf",
-             "print",
-
-            //"for",
-            //"for ",
-            //"for (",
-            //"for(",
-            //" for",
-            //" for",
-            //"int ",
-            //"float ",
-            //"double ",
-            //"char ",
-            //"string ",
-            //"string[] ",
-            //"long ",
-            //"Boolean ",
-
-            // "int",
-            //"float",
-            //"char",
-            //"double",
-            //"string",
-            //"string[]",
-            //"long",
-            //"Boolean",
-
-            //"int float ",
-            //"public float ",
-            //"public double ",
-            //"public string ",
-            //"public long ",
-            //"public Boolean ",
-
-            //"private int ",
-            //"private float ",
-            //"private double",
-            //"private string",
-            //"private long",
-            //"private Boolean",
-
-            //"protected int ",
-            //"protected float ",
-            //"protected double ",
-            //"protected string ",
-            //"protected long ",
-            //"protected Boolean ",
-
-            //"public static int ",
-            //"public static float ",
-            //"public static double ",
-            //"public static string ",
-            //"public static long ",
-            //"public static Boolean ",
-
-            //"private static int ",
-            //"private static float ",
-            //"private static double ",
-            //"private static string ",
-            //"private static long ",
-            //"private static Boolean ",
-
-            //"protected static int ",
-            //"protected static float ",
-            //"protected static double ",
-            //"protected static string ",
-            //"protected static long ",
-            //"protected static Boolean ",
-
-            //"public static void main",
-            //"public static void main ",
-            //"public static void main ( ",
-
-        };
-
-        public static string[] stringLiteralArray = { "System.out.printf", "System.out.printf ", "System.out.print ", "System.out.println ", "System.out.print", "System.out.println" };
+        public static string[] identifiresArray = { "class", "return", "main", "System", "out", "print", "printf" };
         public static string[] wordAray = { "class", "static", "public", "void", "true", "else", "default", "return", "null", "break", "this" };
         public static string[] operatorAray = {  "+", "-", "*", "/", "%", "%.", "++","--",  "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
          "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ".", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
          "^=", "."};
-
-        public String[] controlStrucures = { "if", "while", "do", "switch", "for"};
+        public String[] controlStrucures = { "if", "while", "do", "switch", "for" };
 
         List<CdueToSize> completeList = new List<CdueToSize>();
 
@@ -144,9 +50,6 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void ProcessFile()
         {
-
-           // this.FILE_NAME = "userUploadFile.java";
-           
 
             try
             {
@@ -176,28 +79,25 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void GetKeywordCount(string line)
         {
-            string[] wordNm = line.Trim().Split(new char[] { '(', ')', '\r', '\n', ',', ';', '=', ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-
-            string[] wordSl = line.Trim().Split(new char[] { ' ', '"', '\r', '\n', ',', '(' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-
             string[] wordOp = line.Trim().Split(new char[] { ' ', '\r', '\n', ',', ';', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-
-            string[] words = line.Trim().Split(new char[] { ' ', '\r', '\n', ',' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-            string[] wordIdenti = line.Split(new char[] { ' ', '\r', '\n', ',', '(', '.', ')', '"', '"', ';' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
             try
             {
-                for (int j = 0; j < wordAray.Length; j++)
+
+                foreach (string singleRow in line.Split('\n'))
                 {
-                    for (int i = 0; i < words.Length; i++)
+                    for (int i = 0; i < wordAray.Length; i++)
                     {
-                        if (words[i] == wordAray[j])
+
+                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+
+                        if (singleRow.Contains(wordAray[i]))
                         {
                             keywordCount++;
                         }
                     }
-
                 }
+
                 for (int j = 0; j < operatorAray.Length; j++)
                 {
 
@@ -212,85 +112,61 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                     }
                 }
-                for (int j = 0; j < stringLiteralArray.Length; j++)
-                {
-                    for (int i = 0; i < wordSl.Length; i++)
-                    {
-                        if (wordSl[i] == stringLiteralArray[j])
-                        {
-                            stringLiteral++;
 
-                        }
+
+                foreach (string singleRow in line.Split('\n'))
+                {
+                    System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+
+                    if (singleRow.Contains('"') && singleRow.Contains("(") && singleRow.Contains(")") && singleRow.Contains(";"))
+                    {
+                        stringLiteral++;
                     }
                 }
 
-                for (int j = 0; j < controlStrucures.Length; j++)
+                foreach (string rowLine in line.Split('\n'))
                 {
-                    for (int i = 0; i < wordIdenti.Length; i++)
+                    for (int i = 0; i < identifiresArray.Length; i++)
                     {
-                        if (wordIdenti[i] == controlStrucures[j])
+
+                        System.Diagnostics.Debug.WriteLine("This is row line: " + rowLine);
+
+                        if (rowLine.Contains(identifiresArray[i]))
                         {
-                            if(wordIdenti[i] == "for")
-                            {
-                                System.Diagnostics.Debug.WriteLine("line:" + lineNo + " identifer: " + wordIdenti[i]);
-                                identifires = +3;
-                            }
                             identifires++;
-
                         }
+
                     }
-                }
-                for (int j = 0; j < identifiresArray.Length; j++)
-                {
-                    for (int i = 0; i < wordIdenti.Length; i++)
+
+                    if (rowLine.Contains("for"))
                     {
-                        if (wordIdenti[i] == identifiresArray[j])
-                        {
-                            System.Diagnostics.Debug.WriteLine("line:" + lineNo + " identifer: " + wordIdenti[i]);
-
-                            identifires++;
-
-                        }
+                        identifires = identifires + 3;
                     }
+
+
                 }
 
-
-                for (int j = 0; j < numericalArray.Length; j++)
+                foreach (string singleRow in line.Split('\n'))
                 {
-                    for (int i = 0; i < wordNm.Length; i++)
+                    for (int i = 0; i < numericalArray.Length; i++)
                     {
-                        if (wordNm[i] == numericalArray[j])
+
+                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+
+                        if (singleRow.Contains(numericalArray[i]))
                         {
                             numricalCount++;
-
-                        }
-                        if (" " + wordNm[i] + ";" == numericalArray[j])
-                        {
-                            numricalCount++;
-
-                        }
-                        if (wordNm[i] == j + numericalArray[j])
-                        {
-                            numricalCount++;
-
-                        }
-                        if ("= " + wordNm[i] == numericalArray[j])
-                        {
-                            numricalCount++;
-
                         }
                     }
                 }
+
                 lineNo++;
-
-               // identifires = stringLiteral + identifires;
-
-                cs = (Wkw* keywordCount) + (Wid*operatorCount) + (Wop*stringLiteral) + (Wnv*numricalCount) + (Wsl*identifires);
+                cs = (Wkw * keywordCount) + (Wid * operatorCount) + (Wop * stringLiteral) + (Wnv * numricalCount) + (Wsl * identifires);
                 totalCS = totalCS + cs;
 
-               
+
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
-                
+
                 keywordCount = 0;
                 operatorCount = 0;
                 stringLiteral = 0;
