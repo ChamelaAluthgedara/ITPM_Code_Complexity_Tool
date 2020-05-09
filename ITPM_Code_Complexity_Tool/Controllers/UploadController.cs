@@ -74,6 +74,15 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         public ActionResult UploadFile(HttpPostedFileBase[] files)
         {
 
+            System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/uploadedFiles"));
+            foreach(FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
+
+
+
             // Common FileNames object to use
             List<FileNames> fileNamesList = new List<FileNames>();
             String REDIRECT_PAGE = "";
