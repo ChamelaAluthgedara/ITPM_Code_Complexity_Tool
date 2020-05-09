@@ -20,7 +20,6 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Wcdtp = 2;
 
 
-        public static string rootFolder = "../uploadedFiles";
         private String FILE_NAME;
 
         List<CdueToMethod> completeList = new List<CdueToMethod>();
@@ -30,10 +29,10 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         }
 
-        //public void SetFileName(String fileName)
-        //{
-        //    this.FILE_NAME = fileName;
-        //}
+        public void SetFileName(String fileName)
+        {
+            this.FILE_NAME = fileName;
+        }
 
         public static string[] primitiveTypes = { 
             "public char",
@@ -69,7 +68,6 @@ namespace ITPM_Code_Complexity_Tool.Models
         public void ProcessFile()
         {
 
-            this.FILE_NAME = "userUploadFile.java";
 
             try
             {

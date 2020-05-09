@@ -24,7 +24,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void SetFileName(String fileName)
         {
-            this.FILE_NAME = "userUploadFile.java"; //static file name
+            this.FILE_NAME = fileName;
         }
 
         public void ProcessFile()

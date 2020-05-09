@@ -1,22 +1,26 @@
-﻿@{
-    ViewBag.Title = "UploadFile";
+﻿
+@{
     Layout = null;
 }
 
+@{
+    ViewBag.Title = "UploadFile";
+}
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<h1> Upload Your Code Files </h1>
 
 @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
-    <div align="center">
+    <div>
+        <button type="button" class="btn btn-primary btn-block"> @Html.TextBox("files", "", new { type = "file", multiple = "multiple" }) </button>
 
-        <h2>Please Upload Your File</h2>
 
-        <br /> <br /><br /><br />
-        
-        <input type="file" name="file" id="file" />
-        <input type="submit" value="Upload" />
-
+        <button type="submit" class="btn btn-primary btn-lg btn-block"> Upload  </button>
         @ViewBag.Message
 
     </div>

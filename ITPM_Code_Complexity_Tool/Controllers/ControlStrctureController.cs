@@ -54,7 +54,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
 
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return HttpNotFound();
             }

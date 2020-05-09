@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "MultipleFiles";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<body>
+    <h2> Complexity Finder </h2>
+
+
+
+    <div class="container">
+        <h2> Uploaded Files </h2>
+        <div class="list-group">
+
+
+
+            @{
+                foreach (var pop in ViewBag.FILES_FROM_UPLOAD)
+                {
+                    <a href="Tool_Home?fileName=@pop.FILE_NAME" + class="list-group-item"> @pop.FILE_NAME </a>
+
+                }
+            }
+
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

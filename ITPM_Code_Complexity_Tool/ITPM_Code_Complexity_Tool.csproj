@@ -139,6 +139,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -241,11 +243,13 @@
     <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\ComplexityVariables.cs" />
     <Compile Include="Models\Controlstructure.cs" />
+    <Compile Include="Models\FileNames.cs" />
     <Compile Include="Models\Inheritance.cs" />
     <Compile Include="Models\Inheritance_Detector.cs" />
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Unzipper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2241,6 +2245,8 @@
     <Content Include="Views\ControlStrcture\Index.cshtml" />
     <Content Include="Views\Function\Index.cshtml" />
     <Content Include="Views\Inheritance\Inheritance_viewer.cshtml" />
+    <Content Include="Views\Upload\MultipleFiles.cshtml" />
+    <Content Include="Views\Upload\Tool_Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="uploadedFiles\" />
