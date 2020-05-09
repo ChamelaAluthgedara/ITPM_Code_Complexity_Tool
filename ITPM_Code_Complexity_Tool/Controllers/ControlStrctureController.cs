@@ -18,143 +18,155 @@ namespace ITPM_Code_Complexity_Tool.Controllers
 
 
 
-        private string filename = string.Empty;
-        private string filepath = string.Empty;
-        private int wtcs = 0, NC = 0, Ccpps = 0, Ccs = 0, NewCcspps = 0;
-        private int LineNo = 0;
-        List<int> CcppsList = new List<int>();
+        //private string filename = string.Empty;
+        //private string filepath = string.Empty;
+        //private int wtcs = 0, NC = 0, Ccpps = 0, Ccs = 0, NewCcspps = 0;
+        //private int LineNo = 0;
+        //List<int> CcppsList = new List<int>();
         //List<string> bracketList = new List<string>();
 
+        [HttpGet]
         public ActionResult Index()
         {
 
+            string name = Request.Params["fileName"];
 
-            return View();
+            ControlStructureDetector controlStructure = new ControlStructureDetector();
+
+            controlStructure.SetFileName(name);
+
+            controlStructure.ProcessFile();
+
+            List<Controlstructure> controlstructuresList = new List<Controlstructure>();
+
+            controlstructuresList = controlStructure.result();
+
+            return View(controlstructuresList);
         }
 
 
 
-        [HttpPost]
-        public ActionResult Index(HttpPostedFileBase file)
-        {
-            List<Controlstructure> consList = new List<Controlstructure>();
+        //[HttpPost]
+        //public ActionResult Index(HttpPostedFileBase file)
+        //{
+        //    List<Controlstructure> consList = new List<Controlstructure>();
 
 
-            try
-            {
-                if (file.ContentLength > 0)
-                {
-                    this.filename = Path.GetFileName(file.FileName);
-                    this.filepath = Path.Combine(Server.MapPath("~/UploadedFiles"), this.filename);
-                    file.SaveAs(this.filepath);
+        //    try
+        //    {
+        //        if (file.ContentLength > 0)
+        //        {
+        //            this.filename = Path.GetFileName(file.FileName);
+        //            this.filepath = Path.Combine(Server.MapPath("~/UploadedFiles"), this.filename);
+        //            file.SaveAs(this.filepath);
 
-                }
+        //        }
 
-                ViewBag.Message = "Upload success";
-
-
-            }
-            catch (Exception)
-            {
-                return HttpNotFound();
-            }
+        //        ViewBag.Message = "Upload success";
 
 
-            if (this.filename != null && this.filepath != null)
-            {
-
-                string csvdata = System.IO.File.ReadAllText(this.filepath);
-
-                foreach (string row in csvdata.Split('\n'))
-                {
-                    //if (row.Contains("{"))
-                    //{
-                    //    bracketList.Add("{");
-                    //}
-                    //else if(row.Contains("}"))
-                    //{
-                    //    bracketList.Add("}");
-                    //}
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
 
+        //    if (this.filename != null && this.filepath != null)
+        //    {
 
-                    if (row.Contains("if(") || row.Contains("else if(") || row.Contains("else"))
-                    {
-                        this.wtcs = 2;
-                        this.NC = this.NC + 1;
-                        this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+        //        string csvdata = System.IO.File.ReadAllText(this.filepath);
 
-
-                    }
-                    else if (row.Contains("for(") || row.Contains("while("))
-                    {
-                        this.wtcs = 3;
-                        this.NC = this.NC + 1;
-                        this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
-                    }
-                    else
-                    {
-
-                        this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
-
-                    }
-
-                    if (this.Ccs != 0 && this.NewCcspps != 0)
-                    {
-                        this.Ccpps = this.NewCcspps;
-                        this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
-
-                    }
-
-                    if (this.Ccs != 0)
-                    {
-                        CcppsList.Add(Ccs);
-                        this.NewCcspps = CcppsList[(CcppsList.Count) - 1];
-
-                    }
+        //        foreach (string row in csvdata.Split('\n'))
+        //        {
+        //            //if (row.Contains("{"))
+        //            //{
+        //            //    bracketList.Add("{");
+        //            //}
+        //            //else if(row.Contains("}"))
+        //            //{
+        //            //    bracketList.Add("}");
+        //            //}
 
 
 
-                    consList.Add(new Controlstructure
-                    {
-                        LineNO = this.LineNo + 1,
-                        ProgramStatment = row,
-                        Wtcs = this.wtcs,
-                        NC = this.NC,
-                        Ccpps = this.Ccpps,
-                        Ccs = this.Ccs
-                    });
-
-                    this.LineNo++;
-                    this.wtcs = 0;
-                    this.NC = 0;
-                    this.Ccs = 0;
-                    this.Ccpps = 0;
-
-                }
+        //            if (row.Contains("if(") || row.Contains("else if(") || row.Contains("else"))
+        //            {
+        //                this.wtcs = 2;
+        //                this.NC = this.NC + 1;
+        //                this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
 
-            }
-            else
-            {
-                return HttpNotFound();
-            }
+        //            }
+        //            else if (row.Contains("for(") || row.Contains("while("))
+        //            {
+        //                this.wtcs = 3;
+        //                this.NC = this.NC + 1;
+        //                this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+        //            }
+        //            else
+        //            {
+
+        //                this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+
+        //            }
+
+        //            if (this.Ccs != 0 && this.NewCcspps != 0)
+        //            {
+        //                this.Ccpps = this.NewCcspps;
+        //                this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+
+        //            }
+
+        //            if (this.Ccs != 0)
+        //            {
+        //                CcppsList.Add(Ccs);
+        //                this.NewCcspps = CcppsList[(CcppsList.Count) - 1];
+
+        //            }
+
+
+
+        //            consList.Add(new Controlstructure
+        //            {
+        //                LineNO = this.LineNo + 1,
+        //                ProgramStatment = row,
+        //                Wtcs = this.wtcs,
+        //                NC = this.NC,
+        //                Ccpps = this.Ccpps,
+        //                Ccs = this.Ccs
+        //            });
+
+        //            this.LineNo++;
+        //            this.wtcs = 0;
+        //            this.NC = 0;
+        //            this.Ccs = 0;
+        //            this.Ccpps = 0;
+
+        //        }
+
+
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
 
 
 
 
-            return View(consList);
+        //    return View(consList);
 
 
 
-        }
+        //}
 
-        [HttpPost]
-        public ActionResult Reset()
-        {
+        //[HttpPost]
+        //public ActionResult Reset()
+        //{
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
 
 

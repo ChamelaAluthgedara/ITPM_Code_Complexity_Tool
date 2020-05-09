@@ -24,56 +24,9 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         private String FILE_NAME;
 
-        public static string[] primitiveDataTypes = {
+        public static string[] primitiveDataTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double", "String" };
 
-            "int",
-            "float",
-            "double",
-            "char",
-            "string",
-            "long",
-            "Boolean",
-
-
-        };
-
-        public static string[] compositeDataTypes = {
-            "[",
-            "int[ ",
-            "float[ ",
-            "double[ ",
-            "char[ ",
-            "string[ ",
-            "long[ ",
-            "Boolean[ ",
-            "ArrayList ",
-
-             "int[",
-            "float[",
-            "double[",
-            "char[",
-            "string[",
-            "long[",
-            "Boolean[",
-
-             "int [",
-            "float [",
-            "double [",
-            "char [",
-            "string [",
-            "long [",
-            "Boolean [",
-
-             "int [ ",
-            "float [ ",
-            "doube [ ",
-            "char [ ",
-            "string [ ",
-            "long [ ",
-            "Boolean [ ",
-
-
-        };
+        public static string[] compositeDataTypes = { "ArrayList ", "List", "[" };
 
 
         List<CdueToVariables> completeList = new List<CdueToVariables>();
@@ -118,52 +71,158 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void GetVariablesCount(string line)
         {
-           try
+            try
             {
-                string[] words = line.Split(new char[] { ' '}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+                string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
                 try
                 {
-                    for (int j = 0; j < primitiveDataTypes.Length; j++)
+                    foreach (string rowLine in line.Split('\n'))
                     {
-                        for (int i = 0; i < words.Length; i++)
+                        System.Diagnostics.Debug.WriteLine("Line code " + rowLine);
+
+                        for (int i = 0; i < primitiveDataTypes.Length; i++)
                         {
-
-                            if (words[i] == primitiveDataTypes[j])
+                            if (rowLine.Contains("public"))
                             {
-                                
-                                System.Diagnostics.Debug.WriteLine("line: " + words[i]);
-
-                                NoPrimitiveDataTypeVariables++;
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
                             }
                         }
+
+                        for (int i = 0; i < primitiveDataTypes.Length; i++)
+                        {
+                            if (rowLine.Contains("private"))
+                            {
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                            }
+
+                        }
+
+                        for (int i = 0; i < primitiveDataTypes.Length; i++)
+                        {
+                            if (rowLine.Contains("protected"))
+                            {
+
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                                if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                                {
+                                    NoPrimitiveDataTypeVariables++;
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < primitiveDataTypes.Length; i++)
+                        {
+
+                            if (rowLine.Split('.').Contains(primitiveDataTypes[i]) && !rowLine.Split('.').Contains(".") && !rowLine.Split('.').Contains("=") && rowLine.Split('.').Contains("("))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains("static") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains("static") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains("static") && rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains("static") && rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+                            if (rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
+                            {
+                                NoPrimitiveDataTypeVariables++;
+                            }
+
+                        }
+
                     }
                 }
-                finally
+                catch (Exception)
                 {
 
                 }
 
-                //try
-                //{
-                //    for (int j = 0; j < compositeDataTypes.Length; j++)
-                //    {
-                //        for (int i = 0; i < words.Length; i++)
-                //        {
-                //            if (words[i] + " " == compositeDataTypes[j])
-                //            {
-                //                NoCompositeDataTypeVariables++;
-                //            }
-                //        }
-                //    }
-                //}
+                try
+                {
+                    foreach (string rowLine in line.Split('\n'))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Line code " + rowLine);
 
-                //finally
-                //{
+                        for (int i = 0; i < compositeDataTypes.Length; i++)
+                        {
 
-                //}
+                            if (rowLine.Contains(compositeDataTypes[i]) && rowLine.Contains("=") && !rowLine.Contains("new") && rowLine.Contains(";") && !rowLine.Contains("."))
+                            {
+                                NoCompositeDataTypeVariables++;
+                            }
+
+
+
+                        }
+                            if (rowLine.Contains("=") && rowLine.Contains("new") && rowLine.Contains("(") && rowLine.Contains(";") && !rowLine.Contains("."))
+                            {
+                                NoCompositeDataTypeVariables++;
+                             }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                
 
                 lineNo++;
-                Cv = (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + ( Wcdtv * NoCompositeDataTypeVariables ) ));
+                Cv = (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + (Wcdtv * NoCompositeDataTypeVariables)));
                 totalCv = totalCv + Cv;
                 completeList.Add(new CdueToVariables(lineNo, line, WeightDueToVScope, NoPrimitiveDataTypeVariables, NoCompositeDataTypeVariables, Cv));
                 NoPrimitiveDataTypeVariables = 0;

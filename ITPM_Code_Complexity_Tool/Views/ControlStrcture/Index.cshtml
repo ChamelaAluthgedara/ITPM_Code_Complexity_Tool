@@ -5,29 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
+
 <h2>Index</h2>
 <br />
 
-@using (Html.BeginForm("Index", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
-    @model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
-    <div>
-        @Html.TextBox("file", "", new {type = "file"}) <br/>
+@*@using (Html.BeginForm("Index", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+        @model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
+        <div>
+            @Html.TextBox("file", "", new {type = "file"}) <br/>
 
-        <input type="submit" value="Upload and Calculate"/>
-        @ViewBag.Message
+            <input type="submit" value="Upload and Calculate"/>
+            @ViewBag.Message
 
-    </div>
-
-
-
-    <br/>
-    <br/>
+        </div>*@
 
 
 
-    <table class="table">
-        <thead>
+<br />
+<br />
+
+
+<table class="table">
+    <thead>
         <tr>
             <th scope="col">Line no</th>
             <th scope="col">Program Statements</th>
@@ -36,8 +37,8 @@
             <th scope="col">Ccspps</th>
             <th scope="col">Ccs</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
 
         @{
 
@@ -63,7 +64,8 @@
                     <td>null</td>
                     <td>null</td>
                     <td>null</td>
-                    <td>null<td>
+                    <td>null
+                    <td>
                     <td>null</td>
 
                 </tr>
@@ -72,13 +74,16 @@
 
         }
 
-        </tbody>
-    </table>
-}
+    </tbody>
+</table>
 
 
-@using (Html.BeginForm("Reset", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
-    <input type="submit" value="Reset"/>
 
-}
+@*}*@
+
+
+@*@using (Html.BeginForm("Reset", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+        <input type="submit" value="Reset"/>
+
+    }*@

@@ -242,6 +242,7 @@
     <Compile Include="Models\ComplexitySize.cs" />
     <Compile Include="Models\ComplexityVariables.cs" />
     <Compile Include="Models\Controlstructure.cs" />
+    <Compile Include="Models\ControlStructureDetector.cs" />
     <Compile Include="Models\FileNames.cs" />
     <Compile Include="Models\Inheritance.cs" />
     <Compile Include="Models\Inheritance_Detector.cs" />
@@ -252,10 +253,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CodeContaineer.mdf" />
-    <Content Include="App_Data\CodeContaineer_log.ldf">
-      <DependentUpon>CodeContaineer.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -300,6 +297,7 @@
     <Content Include="Models\Code_Container_Model.edmx.diagram">
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\cardJS.js" />
     <Content Include="Scripts\contact_me.js" />

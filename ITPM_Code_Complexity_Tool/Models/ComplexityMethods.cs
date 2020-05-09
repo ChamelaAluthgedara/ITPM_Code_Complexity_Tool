@@ -34,41 +34,11 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.FILE_NAME = fileName;
         }
 
-        public static string[] primitiveTypes = { 
-            "public char",
-            "public byte",
-            "public short",
-            "public int",
-            "public long",
-            "public boolean",
-            "public float",
-            "public double",
+        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double" };
 
-            "public static char",
-            "public static byte",
-            "public static short",
-            "public static int",
-            "public static long",
-            "public static boolean",
-            "public static float",
-            "public static double",
-        };
-
-        public static string[] compositeTypes = {
-
-            "public static void main",
-            " public static void main(String[] args) ",
-            "public static void main(String[] args) ",
-            " public static void main(String[] args)",
-            "public static void main(",
-            "public static void main ",
-            " public static void main "
-        };
 
         public void ProcessFile()
         {
-
-
             try
             {
                 // Create an instance of StreamReader to read from a file.
@@ -98,60 +68,52 @@ namespace ITPM_Code_Complexity_Tool.Models
         {
             try
             {
-                string[] words = line.Trim().Split(new char[] { '\n', '{', '(', ')', '}', ']', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-                try
+
+                foreach (string singleRow in line.Split('\n'))
                 {
-                    for (int j = 0; j < compositeTypes.Length; j++)
+                    for (int i = 0; i < primitiveTypes.Length; i++)
                     {
-                        for (int i = 0; i < words.Length; i++)
+
+                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+
+                        if (singleRow.Contains("public") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
                         {
-                            string wordLine = words[i];
-                            string arraWord = compositeTypes[j];
-                            if (arraWord.Equals(wordLine))
-                            {
-                                System.Diagnostics.Debug.WriteLine("line: " + words[i]);
-                                Ncdtp++;
-                            }
+                            Npdtp++;
+                        }
+                        if (singleRow.Contains("public") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                        {
+                            Npdtp++;
+                        }
+                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
+                        {
+                            Npdtp++;
+                        }
+                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                        {
+                            Npdtp++;
                         }
                     }
-                }
-                finally
-                {
-
-                }
-
-                try
-                {
-                    for (int j = 0; j < primitiveTypes.Length; j++)
+                    if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("main") && singleRow.Contains("(") && singleRow.Contains("args"))
                     {
-                        for (int i = 0; i < words.Length; i++)
-                        {
-                            if (words[i] == primitiveTypes[j])
-                            {
-                                Npdtp++;
-                            }
-                        }
+                        Ncdtp++;
                     }
                 }
 
-                finally
-                {
 
-                }
-                System.Diagnostics.Debug.WriteLine("composite: " + Ncdtp);
-                lineNo++;
-                Cm = Wmrt + (Wpdtp * Npdtp) + (Wcdtp * Ncdtp);
-                totalCm = totalCm + Cm;
-                completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, Cm));
-                Npdtp = 0;
-                Ncdtp = 0;
-                Cm = 0;
-                CdueToMethod c = new CdueToMethod(this.totalCm);
             }
-            finally
+            catch (Exception)
             {
 
             }
+            lineNo++;
+            Cm = Wmrt + (Wpdtp * Npdtp) + (Wcdtp * Ncdtp);
+            totalCm = totalCm + Cm;
+            completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, Cm));
+            Npdtp = 0;
+            Ncdtp = 0;
+            Cm = 0;
+            CdueToMethod c = new CdueToMethod(this.totalCm);
+
         }
 
         public List<CdueToMethod> showData()
