@@ -216,7 +216,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComplexitySizeVariablesMethodsController.cs" />
     <Compile Include="Controllers\ControlStrctureController.cs" />
-    <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\InheritanceController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2243,7 +2242,6 @@
     <Content Include="Views\ComplexitySizeVariablesMethods\ComplexityVariables.cshtml" />
     <Content Include="Views\ComplexitySizeVariablesMethods\ComplexityMethods.cshtml" />
     <Content Include="Views\ControlStrcture\Index.cshtml" />
-    <Content Include="Views\Function\Index.cshtml" />
     <Content Include="Views\Inheritance\Inheritance_viewer.cshtml" />
     <Content Include="Views\Upload\MultipleFiles.cshtml" />
     <Content Include="Views\Upload\Tool_Home.cshtml" />
