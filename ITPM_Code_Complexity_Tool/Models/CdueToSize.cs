@@ -54,7 +54,15 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Cv;
         public int totalVCCal;
 
+        public  int WeightGlobalVariable = 1;
+        public  int WeightLocalVariable = 1;
+        public  int WeightPrimitiveDataTypeVariable = 1;
+        public  int WeightCompositeDataTypeVariable = 1;
 
+        public CdueToVariables()
+        {
+
+        }
         public CdueToVariables(int lineNo, String codeline, int WeightDueToVScope, int NoPrimitiveDataTypeVariables, int NoCompositeDataTypeVariables, int cv)
         {
             this.lineNo = lineNo;

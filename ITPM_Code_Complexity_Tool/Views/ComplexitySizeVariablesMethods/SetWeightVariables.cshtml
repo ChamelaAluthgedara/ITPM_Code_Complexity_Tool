@@ -19,10 +19,13 @@
 
 <link href="~/Content/style1.css" rel="stylesheet" />
 <link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
-<h1 style="color: white; font-weight: bold">Weights related to the size factor</h1>
+<h1 style="color: white; font-weight: bold">Weights related to the Variable factor</h1>
 
-@using (Html.BeginForm("SetWeight", "ComplexitySizeVariablesMethods", new { fileName = fromURL }, FormMethod.Post))
+@using (Html.BeginForm("SetWeightVariables", "ComplexitySizeVariablesMethods", new { fileName = fromURL }, FormMethod.Post))
 {
+
+
+    // ==========================================================================================
 
     <table style="color: black" class="table table-bordered table-dark">
         <thead>
@@ -36,47 +39,40 @@
         <tbody>
             <tr>
 
-                <td>Keyword</td>
+                <td>Global variable</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeKeyword, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.variableGlobal, new { @Value = "1" })
                 </td>
             </tr>
             <tr>
-                <td>Identifier</td>
+                <td>Local variable </td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeIdentifers, new { @Value = "1" })
-                </td>
-
-            </tr>
-
-            <tr>
-                <td>Operator</td>
-                <td>
-                    @Html.TextBoxFor(m => m.sizeOperators, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.variableLocal, new { @Value = "1" })
                 </td>
 
             </tr>
 
             <tr>
-                <td>Numerical value</td>
+                <td>Primitive data type variable </td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeNumericValues, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.variablePrimitiveDataType, new { @Value = "1" })
                 </td>
 
             </tr>
+
             <tr>
-                <td>String literal</td>
+                <td>Composite data type variable </td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeStringLiteral, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.variableCompotiteDataType, new { @Value = "1" })
                 </td>
 
             </tr>
+
 
         </tbody>
 
 
     </table>
-
 
     <button type="submit" class="btn btn-danger">Save And Calculate</button>
 

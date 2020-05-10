@@ -303,6 +303,7 @@
       <DependentUpon>Code_Container_Model.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\ITPMOnlineCodeComplexityTool - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\cardJS.js" />
     <Content Include="Scripts\contact_me.js" />
@@ -2250,11 +2251,10 @@
     <Content Include="Views\Upload\Tool_Home.cshtml" />
     <Content Include="Views\AllFactors\AllFactors.cshtml" />
     <Content Include="Views\ControlStrcture\SetWeight.cshtml" />
-    <Content Include="Views\ComplexitySizeVariablesMethods\SetWeight.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightSize.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightVariables.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="uploadedFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

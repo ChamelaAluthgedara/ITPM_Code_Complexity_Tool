@@ -35,12 +35,6 @@ namespace ITPM_Code_Complexity_Tool.Models
             WeightNumericalVal = numericalVal;
             WeightStringLiteral = literalString;
 
-            //sMw.Wkw = keyword;
-            //sMw.Wid = identifer;
-            //sMw.Wop = operators;
-            //sMw.Wnv = numericalVal;
-            //sMw.Wsl = literalString;
-
         }
 
         private String FILE_NAME;

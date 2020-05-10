@@ -29,6 +29,11 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         public ActionResult UploadFile(HttpPostedFileBase[] files)
         {
 
+            if(Directory.Exists(Server.MapPath("~/uploadedFiles")) == false)
+            {
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/uploadedFiles"));
+            }
+
             System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/uploadedFiles"));
             foreach(FileInfo file in di.GetFiles())
             {
