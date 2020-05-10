@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "SetWeight";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var fromURL = Request.Params["fileName"];
+
+    if (fromURL == null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            fromURL = name.FILE_NAME;
+        }
+
+    }
+
+}
+
+
+<link href="~/Content/style1.css" rel="stylesheet" />
+<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
+<h1 style="color: white; font-weight: bold">Control Structure Set Weight</h1>
+
+@model ITPM_Code_Complexity_Tool.Models.ControlStructureWeight
+
+@using (Html.BeginForm("SetWeight", "ControlStrcture", new { fileName = fromURL }, FormMethod.Post))
+{
+
+    <table style="color: black" class="table table-bordered table-dark">
+        <thead>
+            <tr id="ROW1">
+
+                <th scope="col">Control Structure Type</th>
+                <th scope="col-1">Weight</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>A Conditional control structure such as an 'if' or 'else-if' condition</td>
+                <td>
+                    @Html.TextBoxFor(m => m.ifElseIfWeight)
+                </td>
+            </tr>
+            <tr>
+                <td>An iterative control structure such as a 'for', 'while' , 'do-while' loop</td>
+                <td>
+                    @Html.TextBoxFor(m => m.forWileDoWhileWeight)
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>The 'switch' statement in a 'switch-case' control structure</td>
+                <td>
+                    @Html.TextBoxFor(m => m.SwitchWeight)
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Each 'case' statment in a 'switch-case' control structure</td>
+                <td>
+                    @Html.TextBoxFor(m => m.CaseWeight)
+                </td>
+
+            </tr>
+
+
+        </tbody>
+
+
+    </table>
+
+
+    <button type="submit" class="btn btn-danger">Save And Calculate</button>
+
+
+}

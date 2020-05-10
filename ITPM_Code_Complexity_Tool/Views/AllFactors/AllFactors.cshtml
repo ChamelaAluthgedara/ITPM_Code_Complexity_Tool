@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.AllFactors>
+
+@{
+    Layout = null;
+
+    //var fromURL = Request.Params["fileName"];
+
+    //if (fromURL == null)
+    //{
+    //    foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+    //    {
+    //        fromURL = name.FILE_NAME;
+    //    }
+
+    //}
+}
+
+<!DOCTYPE html>
+<link href="~/Content/style1.css" rel="stylesheet" />
+<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
+<body>
+
+    <h1 style="color:white;">Displaying the complexity of a single file due to all the factors</h1>
+
+
+    <table style="color: black;">
+        <tr id="ROW1">
+            <td>Line No</td>
+            <td>Code Line</td>
+            <td>Cs</td>
+            <td>Cv</td>
+            <td>Cm</td>
+            <td>Ci</td>
+            <td>Ccp</td>
+            <td>Ccs</td>
+            <td>TCps</td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr style="padding:23px;">
+                    <td> @item.lineNo </td>
+                    <td> @item.CODELINE </td>
+                    @if (item.CS != 0)
+                    {
+                        <td> @item.CS </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.CV != 0)
+                    {
+                        <td> @item.CV </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.CM != 0)
+                    {
+                        <td> @item.CM </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.Ci != 0)
+                    {
+                        <td> @item.Ci </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.Ccp != 0)
+                    {
+                        <td> @item.Ccp </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.Ccs != 0)
+                    {
+                        <td> @item.Ccs </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.TCps != 0)
+                    {
+                        <td> @item.TCps </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                </tr>
+            }
+
+        }
+       
+    </table>
+</body>
+

@@ -214,6 +214,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AllFactorsController.cs" />
     <Compile Include="Controllers\ComplexitySizeVariablesMethodsController.cs" />
     <Compile Include="Controllers\ControlStrctureController.cs" />
     <Compile Include="Controllers\InheritanceController.cs" />
@@ -222,6 +223,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AllFactors.cs" />
+    <Compile Include="Models\AllFactors_Processor.cs" />
     <Compile Include="Models\CdueToSize.cs" />
     <Compile Include="Models\Code_Container_Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -243,9 +246,11 @@
     <Compile Include="Models\ComplexityVariables.cs" />
     <Compile Include="Models\Controlstructure.cs" />
     <Compile Include="Models\ControlStructureDetector.cs" />
+    <Compile Include="Models\ControlStructureWeight.cs" />
     <Compile Include="Models\FileNames.cs" />
     <Compile Include="Models\Inheritance.cs" />
     <Compile Include="Models\Inheritance_Detector.cs" />
+    <Compile Include="Models\sizeVariableMethodsWeightTracker.cs" />
     <Compile Include="Models\Table.cs">
       <DependentUpon>Code_Container_Model.tt</DependentUpon>
     </Compile>
@@ -2243,6 +2248,9 @@
     <Content Include="Views\Inheritance\Inheritance_viewer.cshtml" />
     <Content Include="Views\Upload\MultipleFiles.cshtml" />
     <Content Include="Views\Upload\Tool_Home.cshtml" />
+    <Content Include="Views\AllFactors\AllFactors.cshtml" />
+    <Content Include="Views\ControlStrcture\SetWeight.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\SetWeight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="uploadedFiles\" />

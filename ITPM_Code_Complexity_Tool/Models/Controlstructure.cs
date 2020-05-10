@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using javax.swing;
 
+//Model Class Control Structure
 namespace ITPM_Code_Complexity_Tool.Models
 {
     public class Controlstructure
@@ -19,6 +21,9 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Ccpps { get; set; }
 
         public int Ccs { get; set; }
+
+
+
 
     }
 }

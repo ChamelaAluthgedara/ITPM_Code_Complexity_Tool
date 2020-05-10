@@ -77,6 +77,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
             string[] WORDS = line1.Split(' ');
 
+
             //Check if this line contains keywords
 
             for (int position = 0; position < WORDS.Length; position++)

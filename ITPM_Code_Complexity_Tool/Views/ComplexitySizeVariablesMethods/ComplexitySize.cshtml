@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
     var fromURL = Request.Params["fileName"];
 
@@ -23,89 +24,105 @@
     <h1 style="color:white;">Displaying the complexity of a program due to Size</h1>
 
     <div align="right">
-        <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables?fileName=@fromURL'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Methods" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityMethods?fileName=@fromURL'" />
+        @*  <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables?fileName=@fromURL'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Methods" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityMethods?fileName=@fromURL'" />*@
     </div><br /><br />
 
 
-                <table style="color: black;">
-                    <tr id="ROW1">
-                        <td>Line No</td>
-                        <td>Code Line</td>
-                        <td>Nkw</td>
-                        <td>Nid</td>
-                        <td>Nop</td>
-                        <td>Nnv</td>
-                        <td>Nsl</td>
-                        <td>Cs</td>
-                    </tr>
 
-                    @{
-                        foreach (var item in Model)
-                        {
-                            <tr style="padding:23px;">
-                                <td> @item.lineNo </td>
-                                <td> @item.CODELINE </td>
-                                @if (item.keywordCount != 0)
-                                {
-                                    <td> @item.keywordCount </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                                @if (item.identifires != 0)
-                                {
-                                    <td> @item.identifires </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                                @if (item.operatorCount != 0)
-                                {
-                                    <td> @item.operatorCount </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                                @if (item.numricalCount != 0)
-                                {
-                                    <td> @item.numricalCount </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                                @if (item.stringLiteral != 0)
-                                {
-                                    <td> @item.stringLiteral </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                                <td> @item.CI </td>
-
-                            </tr>
+    @*set weight again*@
+    <button type="button" onclick='window.location.href = "../ComplexitySizeVariablesMethods/SetWeight?fileName=@fromURL"' class="btn btn-success">
+        Set Weight Again
+    </button>
 
 
-                        }
+    @*go to toool menu*@
+    <button type="button" onclick='window.location.href = "../Upload/Tool_Home?fileName=@fromURL"' class="btn btn-primary">
+        Go Back To Tool Menu
+    </button>
 
 
+    <br />
+    <br />
+
+    <table style="color: black;">
+        <tr id="ROW1">
+            <td>Line No</td>
+            <td>Code Line</td>
+            <td>Nkw</td>
+            <td>Nid</td>
+            <td>Nop</td>
+            <td>Nnv</td>
+            <td>Nsl</td>
+            <td>Cs</td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr style="padding:23px;">
+                    <td> @item.lineNo </td>
+                    <td> @item.CODELINE </td>
+                    @if (item.keywordCount != 0)
+                    {
+                        <td> @item.keywordCount </td>
                     }
-                <tr id="ROW1">
-                    <td> Total </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        @ViewBag.TotalCs
-                    </td>
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.identifires != 0)
+                    {
+                        <td> @item.identifires </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.operatorCount != 0)
+                    {
+                        <td> @item.operatorCount </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.numricalCount != 0)
+                    {
+                        <td> @item.numricalCount </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    @if (item.stringLiteral != 0)
+                    {
+                        <td> @item.stringLiteral </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td> @item.CI </td>
 
-                    </tr>
-                </table>
+                </tr>
+
+
+            }
+
+
+        }
+        <tr id="ROW1">
+            <td> Total </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @ViewBag.TotalCs
+            </td>
+
+        </tr>
+    </table>
 </body>

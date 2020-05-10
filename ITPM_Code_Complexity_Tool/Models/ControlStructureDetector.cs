@@ -15,18 +15,15 @@ namespace ITPM_Code_Complexity_Tool.Models
         List<int> CcppsList = new List<int>();
         List<Controlstructure> consList = new List<Controlstructure>();
 
-
+        //Set the file name
         public void SetFileName(String fileName)
         {
             this.FILE_NAME = fileName;
         }
 
 
-        public void ProcessFile()
+        public void ProcessFile(ControlStructureWeight weight)
         {
-
-
-
 
             try
             {
@@ -43,7 +40,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                     while ((line = sr.ReadLine()) != null)
                     {
 
-                        this.ControStructureDetect(line);
+                        this.ControStructureDetect(line, weight);
                     }
 
                 }
@@ -59,44 +56,70 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         }
 
-
-        public void ControStructureDetect(String line)
+        //Detect the all control Structure in code lines
+        public void ControStructureDetect(String line, ControlStructureWeight weight)
         {
+
+            ControlStructureWeight Weight = new ControlStructureWeight()
+            {
+                ifElseIfWeight = weight.ifElseIfWeight,
+                forWileDoWhileWeight = weight.forWileDoWhileWeight,
+                SwitchWeight = weight.SwitchWeight,
+                CaseWeight = weight.CaseWeight
+
+            };
+
 
             foreach (string row in line.Split('\n'))
             {
-                //if (row.Contains("{"))
-                //{
-                //    bracketList.Add("{");
-                //}
-                //else if(row.Contains("}"))
-                //{
-                //    bracketList.Add("}");
-                //}
 
 
-
-                if (row.Contains("if(") || row.Contains("else if(") || row.Contains("else"))
+                //Check if line has "If" , "ifelse" Conditions
+                if (row.Contains("if(") || row.Contains("if (") || row.Contains("else if(") ||
+                    row.Contains("else if ("))
                 {
-                    this.wtcs = 2;
+                    this.wtcs = Weight.ifElseIfWeight;
                     this.NC = this.NC + 1;
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
 
                 }
+                //Check if line has "for" , "while" Conditions
+
                 else if (row.Contains("for(") || row.Contains("while("))
                 {
-                    this.wtcs = 3;
+                    this.wtcs = Weight.forWileDoWhileWeight;
                     this.NC = this.NC + 1;
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
                 }
+                //Check if line has "switch" Conditions
+
+                else if (row.Contains("switch (") || row.Contains("switch("))
+                {
+                    this.wtcs = Weight.SwitchWeight;
+                    this.NC = this.NC + 1;
+                    this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+
+
+                }
+
+                //Check if line has "case" Conditions
+
+                else if (row.Contains("case"))
+                {
+                    this.wtcs = Weight.CaseWeight;
+                    this.NC = this.NC + 1;
+                    this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
+
+                }
+                //No control structure method in line
                 else
                 {
 
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
                 }
-
+                //set Ccsspps value
                 if (this.Ccs != 0 && this.NewCcspps != 0)
                 {
                     this.Ccpps = this.NewCcspps;
@@ -104,7 +127,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                 }
 
-                if (this.Ccs != 0)
+                if (this.Ccs != 0 && (row.Contains("switch(") || row.Contains("switch (")))
                 {
                     CcppsList.Add(Ccs);
                     this.NewCcspps = CcppsList[(CcppsList.Count) - 1];
@@ -129,13 +152,12 @@ namespace ITPM_Code_Complexity_Tool.Models
                 this.Ccs = 0;
                 this.Ccpps = 0;
 
+
+
             }
-
-
-
         }
 
-
+        //return the List of Call control structure model set values
         public List<Controlstructure> result()
         {
 

@@ -19,11 +19,29 @@ namespace ITPM_Code_Complexity_Tool.Models
         int cs = 0;
         public int totalCS;
 
-        public static int Wkw = CdueToSize.Wkw;
-        public static int Wid = CdueToSize.Wid;
-        public static int Wop = CdueToSize.Wop;
-        public static int Wnv = CdueToSize.Wnv;
-        public static int Wsl = CdueToSize.Wsl;
+        public static int weightKeyword;
+        public static int WeightIdentifers;
+        public static int WeightOperators;
+        public static int WeightNumericalVal;
+        public static int WeightStringLiteral;
+
+        //CdueToSize sMw = new CdueToSize();
+
+        public void getWeight(int keyword, int identifer, int operators, int numericalVal, int literalString)
+        {
+            weightKeyword = keyword;
+            WeightIdentifers = identifer;
+            WeightOperators = operators;
+            WeightNumericalVal = numericalVal;
+            WeightStringLiteral = literalString;
+
+            //sMw.Wkw = keyword;
+            //sMw.Wid = identifer;
+            //sMw.Wop = operators;
+            //sMw.Wnv = numericalVal;
+            //sMw.Wsl = literalString;
+
+        }
 
         private String FILE_NAME;
 
@@ -89,7 +107,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                     for (int i = 0; i < wordAray.Length; i++)
                     {
 
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
 
                         if (singleRow.Contains(wordAray[i]))
                         {
@@ -116,7 +133,6 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                 foreach (string singleRow in line.Split('\n'))
                 {
-                    System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
 
                     if (singleRow.Contains('"') && singleRow.Contains("(") && singleRow.Contains(")") && singleRow.Contains(";"))
                     {
@@ -128,8 +144,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                 {
                     for (int i = 0; i < identifiresArray.Length; i++)
                     {
-
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + rowLine);
 
                         if (rowLine.Contains(identifiresArray[i]))
                         {
@@ -151,7 +165,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                     for (int i = 0; i < numericalArray.Length; i++)
                     {
 
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+                       
 
                         if (singleRow.Contains(numericalArray[i]))
                         {
@@ -161,9 +175,9 @@ namespace ITPM_Code_Complexity_Tool.Models
                 }
 
                 lineNo++;
-                cs = (Wkw * keywordCount) + (Wid * operatorCount) + (Wop * stringLiteral) + (Wnv * numricalCount) + (Wsl * identifires);
+                cs = (weightKeyword * keywordCount) + (WeightOperators * operatorCount) + (WeightStringLiteral * stringLiteral) + (WeightNumericalVal * numricalCount) + (WeightIdentifers * identifires);
                 totalCS = totalCS + cs;
-
+               // System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
 
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
 

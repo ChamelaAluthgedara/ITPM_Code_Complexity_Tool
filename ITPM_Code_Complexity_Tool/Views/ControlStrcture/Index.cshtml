@@ -3,33 +3,51 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var fromURL = Request.Params["FileNames"];
+
+    if (fromURL == null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            fromURL = name.FILE_NAME;
+        }
+
+    }
+
 }
+
+
 
 @model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
 
-<h2>Index</h2>
-<br />
+<link href="~/Content/style1.css" rel="stylesheet" />
+<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
 
-@*@using (Html.BeginForm("Index", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
-    {
-        @model List<ITPM_Code_Complexity_Tool.Models.Controlstructure>
-        <div>
-            @Html.TextBox("file", "", new {type = "file"}) <br/>
-
-            <input type="submit" value="Upload and Calculate"/>
-            @ViewBag.Message
-
-        </div>*@
-
-
-
-<br />
+<h1 style="color: white; font-weight: bold">Control Structure Calculate</h1>
 <br />
 
 
-<table class="table">
+@*set weight again*@
+<button type="button" onclick='window.location.href = "../ControlStrcture/SetWeight?fileName=@fromURL"' class="btn btn-success">
+    Set Weight Again
+</button>
+
+
+@*go to toool menu*@
+<button type="button" onclick='window.location.href = "../Upload/Tool_Home?fileName=@fromURL"' class="btn btn-primary">
+    Go Back To Tool Menu
+</button>
+
+
+<br />
+<br />
+
+
+<table class="table" style="color: black">
     <thead>
-        <tr>
+        <tr id="ROW1">
             <th scope="col">Line no</th>
             <th scope="col">Program Statements</th>
             <th scope="col">Wtcs</th>
@@ -46,7 +64,7 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
+                    <tr style="padding:23px;">
                         <th scope="row">@item.LineNO</th>
                         <td>@item.ProgramStatment</td>
                         <td>@item.Wtcs</td>
@@ -79,11 +97,6 @@
 
 
 
-@*}*@
 
 
-@*@using (Html.BeginForm("Reset", "ControlStrcture", FormMethod.Post, new {enctype = "multipart/form-data"}))
-    {
-        <input type="submit" value="Reset"/>
 
-    }*@
