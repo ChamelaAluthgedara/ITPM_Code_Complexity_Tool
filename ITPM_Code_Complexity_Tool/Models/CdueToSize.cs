@@ -54,10 +54,10 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Cv;
         public int totalVCCal;
 
-        public  int WeightGlobalVariable = 1;
-        public  int WeightLocalVariable = 1;
-        public  int WeightPrimitiveDataTypeVariable = 1;
-        public  int WeightCompositeDataTypeVariable = 1;
+        public static int WeightGlobalVariable = 1;
+        public static int WeightLocalVariable = 1;
+        public static int WeightPrimitiveDataTypeVariable = 1;
+        public static int WeightCompositeDataTypeVariable = 1;
 
         public CdueToVariables()
         {
@@ -91,6 +91,13 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int totalCMCal;
 
 
+        public static int Wprimitivedtp = 1;
+        public static int Wcompositedtp = 2;
+        public static int Wvoidtype = 0;
+        public static int WprimitiveDatatype = 1;
+        public static int WcompositeParameter = 2;
+
+
         public CdueToMethod(int lineNo, String codeline, int NumberOfCompositeDataTypeParameters, int NoPrimitiveDataTypeVariables, int methodReturnType, int Cm)
         {
             this.lineNo = lineNo;
@@ -104,6 +111,9 @@ namespace ITPM_Code_Complexity_Tool.Models
         {
 
             this.totalCMCal = totalCMCal;
+        }
+        public CdueToMethod()
+        {
         }
 
     }

@@ -14,11 +14,11 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         CdueToVariables c = new CdueToVariables();
 
-         int WeightGlobalVariable;
-         int WeightLocalVariable;
-         int WeightPrimitiveDataTypeVariable;
-         int WeightCompositeDataTypeVariable;
-         int WeightDueToVScope = 1;
+        static int WeightGlobalVariable;
+        static int WeightLocalVariable;
+        static int WeightPrimitiveDataTypeVariable;
+        static int WeightCompositeDataTypeVariable;
+        static int WeightDueToVScope = 1;
 
         int NoPrimitiveDataTypeVariables = 0;
         int NoCompositeDataTypeVariables = 0;
@@ -36,15 +36,13 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void getWeight(int globalVariable, int localVariable, int primitiveDataTypeVariable, int CompositeDataTypeVariable)
         {
-            c.WeightGlobalVariable = globalVariable;
-            c.WeightLocalVariable = localVariable;
-            c.WeightPrimitiveDataTypeVariable = primitiveDataTypeVariable;
-            c.WeightCompositeDataTypeVariable = CompositeDataTypeVariable;
-
-
-            System.Diagnostics.Debug.WriteLine("Im from Model.GetWeight Called:: " + WeightPrimitiveDataTypeVariable);
+            WeightGlobalVariable = globalVariable;
+            WeightLocalVariable = localVariable;
+            WeightPrimitiveDataTypeVariable = primitiveDataTypeVariable;
+            WeightCompositeDataTypeVariable = CompositeDataTypeVariable;
 
         }
+
 
         public ComplexityVariables()  //Constructor
         {
@@ -58,7 +56,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void ProcessFile()
         {
-            
+
             try
             {
 
@@ -84,9 +82,12 @@ namespace ITPM_Code_Complexity_Tool.Models
                 Console.WriteLine(e.Message);
             }
         }
-       
+
         public void GetVariablesCount(string line)
         {
+            
+
+           // Console.WriteLine("Im from GetVariablesCount Called:: " + c.WeightGlobalVariable);
             try
             {
                 string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
@@ -233,7 +234,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
 
                 lineNo++;
-               
+
 
                 Cv = (WeightDueToVScope * ((WeightPrimitiveDataTypeVariable * NoPrimitiveDataTypeVariables) + (WeightCompositeDataTypeVariable * NoCompositeDataTypeVariables)));
                 totalCv = totalCv + Cv;

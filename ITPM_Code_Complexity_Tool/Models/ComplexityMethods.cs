@@ -6,21 +6,23 @@ using System.Web;
 
 namespace ITPM_Code_Complexity_Tool.Models
 {
+
     public class ComplexityMethods
     {
+        CdueToMethod c = new CdueToMethod();
+
         int lineNo = 0;
         public int Cm;
         public int totalCm;
-
         public int Wmrt;
         public int Npdtp;
         public int Ncdtp;
 
-        public int Wprimitivedtp = 1;
-        public int Wcompositedtp = 2;
-        public int Wvoidtype = 0;
-        public int WprimitiveDatatype = 1;
-        public int WcompositeParameter = 2;
+         static int Wprimitivedtp;
+         static int Wcompositedtp;
+         static int Wvoidtype;
+         static int WprimitiveDatatype;
+         static int WcompositeParameter;
 
 
         private String FILE_NAME;
@@ -39,6 +41,8 @@ namespace ITPM_Code_Complexity_Tool.Models
             Wvoidtype = methodVoid;
             WprimitiveDatatype = methodPDataTypeParameter;
             WcompositeParameter = methodCTypeParameter;
+
+            System.Diagnostics.Debug.WriteLine("Im from GetVariablesCount Called:: " + methodPeReturnType);
         }
 
         public void SetFileName(String fileName)
@@ -86,8 +90,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                     for (int i = 0; i < primitiveTypes.Length; i++)
                     {
 
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
-
+                       
                         if (singleRow.Contains("public") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
                         {
                             Npdtp++;

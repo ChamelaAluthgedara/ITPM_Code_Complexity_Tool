@@ -69,7 +69,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         }
 
 
-        
+
 
         // GET: ComplexityVariablesController
         [HttpGet]
@@ -119,9 +119,9 @@ namespace ITPM_Code_Complexity_Tool.Controllers
                 methodVoid = Weight.methodVoidReturnType;
                 methodPDataTypeParameter = Weight.methodPrimitiveDataTypeParameter;
                 methodCTypeParameter = Weight.methodCompositeDataTypeParameter;
+
             }
 
-            System.Diagnostics.Debug.WriteLine("Im from controller:: " + globalVariable);
             w.getWeight(methodPeReturnType, methodCReturnType, methodVoid, methodPDataTypeParameter, methodCTypeParameter);
 
 
@@ -218,10 +218,11 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             sizeVariableMethodsWeightTracker weight = new sizeVariableMethodsWeightTracker()
             {
 
-                variableGlobal = sizeVariableMethodsWeightTracker.variableGlobal,
-                variableLocal = sizeVariableMethodsWeightTracker.variableLocal,
-                variablePrimitiveDataType = sizeVariableMethodsWeightTracker.variablePrimitiveDataType,
-                variableCompotiteDataType = sizeVariableMethodsWeightTracker.variableCompotiteDataType,
+                methodPrimitiveReturnType = sizeVariableMethodsWeightTracker.methodPrimitiveReturnType,
+                methodCompositeReturnType = sizeVariableMethodsWeightTracker.methodCompositeReturnType,
+                methodVoidReturnType = sizeVariableMethodsWeightTracker.methodVoidReturnType,
+                methodPrimitiveDataTypeParameter = sizeVariableMethodsWeightTracker.methodPrimitiveDataTypeParameter,
+                methodCompositeDataTypeParameter = sizeVariableMethodsWeightTracker.methodCompositeDataTypeParameter,
 
             };
 
