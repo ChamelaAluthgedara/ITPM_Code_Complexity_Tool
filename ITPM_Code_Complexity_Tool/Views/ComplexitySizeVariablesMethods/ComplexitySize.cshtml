@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.CdueToSize>
 
 @{
-    Layout = null;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
     var fromURL = Request.Params["fileName"];
 
     if (fromURL == null)
@@ -23,17 +20,10 @@
 
     <h1 style="color:white;">Displaying the complexity of a program due to Size</h1>
 
-    <div align="right">
-        @*  <input class="button button3" type="button" value="Calculate Complexity due to Variables" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityVariables?fileName=@fromURL'" />   &nbsp;  &nbsp;    <input class="button button3" type="button" value="Calculate Complexity due to Methods" onclick="location.href='../ComplexitySizeVariablesMethods/ComplexityMethods?fileName=@fromURL'" />*@
-    </div><br /><br />
-
-
-
     @*set weight again*@
     <button type="button" onclick='window.location.href = "../ComplexitySizeVariablesMethods/SetWeightSize?fileName=@fromURL"' class="btn btn-success">
         Set Weight Again
     </button>
-
 
     @*go to toool menu*@
     <button type="button" onclick='window.location.href = "../Upload/Tool_Home?fileName=@fromURL"' class="btn btn-primary">

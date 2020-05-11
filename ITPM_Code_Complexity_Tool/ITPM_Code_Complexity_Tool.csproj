@@ -2253,6 +2253,7 @@
     <Content Include="Views\ControlStrcture\SetWeight.cshtml" />
     <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightSize.cshtml" />
     <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightVariables.cshtml" />
+    <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightMethods.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

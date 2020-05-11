@@ -21,6 +21,15 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         static int CompositeDataTypeVariable;
 
 
+        static int methodCReturnType;
+        static int methodPeReturnType;
+        static int methodPDataTypeParameter;
+        static int methodCTypeParameter;
+        static int methodVoid;
+
+
+
+
         // GET: ComplexitySizeController
         [HttpGet]
         public ActionResult ComplexitySize(String fileName)
@@ -94,29 +103,28 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // GET: ComplexityMethodsController
         [HttpGet]
         public ActionResult ComplexityMethods()
         {
+
+            sizeVariableMethodsWeightTracker Weight = TempData["Weight"] as sizeVariableMethodsWeightTracker;
+            ComplexityMethods w = new ComplexityMethods();
+            ////set the weight 
+            if (Weight != null)
+            {
+
+                methodPeReturnType = Weight.methodPrimitiveReturnType;
+                methodCReturnType = Weight.methodCompositeReturnType;
+                methodVoid = Weight.methodVoidReturnType;
+                methodPDataTypeParameter = Weight.methodPrimitiveDataTypeParameter;
+                methodCTypeParameter = Weight.methodCompositeDataTypeParameter;
+            }
+
+            System.Diagnostics.Debug.WriteLine("Im from controller:: " + globalVariable);
+            w.getWeight(methodPeReturnType, methodCReturnType, methodVoid, methodPDataTypeParameter, methodCTypeParameter);
+
+
             string name = Request.Params["fileName"];
             var detector = new Models.ComplexityMethods();
             detector.SetFileName(name);
@@ -127,6 +135,9 @@ namespace ITPM_Code_Complexity_Tool.Controllers
 
 
         }
+
+
+        //=======================================================
 
         public ActionResult SetWeightSize()
         {
@@ -189,6 +200,39 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             ViewBag.FILES_FROM_UPLOAD = TempData["UPLOADED_FILES_LIST"];
             ViewBag.FILES_FROM_UPLOAD = TempData["UPLOADED_FILES_LIST"];
             return RedirectToAction("ComplexityVariables", "ComplexitySizeVariablesMethods", new { fileName = fileName });
+        }
+
+        //=====================================================================
+
+
+        public ActionResult SetWeightMethods()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SetWeightMethods(sizeVariableMethodsWeightTracker sizeVariableMethodsWeightTracker, String fileName)
+        {
+
+
+            //set the weight 
+            sizeVariableMethodsWeightTracker weight = new sizeVariableMethodsWeightTracker()
+            {
+
+                variableGlobal = sizeVariableMethodsWeightTracker.variableGlobal,
+                variableLocal = sizeVariableMethodsWeightTracker.variableLocal,
+                variablePrimitiveDataType = sizeVariableMethodsWeightTracker.variablePrimitiveDataType,
+                variableCompotiteDataType = sizeVariableMethodsWeightTracker.variableCompotiteDataType,
+
+            };
+
+
+            //return weight to index controller 
+            TempData["Weight"] = weight;
+
+            TempData.Keep("UPLOADED_FILES_LIST");
+            ViewBag.FILES_FROM_UPLOAD = TempData["UPLOADED_FILES_LIST"];
+            ViewBag.FILES_FROM_UPLOAD = TempData["UPLOADED_FILES_LIST"];
+            return RedirectToAction("ComplexityMethods", "ComplexitySizeVariablesMethods", new { fileName = fileName });
         }
     }
 }

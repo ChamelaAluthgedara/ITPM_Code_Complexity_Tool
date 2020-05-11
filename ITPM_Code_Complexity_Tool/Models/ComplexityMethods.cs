@@ -16,8 +16,11 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int Npdtp;
         public int Ncdtp;
 
-        public int Wpdtp = 1;
-        public int Wcdtp = 2;
+        public int Wprimitivedtp = 1;
+        public int Wcompositedtp = 2;
+        public int Wvoidtype = 0;
+        public int WprimitiveDatatype = 1;
+        public int WcompositeParameter = 2;
 
 
         private String FILE_NAME;
@@ -27,6 +30,15 @@ namespace ITPM_Code_Complexity_Tool.Models
         public ComplexityMethods()  //Constructor
         {
 
+        }
+
+        public void getWeight(int methodPeReturnType, int methodCReturnType, int methodVoid, int methodPDataTypeParameter, int methodCTypeParameter)
+        {
+            Wprimitivedtp = methodPeReturnType;
+            Wcompositedtp = methodCReturnType;
+            Wvoidtype = methodVoid;
+            WprimitiveDatatype = methodPDataTypeParameter;
+            WcompositeParameter = methodCTypeParameter;
         }
 
         public void SetFileName(String fileName)
@@ -106,7 +118,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
             }
             lineNo++;
-            Cm = Wmrt + (Wpdtp * Npdtp) + (Wcdtp * Ncdtp);
+            Cm = Wmrt + (Wprimitivedtp * Npdtp) + (Wcompositedtp * Ncdtp);
             totalCm = totalCm + Cm;
             completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, Cm));
             Npdtp = 0;
