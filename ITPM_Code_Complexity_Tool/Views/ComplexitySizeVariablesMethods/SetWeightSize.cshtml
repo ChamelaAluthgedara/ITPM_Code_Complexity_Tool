@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "SetWeight";
-
     var fromURL = Request.Params["fileName"];
 
     if (fromURL == null)
@@ -19,12 +18,12 @@
 
 <link href="~/Content/style1.css" rel="stylesheet" />
 <link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
-<h1 style="color: white; font-weight: bold">Weights related to the size factor, Variable factor and Method factor</h1>
+<h1 style="color: white; font-weight:bold">Weights related to the size factor</h1>
 
 @using (Html.BeginForm("SetWeightSize", "ComplexitySizeVariablesMethods", new { fileName = fromURL }, FormMethod.Post))
 {
 
-    <table style="color: black" class="table table-bordered table-dark">
+    <table style="color: white" class="table table-bordered table-dark" border="1">
         <thead>
             <tr id="ROW1">
 
@@ -38,13 +37,13 @@
 
                 <td>Keyword</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeKeyword, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.sizeKeyword, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
             </tr>
             <tr>
                 <td>Identifier</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeIdentifers, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.sizeIdentifers, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
@@ -52,7 +51,7 @@
             <tr>
                 <td>Operator</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeOperators, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.sizeOperators, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
@@ -60,14 +59,14 @@
             <tr>
                 <td>Numerical value</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeNumericValues, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.sizeNumericValues, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
             <tr>
                 <td>String literal</td>
                 <td>
-                    @Html.TextBoxFor(m => m.sizeStringLiteral, new { @Value = "1" })
+                    @Html.TextBoxFor(m => m.sizeStringLiteral, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>

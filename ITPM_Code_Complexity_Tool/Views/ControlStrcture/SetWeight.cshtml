@@ -27,7 +27,7 @@
 @using (Html.BeginForm("SetWeight", "ControlStrcture", new { fileName = fromURL }, FormMethod.Post))
 {
 
-    <table style="color: black" class="table table-bordered table-dark">
+    <table style="color: white" class="table table-bordered table-dark">
         <thead>
             <tr id="ROW1">
 
@@ -41,13 +41,13 @@
 
                 <td>A Conditional control structure such as an 'if' or 'else-if' condition</td>
                 <td>
-                    @Html.TextBoxFor(m => m.ifElseIfWeight)
+                    @Html.TextBoxFor(m => m.ifElseIfWeight, new { @Value = "1", size = "2", style = "text-align:center" } )
                 </td>
             </tr>
             <tr>
                 <td>An iterative control structure such as a 'for', 'while' , 'do-while' loop</td>
                 <td>
-                    @Html.TextBoxFor(m => m.forWileDoWhileWeight)
+                    @Html.TextBoxFor(m => m.forWileDoWhileWeight, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
@@ -55,7 +55,7 @@
             <tr>
                 <td>The 'switch' statement in a 'switch-case' control structure</td>
                 <td>
-                    @Html.TextBoxFor(m => m.SwitchWeight)
+                    @Html.TextBoxFor(m => m.SwitchWeight, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
@@ -63,7 +63,7 @@
             <tr>
                 <td>Each 'case' statment in a 'switch-case' control structure</td>
                 <td>
-                    @Html.TextBoxFor(m => m.CaseWeight)
+                    @Html.TextBoxFor(m => m.CaseWeight, new { @Value = "1", size = "2", style = "text-align:center" })
                 </td>
 
             </tr>
