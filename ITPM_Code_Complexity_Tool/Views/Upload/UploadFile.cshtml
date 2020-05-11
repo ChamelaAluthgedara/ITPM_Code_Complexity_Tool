@@ -7,23 +7,28 @@
     ViewBag.Title = "UploadFile";
 }
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
+    <head>
+        <link href="~/Content/style1.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
 
-<h1> Upload Your Code Files </h1>
+<h1 style="color:white;  font-weight:bold" align="center"> Upload Your Code File(s) </h1>
 
 @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+<div background-color="white">
+    <div align="center">
+        <br /><br /><br />
 
-    <div>
-        <button type="button" class="btn btn-primary btn-block"> @Html.TextBox("files", "", new { type = "file", multiple = "multiple" }) </button>
+        <button type="button" class="btn btn-danger"> @Html.TextBox("files", "", new { type = "file", multiple = "multiple" }) </button>
+        <br /><br /><br />
 
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block"> Upload  </button>
-        @ViewBag.Message
-
+        <div align="center">
+            <button type="submit" class="btn btn-danger btn-group-xs"> Upload  </button>
+            @ViewBag.Message
+        </div>
     </div>
-
+</div>
 
 }
