@@ -14,11 +14,12 @@
 
     }
 }
+<head>
+    <title>SetWeight</title>
+    <link href="~/Content/style1.css" rel="stylesheet" />
+    <link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
 
-<h2>SetWeight</h2>
-
-<link href="~/Content/style1.css" rel="stylesheet" />
-<link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
+</head>
 <h1 style="color: white; font-weight: bold">Weights related to the Variable factor</h1>
 
 @using (Html.BeginForm("SetWeightVariables", "ComplexitySizeVariablesMethods", new { fileName = fromURL }, FormMethod.Post))
@@ -41,7 +42,7 @@
 
                 <td>Global variable</td>
                 <td>
-                    @Html.TextBoxFor(m => m.variableGlobal, new { @Value = "2", size = "2", style = "text-align:center",  })
+                    @Html.TextBoxFor(m => m.variableGlobal, new { @Value = "2", size = "2", style = "text-align:center", })
                 </td>
             </tr>
             <tr>

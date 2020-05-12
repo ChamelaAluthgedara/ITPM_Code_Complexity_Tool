@@ -39,13 +39,13 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         private String FILE_NAME;
 
-        public static string[] numericalArray = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+        public static string[] numericalArray = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        public static string[] identifiresArray = { "class", "return", "main", "System", "out", "print", "printf" };
-        public static string[] wordAray = { "class", "static", "public", "void", "true", "else", "default", "return", "null", "break", "this" };
-        public static string[] operatorAray = {  "+", "-", "*", "/", "%", "%.", "++","--",  "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
-         "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ".", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
-         "^=", "."};
+        public static string[] identifiresArray = { "class", "return", "main", "System", "out", "print", "printf"};
+        public static string[] wordAray = { "class", "static", "extends", "java", "public", "private", "protected", "void", "true", "else", "default", "return", "null", "break", "this" };
+        public static string[] operatorAray = { ".", "+", "-", "*", "/", "%", "%.", "++","--",  "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
+         "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ",", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
+         "^="};
         public String[] controlStrucures = { "if", "while", "do", "switch", "for" };
 
         List<CdueToSize> completeList = new List<CdueToSize>();
@@ -91,7 +91,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void GetKeywordCount(string line)
         {
-            string[] wordOp = line.Trim().Split(new char[] { ' ', '\r', '\n', ',', ';', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
+            string[] wordOp = line.Trim().Split(new char[] { ' ', '\r', '\n', ';', '"', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z'}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
             try
             {
@@ -102,30 +102,54 @@ namespace ITPM_Code_Complexity_Tool.Models
                     {
 
 
-                        if (singleRow.Contains(wordAray[i]))
+                        if (singleRow.Contains(wordAray[i]) && !singleRow.Contains("import"))
                         {
                             keywordCount++;
                         }
                     }
                 }
 
-                for (int j = 0; j < operatorAray.Length; j++)
+                //for (int j = 0; j < operatorAray.Length; j++)
+                //{
+
+                //    for (int i = 0; i < wordOp.Length; i++)
+                //    {
+                //        wordOp[i].Remove(wordOp[i].Length - 1).Trim();
+
+                //        if (wordOp[i] == operatorAray[j])
+                //        {
+                //            operatorCount++;
+                //        }
+
+                //    }
+                //}
+                foreach (string singleRow in line.Split('\n'))
                 {
-
-                    for (int i = 0; i < wordOp.Length; i++)
+                    if (!singleRow.Contains("import"))
                     {
-                        wordOp[i].Remove(wordOp[i].Length - 1).Trim();
+                    string[] rowArray = singleRow.Trim().Split(new char[] { ' ', ')', '(', '{', '}', ':',  '\r', '\n', ';', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-                        if (wordOp[i] == operatorAray[j])
-                        {
-                            operatorCount++;
-                        }
+                    for (int i = 0; i < rowArray.Length; i++)
+                    {
+                       // System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
 
+                        for (int j = 0; j < operatorAray.Length; j++)
+                            {
+                                rowArray[i].Remove(rowArray[i].Length - 1).Trim();
+
+                                if (rowArray[i] == operatorAray[j])
+                                {
+                                    operatorCount++;
+
+                                }
+
+                            }
+                    }
                     }
                 }
 
 
-                foreach (string singleRow in line.Split('\n'))
+                foreach (string singleRow in line.Split('\n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'))
                 {
 
                     if (singleRow.Contains('"') && singleRow.Contains("(") && singleRow.Contains(")") && singleRow.Contains(";"))
@@ -139,11 +163,34 @@ namespace ITPM_Code_Complexity_Tool.Models
                     for (int i = 0; i < identifiresArray.Length; i++)
                     {
 
-                        if (rowLine.Contains(identifiresArray[i]))
+                        if (rowLine.Contains(identifiresArray[i]) && !rowLine.Contains("import"))
                         {
                             identifires++;
                         }
+                       
 
+                    }
+                    if (rowLine.Contains("(") && rowLine.Contains(")") && rowLine.Contains(";") && !rowLine.Contains("import"))
+                    {
+                        identifires++;
+                    }
+
+                    if (rowLine.Contains("=") && rowLine.Contains(";") && !rowLine.Contains("import"))
+                    {
+                        identifires++;
+                    }
+
+                    if (rowLine.Contains(".") && rowLine.Contains("(") && rowLine.Contains(")") && rowLine.Contains(";") && !rowLine.Contains("=") && !rowLine.Contains("import"))
+                    {
+                        identifires++;
+                    }
+                    if (rowLine.Contains("(") && rowLine.Contains("{") && rowLine.Contains(")") && !rowLine.Contains("=") && !rowLine.Contains(";") && !rowLine.Contains("import"))
+                    {
+                        identifires++;
+                    }
+                    if (rowLine.Contains("(") && rowLine.Contains(".") && rowLine.Contains("{") && rowLine.Contains(")") && !rowLine.Contains("=") && !rowLine.Contains(";") && !rowLine.Contains("import"))
+                    {
+                        identifires++;
                     }
 
                     if (rowLine.Contains("for"))
@@ -154,18 +201,28 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                 }
 
-                foreach (string singleRow in line.Split('\n'))
+                foreach (string singleRow in line.ToLower().Split(new char[] { '\n', ',', ' ', ')', '(', '{', '}', ':', '\r', ';', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u','v' ,'w', 'x', 'y', 'z' },StringSplitOptions.RemoveEmptyEntries))
                 {
-                    for (int i = 0; i < numericalArray.Length; i++)
+                    for (int i = 0; i < ((numericalArray.Length)-1); i++)
                     {
+                        //string[] numberArray = singleRow.Trim().Split(new char[] { ' ', ')', '(', '{', '}', ':', '\r', ';', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'w', 'x', 'y', 'z'}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-                       
 
-                        if (singleRow.Contains(numericalArray[i]))
+                        //var result = "1234";
+                        var fResult = string.Join(",", singleRow.ToCharArray());
+                        int index = fResult.IndexOf(",");
+                        string input = fResult;
+                        if (index > 0)
+                            input = input.Substring(0, index);
+                        System.Diagnostics.Debug.WriteLine("This is row line: " + input + ", lenght: " + ((numericalArray.Length) - 1));
+                        if (input.Contains(numericalArray[i]))
                         {
                             numricalCount++;
                         }
+
+
                     }
+                    System.Diagnostics.Debug.WriteLine("End of for Loop....\n");
                 }
 
                 lineNo++;
