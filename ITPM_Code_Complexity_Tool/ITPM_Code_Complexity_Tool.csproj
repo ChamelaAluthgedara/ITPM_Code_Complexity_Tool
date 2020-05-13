@@ -2253,6 +2253,7 @@
     <Content Include="Views\Upload\MultipleFiles.cshtml" />
     <Content Include="Views\Upload\Tool_Home.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
+    <Content Include="Views\Inheritance\setWeight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFiles\Files\" />
