@@ -17,6 +17,10 @@
 <body>
     <h2> Change weight </h2>
 
+    @{ 
+        ViewData["FILE"] = Request.Params["fileName"];
+    }
+
     <div class="container">
         <form class="form-horizontal" action="setIt" method="GET">
 

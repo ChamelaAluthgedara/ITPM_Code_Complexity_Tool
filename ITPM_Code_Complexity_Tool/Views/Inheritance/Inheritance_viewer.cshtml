@@ -16,7 +16,11 @@
 
     <h1> Inheritance </h1>
 
-  
+    @{ 
+        string url = Request.Params["fileName"];
+        
+    }
+    <a href="setWeight?fileName=@url"  style="float:right"> Change weight </a>
     <br /> <br />
 
 

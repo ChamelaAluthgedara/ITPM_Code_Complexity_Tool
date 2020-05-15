@@ -1,12 +1,7 @@
-
-
-public class Java extends Shit {
-
+public class Java extends Shit , lol , top {
 }
 
-
-
-
 public lol : pip {
+} 
 
-	}
+	
