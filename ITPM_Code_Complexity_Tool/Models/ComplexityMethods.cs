@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Antlr4.Runtime.Misc;
+using com.sun.org.apache.xml.@internal.resolver.helpers;
+using java.util;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace ITPM_Code_Complexity_Tool.Models
@@ -10,6 +15,8 @@ namespace ITPM_Code_Complexity_Tool.Models
     public class ComplexityMethods
     {
         CdueToMethod c = new CdueToMethod();
+        public Boolean detected = false;
+        public int k = 0;
 
         int lineNo = 0;
         public int Cm;
@@ -24,6 +31,7 @@ namespace ITPM_Code_Complexity_Tool.Models
          static int WprimitiveDatatype;
          static int WcompositeParameter;
 
+        List<string> primitiveTypesArray = new List<string>();
 
         private String FILE_NAME;
 
@@ -42,7 +50,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             WprimitiveDatatype = methodPDataTypeParameter;
             WcompositeParameter = methodCTypeParameter;
 
-            System.Diagnostics.Debug.WriteLine("Im from GetVariablesCount Called:: " + methodPeReturnType);
+            //System.Diagnostics.Debug.WriteLine("Im from GetVariablesCount Called:: " + methodPeReturnType);
         }
 
         public void SetFileName(String fileName)
@@ -50,7 +58,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.FILE_NAME = fileName;
         }
 
-        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double" };
+        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double", "String"};
 
 
         public void ProcessFile()
@@ -80,42 +88,174 @@ namespace ITPM_Code_Complexity_Tool.Models
             }
         }
 
+
         public void GetMethodCount(string line)
         {
+            
             try
             {
 
                 foreach (string singleRow in line.Split('\n'))
                 {
-                    for (int i = 0; i < primitiveTypes.Length; i++)
+                    foreach (string v in primitiveTypes)
                     {
+                        
+                        if (singleRow.Contains("public") || singleRow.Contains("private") || singleRow.Contains("protected"))
+                        {
 
-                       
-                        if (singleRow.Contains("public") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
+                            if (singleRow.Contains(v))
+                            {
+                                //////method return type
+                                if (singleRow.Contains(v) && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                {
+                                    string regularExpressionPattern = @"\((.*?)\)";
+
+                                    Regex re = new Regex(regularExpressionPattern);
+
+                                    foreach (Match m in re.Matches(singleRow))
+                                    {
+                                        if (m.Value.Equals("()"))
+                                        {
+                                           // System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
+                                            Wmrt++;
+                                            Wmrt = Wmrt + Wprimitivedtp;
+                                        }
+                                    }
+                                }
+
+                                if (singleRow.Contains("void") &&  singleRow.Contains("(") && singleRow.Contains(")") && !singleRow.Contains("args"))
+                                {
+                                    string regularExpressionPattern = @"\((.*?)\)";
+                                    Regex re = new Regex(regularExpressionPattern);
+                                    foreach (Match m in re.Matches(singleRow))
+                                    {
+                                        if (m.Value.Equals("()"))
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("void detected " + m.Value);
+                                            Wmrt++;
+                                            Wmrt = Wmrt * Wvoidtype;
+                                        }
+                                    }
+                                }
+
+
+                                //// primitive data type parameter with primitive return type
+                                //if (singleRow.Contains(v) && !singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                //{
+                                //    string regularExpressionPattern = @"\((.*?)\)";
+
+                                //    Regex re = new Regex(regularExpressionPattern);
+                                //    string lineWords = singleRow;
+                                //    foreach (Match m in re.Matches(lineWords))
+                                //    {
+                                //        if (!m.Value.Equals("()"))
+                                //        {
+                                //            if (m.Value.Contains(v))
+                                //            {
+                                //                System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
+                                //                Npdtp++;
+                                //            }
+
+                                //        }
+                                //    }
+                                //}
+
+                                // primitive data type parameter with void
+                                if (singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                {
+                                    string regularExpressionPattern = @"\((.*?)\)";
+                                    
+                                    Regex re = new Regex(regularExpressionPattern);
+                                    string lineWords = singleRow;
+                                    foreach (Match m in re.Matches(lineWords))
+                                    {
+                                        if (!m.Value.Equals("()"))
+                                        {
+                                            string valk = m.Value;
+
+                                            char[] spearator = { ' ', '(', ')' };
+                                            Int32 count = 10;
+
+                                            // Using the Method 
+                                            String[] strlist = valk.Split(spearator, count, StringSplitOptions.None);
+                                            
+                                            foreach (String s in strlist)
+                                            {
+
+                                                if (s == v)
+                                                {
+                                                    primitiveTypesArray.Add(s);
+                                                    foreach (string word in primitiveTypes)
+                                                    {
+                                                        if (primitiveTypesArray[k] == word)
+                                                        {
+                                                            Npdtp++;
+                                                         }
+                                                    }
+                                                    k++;
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+
+                                //// composite data type parameter with PRIMITIVE RETURN TYPE
+                                //if (singleRow.Contains(v) && !singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                //{
+                                //    string regularExpressionPattern = @"\((.*?)\)";
+
+                                //    Regex re = new Regex(regularExpressionPattern);
+                                //    string lineWords = singleRow;
+                                //    foreach (Match m in re.Matches(lineWords))
+                                //    {
+                                //        if (!m.Value.Equals("()"))
+                                //        {
+                                //            if (!m.Value.Contains(v))
+                                //            {
+                                //                System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
+                                //                Ncdtp++;
+                                //            }
+
+                                //        }
+                                //    }
+                                //}
+
+
+                                // composite data type parameter with void type
+                                if (!singleRow.Contains(v) && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                {
+                                    string regularExpressionPattern = @"\((.*?)\)";
+                                    Regex re = new Regex(regularExpressionPattern);
+
+                                    foreach (Match m in re.Matches(singleRow))
+                                    {
+                                        if (!m.Value.Equals("()"))
+                                        {
+                                            if (!m.Value.Contains(v))
+                                            {
+                                                if (!detected)
+                                                {
+                                                   // System.Diagnostics.Debug.WriteLine("composite parameter " + m.Value);
+                                                    Ncdtp++;
+                                                }
+                                                detected = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        if (singleRow.Contains("public") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
+
                     }
-                    if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("main") && singleRow.Contains("(") && singleRow.Contains("args"))
-                    {
-                        Ncdtp++;
-                    }
+                    detected = false;
                 }
-
-
             }
+
+            
             catch (Exception)
             {
 
@@ -124,6 +264,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             Cm = Wmrt + (Wprimitivedtp * Npdtp) + (Wcompositedtp * Ncdtp);
             totalCm = totalCm + Cm;
             completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, Cm));
+            Wmrt = 0;
             Npdtp = 0;
             Ncdtp = 0;
             Cm = 0;

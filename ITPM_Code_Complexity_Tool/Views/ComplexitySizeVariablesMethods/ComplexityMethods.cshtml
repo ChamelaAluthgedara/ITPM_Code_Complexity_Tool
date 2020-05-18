@@ -54,7 +54,7 @@
                 <tr style="padding:23px;">
                     <td> @item.lineNo </td>
                     <td> @item.CODELINE </td>
-                    @if (item.methodReturnType != 0)
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
                     {
                         <td> @item.methodReturnType </td>
                     }
@@ -62,7 +62,7 @@
                     {
                         <td></td>
                     }
-                    @if (item.NumberOfPrimitiveDataTypeParameters != 0)
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
                     {
                         <td> @item.NumberOfPrimitiveDataTypeParameters </td>
                     }
@@ -70,7 +70,7 @@
                     {
                         <td></td>
                     }
-                    @if (item.NumberOfCompositeDataTypeParameters != 0)
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
                     {
                         <td> @item.NumberOfCompositeDataTypeParameters </td>
                     }

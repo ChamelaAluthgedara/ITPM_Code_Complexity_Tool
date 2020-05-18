@@ -16,7 +16,7 @@ public class JumpingBox extends java.applet.Applet implements MouseListener, Mou
         addComponentListener(this);
     }
 
-    public void update(Graphics g) {
+    public void update(int g, float f, int k) {
         Dimension newSize = getSize();
         if (size.equals(newSize)) { // Erase old box
             g.setColor(getBackground());
@@ -54,17 +54,16 @@ public class JumpingBox extends java.applet.Applet implements MouseListener, Mou
             if (onaroll > 0) {   //not first hit
                 switch (onaroll%4) {   //play a sound
                 case 0:
-                    play(getCodeBase(), 
-                         "sounds/tiptoe.thru.the.tulips.au");
+                    play(getCodeBase(),"sounds/tiptoe.thru.the.tulips.au");
                     break;
                 case 1:
-                    play(getCodeBase(), "sounds/danger.au");
+                    play(getCodeBase(),"sounds/danger.au");
                     break;
                 case 2:
-                    play(getCodeBase(), "sounds/adapt-or-die.au");
+                    play(getCodeBase(),"sounds/adapt-or-die.au");
                     break;
                 case 3:
-                    play(getCodeBase(), "sounds/cannot.be.completed.au");
+                    play(getCodeBase(),"sounds/cannot.be.completed.au");
                     break;
                 }
                 onaroll++;
