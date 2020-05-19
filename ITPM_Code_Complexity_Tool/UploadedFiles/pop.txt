@@ -1,7 +1,5 @@
-public class Java extends Shit , lol , top {
+public class Java extends language{
 }
 
-public lol : pip {
-} 
 
 	

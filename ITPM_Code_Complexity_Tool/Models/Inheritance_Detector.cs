@@ -79,90 +79,78 @@ namespace ITPM_Code_Complexity_Tool.Models
             int direct = 0;
             int indirect = 0;
             int ci = 0;
-            int directWeight = 0;
-
+            int foundClasses = 0;
 
             String[] KEYWORDS = { "extends", "implements", ":" };
 
             string[] WORDS = line1.Split(' ');
 
             //Check if this line contains keywords
-            
+
 
             for (int position = 0; position < WORDS.Length; position++)
             {
-                
+
                 foreach (String keyword in KEYWORDS)//Checking for keywords
                 {
                     if (WORDS[position] == keyword)//A Keyword on the line is found
                     {
+                        
+                        for (int temp = position; temp <= (WORDS.Length - 1); temp++) // Gets next word after keyword
+                        {
+                            
+                            //Analyze the word, Getting 
+                            foreach (char letter in WORDS[temp])
+                            {
+                                if (letter == ',')
+                                {
+                                    foundClasses = foundClasses + 1;
 
-                       
-                       for (int temp = position + 1; temp < WORDS.Length; temp++)//Checking words after keywords
-                       {
-                           if (WORDS[temp] == ",")
-                           {
-                               if (direct == 0)
-                               {
-                                    direct = direct + 2;//One defined Class found
-                                    
-                               }
-
-                               else
-                               {
-
-                                    direct = direct + 1;
-                                    
-                               }
-                           }
-                           else if (direct == 0 && WORDS[temp] == "{")
-                           {
-                               direct = direct + 1;
-                               
-                           }
+                                }
+                                if (letter == '{')
+                                {
+                                    foundClasses = foundClasses + 1;
+                                }
 
 
+                            }
 
-                       }
-                       /*
-                       ci = direct + indirect;
-                       this.totalCi = this.totalCi + ci;
-                       completeList.Add(new Inheritance(line1, indirect, direct, ci));
-                       */
+
+                        }
 
 
 
 
                     }
 
-                }       
+                }
 
-              
+
 
             }
 
-            
+
             //exp
             //According to weight set by user
-            if (direct == 0)
+            if (foundClasses == 0)
             {
-                directWeight = INHERITED_NO_CLASS;
+                direct = direct + INHERITED_NO_CLASS;
             }
-            else if (direct == 1)
+            else if (foundClasses == 1)
             {
-                directWeight = INHERITED_ONE_CLASS;
+                direct = direct + INHERITED_ONE_CLASS;
             }
-            else if (direct == 2)
+            else if (foundClasses == 2)
             {
-                directWeight = INHERITED_TWO_CLASSES;
+                direct = direct + INHERITED_TWO_CLASSES;
             }
-            else if (direct == 3)
+            else if (foundClasses == 3)
             {
-                directWeight = INHERITED_THREE_CLASSES;
+                direct = direct + INHERITED_THREE_CLASSES;
             }
-            else if (direct >= 4)
+            else if (foundClasses >= 4)
             {
-                directWeight = INHERITED_MORE_THAN_FOUR_CLASSES;
+                direct = direct + INHERITED_MORE_THAN_FOUR_CLASSES;
             }
 
 
@@ -170,17 +158,18 @@ namespace ITPM_Code_Complexity_Tool.Models
 
 
             //Calculate Ci value
-            ci = directWeight + indirect;
-            this.totalDirect = this.totalDirect + directWeight;
+            ci = direct + indirect;
+            this.totalDirect = this.totalDirect + direct;
+            this.totalIndirect = this.totalIndirect + indirect;
             this.totalCi = this.totalCi + ci;
-            completeList.Add(new Inheritance(line1, indirect, directWeight, ci));
-            
-           
+            completeList.Add(new Inheritance(line1, indirect, direct, ci));
+
+
         }
 
 
 
-            public List<Inheritance> showData()
+        public List<Inheritance> showData()
             {
                 completeList.Add(new Inheritance("Total", this.totalIndirect, this.totalDirect, this.totalCi));
                 return completeList;
