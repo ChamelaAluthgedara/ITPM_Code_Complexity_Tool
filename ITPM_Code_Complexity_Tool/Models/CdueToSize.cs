@@ -17,6 +17,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int stringLiteral;
         public int CI;
         public  int totalCSCal;
+       
 
         public static int Wkw = 1;
         public static int Wid = 1;
@@ -89,6 +90,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int methodReturnType;
         public int Cm;
         public int totalCMCal;
+        public Boolean voidDetected = false;
 
 
         public static int Wprimitivedtp = 1;
@@ -98,13 +100,14 @@ namespace ITPM_Code_Complexity_Tool.Models
         public static int WcompositeParameter = 2;
 
 
-        public CdueToMethod(int lineNo, String codeline, int NumberOfCompositeDataTypeParameters, int NoPrimitiveDataTypeVariables, int methodReturnType, int Cm)
+        public CdueToMethod(int lineNo, String codeline, int NumberOfCompositeDataTypeParameters, int NoPrimitiveDataTypeVariables, int methodReturnType, Boolean voidDetec, int Cm)
         {
             this.lineNo = lineNo;
             this.CODELINE = codeline;
             this.NumberOfCompositeDataTypeParameters = NumberOfCompositeDataTypeParameters;
             this.NumberOfPrimitiveDataTypeParameters = NoPrimitiveDataTypeVariables;
             this.methodReturnType = methodReturnType;
+            this.voidDetected = voidDetec;
             this.Cm = Cm;
         }
         public CdueToMethod(int totalCMCal)

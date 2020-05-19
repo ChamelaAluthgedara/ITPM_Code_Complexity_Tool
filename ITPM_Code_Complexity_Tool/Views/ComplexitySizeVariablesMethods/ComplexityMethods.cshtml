@@ -54,7 +54,8 @@
                 <tr style="padding:23px;">
                     <td> @item.lineNo </td>
                     <td> @item.CODELINE </td>
-                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
+
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0 || item.voidDetected)
                     {
                         <td> @item.methodReturnType </td>
                     }
@@ -62,7 +63,7 @@
                     {
                         <td></td>
                     }
-                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0 || item.voidDetected)
                     {
                         <td> @item.NumberOfPrimitiveDataTypeParameters </td>
                     }
@@ -70,7 +71,7 @@
                     {
                         <td></td>
                     }
-                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0)
+                    @if (item.methodReturnType != 0 || item.NumberOfPrimitiveDataTypeParameters != 0 || item.NumberOfCompositeDataTypeParameters != 0 || item.voidDetected)
                     {
                         <td> @item.NumberOfCompositeDataTypeParameters </td>
                     }
@@ -79,15 +80,10 @@
                         <td></td>
                     }
                     <td> @item.Cm </td>
-
-
                 </tr>
-
-
             }
-
-
         }
+
         <tr id="ROW1">
             <td> Total </td>
             <td></td>
