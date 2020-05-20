@@ -125,7 +125,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                     foreach (string v in primitiveTypes)
                     {
 
-                        if (singleRow.Contains("public") || singleRow.Contains("private") || singleRow.Contains("protected"))
+                        if (singleRow.Contains("public") || singleRow.Contains("private") || singleRow.Contains("protected") || singleRow.Contains("static"))
                         {
                             if (singleRow.Contains(v))
                             {
@@ -143,16 +143,16 @@ namespace ITPM_Code_Complexity_Tool.Models
                                             // System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
                                             Wmrt++;
                                             Wmrt = Wmrt * Wprimitivedtp;
-                                           
+
                                         }
                                     }
                                 }
-                                
+
 
                                 if (singleRow.Contains(v))
                                 {
                                     //////method return type
-                                    if ( !singleRow.Contains(v) && singleRow.Contains("(") && !singleRow.Contains("void") && !singleRow.Contains("args"))
+                                    if (!singleRow.Contains(v) && singleRow.Contains("(") && !singleRow.Contains("void") && !singleRow.Contains("args"))
                                     {
                                         string regularExpressionPattern = @"\((.*?)\)";
 
@@ -171,30 +171,29 @@ namespace ITPM_Code_Complexity_Tool.Models
                                 }
 
 
+                                if (singleRow.Contains(v))
+                                {
+                                    //////method return type
+                                    if (singleRow.Contains("void") && singleRow.Contains("(") && singleRow.Contains("main") && singleRow.Contains("args") && singleRow.Contains("String"))
+                                    {
+                                        string regularExpressionPattern = @"\((.*?)\)";
 
-                                    //// primitive data type parameter with primitive return type
-                                    //if (singleRow.Contains(v) && !singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                                    //{
-                                    //    string regularExpressionPattern = @"\((.*?)\)";
+                                        Regex re = new Regex(regularExpressionPattern);
 
-                                    //    Regex re = new Regex(regularExpressionPattern);
-                                    //    string lineWords = singleRow;
-                                    //    foreach (Match m in re.Matches(lineWords))
-                                    //    {
-                                    //        if (!m.Value.Equals("()"))
-                                    //        {
-                                    //            if (m.Value.Contains(v))
-                                    //            {
-                                    //                System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
-                                    //                Npdtp++;
-                                    //            }
+                                        foreach (Match m in re.Matches(singleRow))
+                                        {
+                                            if (!m.Value.Equals("()"))
+                                            {
+                                                // System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
+                                                Ncdtp++;
+                                            }
+                                        }
+                                    }
+                                }
 
-                                    //        }
-                                    //    }
-                                    //}
 
-                                    // primitive data type parameter with void
-                                    if (singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
+                                // primitive data type parameter with void
+                                if (singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
                                 {
                                     string regularExpressionPattern = @"\((.*?)\)";
 
@@ -236,27 +235,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                             else
                             {
 
-                                //// composite data type parameter with PRIMITIVE RETURN TYPE
-                                //if (singleRow.Contains(v) && !singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                                //{
-                                //    string regularExpressionPattern = @"\((.*?)\)";
-
-                                //    Regex re = new Regex(regularExpressionPattern);
-                                //    string lineWords = singleRow;
-                                //    foreach (Match m in re.Matches(lineWords))
-                                //    {
-                                //        if (!m.Value.Equals("()"))
-                                //        {
-                                //            if (!m.Value.Contains(v))
-                                //            {
-                                //                System.Diagnostics.Debug.WriteLine("empty () detected: " + m.Value);
-                                //                Ncdtp++;
-                                //            }
-
-                                //        }
-                                //    }
-                                //}
-
 
                                 // composite data type parameter with void type
                                 if (!singleRow.Contains(v) && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
@@ -285,7 +263,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                     }
                     detected = false;
-                   
+
                 }
             }
 

@@ -87,7 +87,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
                 CompositeDataTypeVariable = Weight.variableCompotiteDataType;
             }
 
-            System.Diagnostics.Debug.WriteLine("Im from controller:: " + globalVariable);
+           
             w.getWeight(globalVariable, localVariable, primitiveDataTypeVariable, CompositeDataTypeVariable);
 
 
