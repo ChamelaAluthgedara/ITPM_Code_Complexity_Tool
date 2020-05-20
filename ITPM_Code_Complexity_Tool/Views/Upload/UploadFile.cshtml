@@ -13,11 +13,14 @@
 
 <h1> Upload Your Code Files </h1>
 
+
+
+
 @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     <div>
-        <button type="button" class="btn btn-primary btn-block"> @Html.TextBox("files", "", new { type = "file", multiple = "multiple", accept = ".java,.cpp,.zip" }) </button>
+        <button type="button" class="btn btn-primary btn-block"> @Html.TextBox("files", "", new { type = "file", multiple = "multiple", accept = ".java,.cpp,.zip"}) </button>
 
 
         <button type="submit" class="btn btn-primary btn-lg btn-block"> Upload  </button>
