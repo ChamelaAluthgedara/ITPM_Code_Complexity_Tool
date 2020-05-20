@@ -229,7 +229,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
 
                                 // local primitive variable
-                                for (int i = 0; i < 1; i++)
+                                for (int i = 0; i < primitiveDataTypes.Length; i++)
                                 {
                                     //System.Diagnostics.Debug.WriteLine("split count in local primitive: " + "global state:: " + globalVariable);
                                     // System.Diagnostics.Debug.WriteLine("line " + rowLine);
@@ -264,6 +264,83 @@ namespace ITPM_Code_Complexity_Tool.Models
                         {
                             if (globalVariable == false)
                             {
+
+
+
+
+                                //local composite variables
+                                for (int i = 0; i < 1; i++)
+                                {
+                                    if (rowLine.Contains("=") && rowLine.Contains(";") && rowLine.Contains("(") && !(rowLine.Contains("int") || rowLine.Contains("double") || rowLine.Contains("char") || rowLine.Contains("byte") || rowLine.Contains("short") || rowLine.Contains("String") || rowLine.Contains("long") || rowLine.Contains("boolean") || rowLine.Contains("float")))
+                                    {
+
+                                        // System.Diagnostics.Debug.WriteLine("LOCAL inside composite split........... : ");
+                                        string firstFragment = rowLine.Split('=').First();
+                                        //System.Diagnostics.Debug.WriteLine("left word: " + firstFragment);
+
+                                        if (firstFragment.Contains(primitiveDataTypes[i]))
+                                        {
+                                            if (rowLine.Contains(","))
+                                            {
+
+                                                int count = rowLine.Split(',').Length - 1;
+                                                System.Diagnostics.Debug.WriteLine("LOCAL composite split count: " + count);
+                                                if (!detected)
+                                                {
+                                                    NoCompositeDataTypeVariables = count + 1;
+                                                    WeightDueToVScope = WeightLocalVariable;
+                                                    detected = true;
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (!detected)
+                                                {
+                                                    NoCompositeDataTypeVariables++;
+                                                    WeightDueToVScope = WeightLocalVariable;
+                                                    detected = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                detected = false;
+
+
+                                // local primitive variable
+                                for (int i = 0; i < primitiveDataTypes.Length; i++)
+                                {
+                                    //System.Diagnostics.Debug.WriteLine("split count in local primitive: " + "global state:: " + globalVariable);
+                                    // System.Diagnostics.Debug.WriteLine("line " + rowLine);
+                                    if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains(";"))
+                                    {
+                                        if (rowLine.Contains(","))
+                                        {
+
+                                            int count = rowLine.Split(',').Length - 1;
+                                            //  System.Diagnostics.Debug.WriteLine("split count in local primitive: " + count +"\n line: " + rowLine);
+                                            NoPrimitiveDataTypeVariables = count + 1;
+                                            WeightDueToVScope = WeightLocalVariable;
+
+                                        }
+                                        else
+                                        {
+                                            if(!rowLine.Contains("int")){
+                                                // System.Diagnostics.Debug.WriteLine("split count in local primitive: " + "\n line: " + rowLine);
+                                                NoPrimitiveDataTypeVariables++;
+                                                WeightDueToVScope = WeightLocalVariable;
+                                            }
+                                           
+                                        }
+
+                                    }
+
+                                }
+
+
+
+
                                 // local primitive variable
                                 for (int i = 0; i < primitiveDataTypes[i].Length; i++)
                                 {
@@ -305,9 +382,9 @@ namespace ITPM_Code_Complexity_Tool.Models
                                 detected = false;
 
                                 //local composite variables
-                                for (int i = 0; i < 1; i++)
+                                for (int i = 0; i < primitiveDataTypes.Length; i++)
                                 {
-                                    if (rowLine.Contains("=") && rowLine.Contains(";") && rowLine.Contains("(") && !(rowLine.Contains(primitiveDataTypes[i])))
+                                    if (rowLine.Contains("=") && rowLine.Contains(";") && rowLine.Contains("(") && !(rowLine.Contains("int") || rowLine.Contains("double") || rowLine.Contains("char") || rowLine.Contains("byte") || rowLine.Contains("short") || rowLine.Contains("String") || rowLine.Contains("long") || rowLine.Contains("boolean") || rowLine.Contains("float")))
                                     {
 
 
@@ -352,6 +429,34 @@ namespace ITPM_Code_Complexity_Tool.Models
                                     }
                                 }
                                 detected = false;
+
+
+
+                            }
+
+                            if (globalVariable)
+                            {
+                                for (int i = 0; i < primitiveDataTypes.Length; i++)
+                                {
+                                    //primitive global
+                                    if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains(";") && !(rowLine.Contains("public") || rowLine.Contains("private") || rowLine.Contains("protected")))
+                                    {
+                                        if (rowLine.Contains(","))
+                                        {
+                                            int count = rowLine.Split(',').Length - 1;
+                                            // System.Diagnostics.Debug.WriteLine("Global primitive split count: " + count);
+                                            NoPrimitiveDataTypeVariables = count + 1;
+                                            WeightDueToVScope = WeightGlobalVariable;
+                                        }
+                                        else
+                                        {
+                                            NoPrimitiveDataTypeVariables++;
+                                            WeightDueToVScope = WeightGlobalVariable;
+                                        }
+
+                                    }
+
+                                }
                             }
                         }
                         detected = false;

@@ -10,74 +10,94 @@
 <html>
 <head>
     <title> Inheritance </title>
+    <link href="~/Content/Cize,Variable,Methods_CSS.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-
-    <h1> Inheritance </h1>
-
-
-    <br /> <br />
-
-
-    <style>
-
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-
-
-    <table>
-        <tr>
-            <td> <strong> Code Line </strong> </td>
-            <td> <strong> No. of Direct Inheritances </strong> </td>
-            <td> <strong> No. of Indirect Inheritances </strong> </td>
-            <td> <strong> Ci </strong> </td>
-        </tr>
+<body style="background: url('../StartPage/images/slide1-01.png')">
+    <div class="container">
+        <h1 style="color:ghostwhite"> Inheritance </h1>
 
         @{
-            foreach (var item in Model)
-            {
-                <tr style="padding:23px;">
-
-
-
-                    @{ if (@item.CODELINE == "Total")
-                        {
-                            <td style="color:white;font-weight:bold;background-color:black;"> @item.CODELINE </td>
-                            <td style="color:white;font-weight:bold;background-color:black;"> @item.DIRECT  </td>
-                            <td style="color:white;font-weight:bold;background-color:black;"> @item.INDIRECT </td>
-                            <td style="color:white;font-weight:bold;background-color:black;"> @item.CI </td>
-                        }
-
-                        else
-                        {
-                            <td> @item.CODELINE </td>
-                            <td> @item.DIRECT </td>
-                            <td> @item.INDIRECT </td>
-                            <td> @item.CI </td>
-                        }
-                    }
-
-                </tr>
-            }
-
+            string url = Request.Params["fileName"];
 
         }
-    </table>
+
+
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                /* border: 1px solid #dddddd;*/
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: white;
+                /*#dddddd*/
+            }
+        </style>
+
+        <button type="button" onclick='window.location.href = "../Inheritance/setWeight?fileName=@url"' class="btn btn-success">
+            Set Weight
+        </button>
+
+        @*go to toool menu*@
+        <button type="button" onclick='window.location.href = "../Upload/Tool_Home?fileName=@url"' class="btn btn-primary">
+            Go Back To Tool Menu
+        </button>
+
+
+        <table>
+            <tr style="background-color: red;color: white;">
+                <td> <strong> Code Line </strong> </td>
+                <td> <strong> No. of Direct Inheritances </strong> </td>
+                <td> <strong> No. of Indirect Inheritances </strong> </td>
+                <td> <strong> Ci </strong> </td>
+            </tr>
+
+            @{
+                foreach (var item in Model)
+                {
+                    <tr style="padding:23px;color:black;background-color:white;">
+
+
+
+                        @{ if (@item.CODELINE == "Total")
+                            {
+                                <td style="color:white;font-weight:bold;background-color:black;"> @item.CODELINE </td>
+                                <td style="color:white;font-weight:bold;background-color:black;"> @item.DIRECT  </td>
+                                <td style="color:white;font-weight:bold;background-color:black;"> @item.INDIRECT </td>
+                                <td style="color:white;font-weight:bold;background-color:black;"> @item.CI </td>
+                            }
+
+                            else
+                            {
+                                <td> @item.CODELINE </td>
+                                <td> @item.DIRECT </td>
+                                <td> @item.INDIRECT </td>
+                                <td> @item.CI </td>
+                            }
+                        }
+
+                    </tr>
+                }
+
+
+            }
+        </table>
+
+    </div>
 </body>
 
 </html>

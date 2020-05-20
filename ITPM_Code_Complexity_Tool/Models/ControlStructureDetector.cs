@@ -69,7 +69,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
             };
 
-
+            //new added==================================
             foreach (string row in line.Split('\n'))
             {
 
@@ -79,7 +79,20 @@ namespace ITPM_Code_Complexity_Tool.Models
                     row.Contains("else if ("))
                 {
                     this.wtcs = Weight.ifElseIfWeight;
-                    this.NC = this.NC + 1;
+
+                    foreach (string word in row.Split(' '))
+                    {
+                        if (word.Contains("||") || word.Contains("&&"))
+                        {
+                            this.NC = this.NC + 1;
+                        }
+
+                    }
+                    if (this.NC == 0)
+                    {
+                        this.NC = 1;
+                    }
+
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
 
@@ -89,7 +102,19 @@ namespace ITPM_Code_Complexity_Tool.Models
                 else if (row.Contains("for(") || row.Contains("while("))
                 {
                     this.wtcs = Weight.forWileDoWhileWeight;
-                    this.NC = this.NC + 1;
+                    foreach (string word in row.Split(' '))
+                    {
+                        if (word.Contains("||") || word.Contains("&&"))
+                        {
+                            this.NC = this.NC + 1;
+                        }
+
+                    }
+
+                    if (this.NC == 0)
+                    {
+                        this.NC = 1;
+                    }
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
                 }
                 //Check if line has "switch" Conditions
@@ -97,7 +122,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 else if (row.Contains("switch (") || row.Contains("switch("))
                 {
                     this.wtcs = Weight.SwitchWeight;
-                    this.NC = this.NC + 1;
+                    this.NC = 1;
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
 
@@ -108,7 +133,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 else if (row.Contains("case"))
                 {
                     this.wtcs = Weight.CaseWeight;
-                    this.NC = this.NC + 1;
+                    this.NC = 1;
                     this.Ccs = (this.wtcs * this.NC) + this.Ccpps;
 
                 }
@@ -155,6 +180,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
 
             }
+            //new added end ============================================
         }
 
         //return the List of Call control structure model set values
@@ -163,7 +189,6 @@ namespace ITPM_Code_Complexity_Tool.Models
 
             return this.consList;
         }
-
 
 
 

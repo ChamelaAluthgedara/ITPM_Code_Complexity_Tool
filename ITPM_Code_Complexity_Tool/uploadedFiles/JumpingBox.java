@@ -7,6 +7,7 @@ public class JumpingBox extends java.applet.Applet implements MouseListener, Mou
     private Dimension size;
     private int onaroll;
 
+
     public void init() {
         onaroll = 0;
         setSize(500, 500);
@@ -46,7 +47,7 @@ public class JumpingBox extends java.applet.Applet implements MouseListener, Mou
     }
 
     public void mousePressed(MouseEvent e) {
-        int x = e.getX();
+        float x = e.getX();
         int y = e.getY();
         e.consume();
         requestFocus();

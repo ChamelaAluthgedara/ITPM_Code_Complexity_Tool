@@ -17,6 +17,13 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int totalIndirect = 0;
         public int totalCi = 0;
 
+        private int INHERITED_NO_CLASS = 0;
+        private int INHERITED_ONE_CLASS = 1;
+        private int INHERITED_TWO_CLASSES = 2;
+        private int INHERITED_THREE_CLASSES = 3;
+        private int INHERITED_MORE_THAN_FOUR_CLASSES = 4;
+
+
         public Inheritance_Detector()  //Constructor
         {
 
@@ -72,72 +79,109 @@ namespace ITPM_Code_Complexity_Tool.Models
             int direct = 0;
             int indirect = 0;
             int ci = 0;
+            int foundClasses = 0;
 
             String[] KEYWORDS = { "extends", "implements", ":" };
 
             string[] WORDS = line1.Split(' ');
 
-
             //Check if this line contains keywords
+
 
             for (int position = 0; position < WORDS.Length; position++)
             {
+
                 foreach (String keyword in KEYWORDS)//Checking for keywords
                 {
                     if (WORDS[position] == keyword)//A Keyword on the line is found
                     {
 
-                        for (int temp = position + 1; temp < WORDS.Length; temp++)//Checking words after keywords
+                        for (int temp = position; temp <= (WORDS.Length - 1); temp++) // Gets next word after keyword
                         {
-                            if (WORDS[temp] == ",")
+
+                            //Analyze the word, Getting 
+                            foreach (char letter in WORDS[temp])
                             {
-                                if (direct == 0)
+                                if (letter == ',')
                                 {
-                                    direct = direct + 2;//One defined Class found
-                                    this.totalDirect = this.totalDirect + direct;
+                                    foundClasses = foundClasses + 1;
+
+                                }
+                                if (letter == '{')
+                                {
+                                    foundClasses = foundClasses + 1;
                                 }
 
-                                else
-                                {
 
-                                    direct = direct + 1;
-                                    this.totalDirect = this.totalDirect + direct;
-                                }
                             }
-                            else if (direct == 0 && WORDS[temp] == "{")
-                            {
-                                direct = direct + 1;
-                                this.totalDirect = this.totalDirect + direct;
-                            }
-
 
 
                         }
-                        ci = direct + indirect;
-                        this.totalCi = this.totalCi + ci;
-                        completeList.Add(new Inheritance(line1, indirect, direct, ci));
+
+
+
 
                     }
 
-
-
                 }
-                //Calculate Ci value
+
 
 
             }
 
-            if (ci == 0)
+
+            //exp
+            //According to weight set by user
+            if (foundClasses == 0)
             {
-                completeList.Add(new Inheritance(line1, indirect, direct, ci));
+                direct = direct + INHERITED_NO_CLASS;
             }
+            else if (foundClasses == 1)
+            {
+                direct = direct + INHERITED_ONE_CLASS;
+            }
+            else if (foundClasses == 2)
+            {
+                direct = direct + INHERITED_TWO_CLASSES;
+            }
+            else if (foundClasses == 3)
+            {
+                direct = direct + INHERITED_THREE_CLASSES;
+            }
+            else if (foundClasses >= 4)
+            {
+                direct = direct + INHERITED_MORE_THAN_FOUR_CLASSES;
+            }
+
+
+
+
+
+            //Calculate Ci value
+            ci = direct + indirect;
+            this.totalDirect = this.totalDirect + direct;
+            this.totalIndirect = this.totalIndirect + indirect;
+            this.totalCi = this.totalCi + ci;
+            completeList.Add(new Inheritance(line1, indirect, direct, ci));
+
+
         }
+
 
 
         public List<Inheritance> showData()
         {
             completeList.Add(new Inheritance("Total", this.totalIndirect, this.totalDirect, this.totalCi));
             return completeList;
+        }
+
+        public void setValOfWeight(int zero, int one, int two, int three, int four)
+        {
+            this.INHERITED_NO_CLASS = zero;
+            this.INHERITED_ONE_CLASS = one;
+            this.INHERITED_TWO_CLASSES = two;
+            this.INHERITED_THREE_CLASSES = three;
+            this.INHERITED_MORE_THAN_FOUR_CLASSES = four;
         }
 
 
