@@ -12,6 +12,9 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         private int wtcs = 0, NC = 0, Ccpps = 0, Ccs = 0, NewCcspps = 0;
         private int LineNo = 0;
+
+        public int CtsouterAccess;
+
         List<int> CcppsList = new List<int>();
         List<Controlstructure> consList = new List<Controlstructure>();
 
@@ -160,7 +163,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 }
 
 
-
+                CtsouterAccess = Ccs;
                 consList.Add(new Controlstructure
                 {
                     LineNO = this.LineNo + 1,

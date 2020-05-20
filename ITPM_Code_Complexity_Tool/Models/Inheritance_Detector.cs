@@ -17,6 +17,8 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int totalIndirect = 0;
         public int totalCi = 0;
 
+        public int CiouterAccess;
+
         private int INHERITED_NO_CLASS = 0;
         private int INHERITED_ONE_CLASS = 1;
         private int INHERITED_TWO_CLASSES = 2;
@@ -162,6 +164,10 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.totalDirect = this.totalDirect + direct;
             this.totalIndirect = this.totalIndirect + indirect;
             this.totalCi = this.totalCi + ci;
+
+            CiouterAccess = ci;
+            System.Diagnostics.Debug.WriteLine("Due to inheritance: Im in inheritance " + ci);
+
             completeList.Add(new Inheritance(line1, indirect, direct, ci));
 
 

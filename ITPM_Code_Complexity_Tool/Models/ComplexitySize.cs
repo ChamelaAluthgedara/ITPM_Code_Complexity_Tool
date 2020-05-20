@@ -11,13 +11,16 @@ namespace ITPM_Code_Complexity_Tool.Models
     public class ComplexitySize
     {
         int lineNo = 0;
+        public string codeLine;
         int keywordCount = 0;
         int operatorCount = 0;
         int numricalCount = 0;
         int identifires = 0;
         int stringLiteral = 0;
-        int cs = 0;
+        public int cs = 0;
         public int totalCS;
+
+        public  int csOuterAccess;
 
         public static int weightKeyword;
         public static int WeightIdentifers;
@@ -214,23 +217,25 @@ namespace ITPM_Code_Complexity_Tool.Models
                         string input = fResult;
                         if (index > 0)
                             input = input.Substring(0, index);
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + input + ", lenght: " + ((numericalArray.Length) - 1));
+                       // System.Diagnostics.Debug.WriteLine("This is row line: " + input + ", lenght: " + ((numericalArray.Length) - 1));
                         if (input.Contains(numericalArray[i]))
                         {
                             numricalCount++;
                         }
 
 
-                    }
-                    System.Diagnostics.Debug.WriteLine("End of for Loop....\n");
+                  }
+                   // System.Diagnostics.Debug.WriteLine("End of for Loop....\n");
                 }
 
                 lineNo++;
                 cs = (weightKeyword * keywordCount) + (WeightOperators * operatorCount) + (WeightStringLiteral * stringLiteral) + (WeightNumericalVal * numricalCount) + (WeightIdentifers * identifires);
                 totalCS = totalCS + cs;
-               // System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
-
+                //System.Diagnostics.Debug.WriteLine("Due to Size: Im in SIze " + cs);
+                codeLine = line;
                 completeList.Add(new CdueToSize(lineNo, line, keywordCount, operatorCount, numricalCount, identifires, stringLiteral, cs));
+
+                csOuterAccess = cs;
 
                 keywordCount = 0;
                 operatorCount = 0;
@@ -249,6 +254,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public List<CdueToSize> showData()
         {
+            System.Diagnostics.Debug.WriteLine("Am in All Size : " + completeList);
             return completeList;
         }
 

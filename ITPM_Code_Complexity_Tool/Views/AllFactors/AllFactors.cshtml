@@ -31,7 +31,7 @@
             <td>Cv</td>
             <td>Cm</td>
             <td>Ci</td>
-            <td>Ccp</td>
+            @*<td>Ccp</td>*@
             <td>Ccs</td>
             <td>TCps</td>
         </tr>
@@ -40,70 +40,76 @@
             foreach (var item in Model)
             {
                 <tr style="padding:23px;">
-                    <td> @item.lineNo </td>
-                    <td> @item.CODELINE </td>
-                    @if (item.CS != 0)
+                    <td> @item.lineNoAllF </td>
+                    <td> @item.CODELINEallF </td>
+
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
-                        <td> @item.CS </td>
+                        <td> @item.CSAllF </td>
                     }
                     else
                     {
-                        <td></td>
+                        <td>  </td>
                     }
-                    @if (item.CV != 0)
+
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
-                        <td> @item.CV </td>
+                        <td> @item.CVAllF </td>
                     }
                     else
                     {
-                        <td></td>
+                        <td>  </td>
                     }
-                    @if (item.CM != 0)
+
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
-                        <td> @item.CM </td>
+                        <td> @item.CMAllF </td>
                     }
                     else
                     {
-                        <td></td>
+                        <td>  </td>
                     }
-                    @if (item.Ci != 0)
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
-                        <td> @item.Ci </td>
+                        <td> @item.CiAllF </td>
                     }
                     else
                     {
-                        <td></td>
+                        <td>  </td>
                     }
-                    @if (item.Ccp != 0)
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
-                        <td> @item.Ccp </td>
+                        <td> @item.CcsAllF </td>
                     }
                     else
                     {
-                        <td></td>
+                        <td>  </td>
                     }
-                    @if (item.Ccs != 0)
-                    {
-                        <td> @item.Ccs </td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
-                    @if (item.TCps != 0)
-                    {
-                        <td> @item.TCps </td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
+
+
+                    @*<td> @item.CcpAllF </td>*@
+
+
+                    <td> @item.TCpsAllF </td>
+
 
                 </tr>
             }
-
         }
-       
+    <tr id="ROW1">
+
+
+                <td style="color:white;font-weight:bold;background-color:black;"> Total </td>
+                <td style="color:white;font-weight:bold;background-color:black;"></td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCsColumn</td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCvColumn</td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCmColumn</td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCiColumn</td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCtsColumn</td>
+                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalTCpsAllFColumn</td>
+      
+
+    </tr>
     </table>
 </body>
 

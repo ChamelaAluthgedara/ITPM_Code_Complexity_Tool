@@ -7,63 +7,51 @@ namespace ITPM_Code_Complexity_Tool.Models
 {
     public class AllFactors
     {
-        public int lineNo;
-        public String CODELINE;
-        public int CS;
-        public int CV;
-        public int CM;
+        public int lineNoAllF;
+        public String CODELINEallF;
+        public int CSAllF;
+        public int CVAllF;
+        public int CMAllF;
 
-        public int Ci;
-        public int Ccp;
-        public int Ccs;
-        public int TCps;
-
-
+        public int CiAllF;
+        public int CcpAllF;
+        public int CcsAllF;
+        public int TCpsAllF;
 
 
-        public AllFactors(int lineNo, String codeline, int cs, int cv, int cm, int ci)
+        public int totalCsColumn;
+        public int totalCvColumn;
+        public int totalCmColumn;
+        public int totalCiColumn;
+        public int totalCtsColumn;
+        public int totalTCpsAllFColumn;
+
+
+
+        public AllFactors(int lineNo, String codeline, int cs, int cv, int cm, int ci, int cts, int tcps)
         {
-            this.lineNo = lineNo;
-            this.CODELINE = codeline;
-            this.CS = cs;
-            this.CV = cv;
-            this.CM = cm;
-            this.Ci = ci;
+            this.lineNoAllF = lineNo;
+            this.CODELINEallF = codeline;
+            this.CSAllF = cs;
+            this.CVAllF = cv;
+            this.CMAllF = cm;
+            this.CiAllF = ci;
+            this.CcsAllF = cts;
+            this.TCpsAllF = tcps;
         }
+
+        public AllFactors(int totalCsColumn, int totalCvColumn, int totalCmColumn, int totalCiColumn, int totalCtsColumn, int totalTCpsAllFColumn)
+        {
+            this.totalCsColumn = totalCsColumn;
+            this.totalCvColumn = totalCvColumn;
+            this.totalCmColumn = totalCmColumn;
+            this.totalCiColumn = totalCiColumn;
+            this.totalCtsColumn = totalCtsColumn;
+            this.totalTCpsAllFColumn = totalTCpsAllFColumn;
+        }
+
 
     }
 
-    //public class AllFactorsVariables
-    //{
-    //    public int lineNo;
-    //    public String CODELINE;
-        
 
-
-
-    //    public AllFactorsVariables(int lineNo, String codeline, int cv)
-    //    {
-    //        this.lineNo = lineNo;
-    //        this.CODELINE = codeline;
-            
-    //    }
-
-    //}
-
-    //public class AllFactorsMethods
-    //{
-    //    public int lineNo;
-    //    public String CODELINE;
-    //    public int CM;
-
-
-
-    //    public AllFactorsMethods(int lineNo, String codeline, int cm)
-    //    {
-    //        this.lineNo = lineNo;
-    //        this.CODELINE = codeline;
-    //        this.CM = cm;
-    //    }
-
-    //}
 }

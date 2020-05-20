@@ -11,73 +11,51 @@ namespace ITPM_Code_Complexity_Tool.Models
         List<AllFactors> completeList = new List<AllFactors>();
 
 
+        // size factor weights
+        private static int weightKeyword = 1;
+        private static int WeightIdentifers = 1;
+        private static int WeightOperators = 1;
+        private static int WeightNumericalVal = 1;
+        private static int WeightStringLiteral = 1;
+
+        // variable factor weights
+        private static int globalVariable = 2;
+        private static int localVariable = 1;
+        private static int primitiveDataTypeVariable = 1;
+        private static int CompositeDataTypeVariable = 2;
+
+        // methods factor weights
+        private static int methodPeReturnType = 1;
+        private static int methodCReturnType = 2;
+        private static int methodVoid = 0;
+        private static int methodPDataTypeParameter = 1;
+        private static int methodCTypeParameter = 2;
+
+        // methods factor control structure
+        private static int ifElseIfWeight = 1;
+        private static int forWileDoWhileWeight = 1;
+        private static int SwitchWeight = 1;
+        private static int CaseWeight = 1;
+
+
         int lineNo = 0;
-        int keywordCount = 0;
-        int operatorCount = 0;
-        int numricalCount = 0;
-        int identifires = 0;
-        int stringLiteral = 0;
-        int cs = 0;
-        public int totalCS;
+        string codeLine;
+        private int CS = 0;
+        private int CV = 0;
+        private int CM = 0;
+        private int CI = 0;
+        private int Cts = 0;
 
-        public int totalCv;
-        int WeightDueToVScope = 1;
-        int Wpdv = 1;
-        int Wcdtv = 1;
-        int NoPrimitiveDataTypeVariables = 0;
-        int NoCompositeDataTypeVariables = 0;
-        int Cv = 0;
+        private int Totalcps;
 
-        public int Cm;
-        public int totalCm;
-
-        public int Wmrt;
-        public int Npdtp;
-        public int Ncdtp;
-        public int Wpdtp = 1;
-        public int Wcdtp = 2;
-
-        public static int Wkw = CdueToSize.Wkw;
-        public static int Wid = CdueToSize.Wid;
-        public static int Wop = CdueToSize.Wop;
-        public static int Wnv = CdueToSize.Wnv;
-        public static int Wsl = CdueToSize.Wsl;
-
-
-
-
-        // =============================
-
-        int direct = 0;
-        int indirect = 0;
-        int ci = 0;
-
-
-        public static String[] KEYWORDS = { "extends", "implements", ":" };
-        public int totalDirect = 0;
-        public int totalIndirect = 0;
-        public int totalCi = 0;
-
-
-        // =======================================
+        public int totalCsColumn;
+        public int totalCvColumn;
+        public int totalCmColumn;
+        public int totalCiColumn;
+        public int totalCtsColumn;
+        public int totalTCpsAllFColumn;
 
         private String FILE_NAME;
-
-        public static string[] numericalArray = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
-
-        public static string[] identifiresArray = { "class", "return", "main", "System", "out", "print", "printf" };
-        public static string[] wordAray = { "class", "static", "public", "void", "true", "else", "default", "return", "null", "break", "this" };
-        public static string[] operatorAray = {  "+", "-", "*", "/", "%", "%.", "++","--",  "==", "!=", ">", "<", ">=", "<=", "&&", "||", "!",
-         "|", "^", "~", "<<", ">>", ">>>", "<<<", "->", ".", "::", "+=", "-=", "*=", "/=", " = ", "=", ">>>=", "|=", "&=", "%=", "<<=", ">>=",
-         "^=", "."};
-        public String[] controlStrucures = { "if", "while", "do", "switch", "for" };
-
-
-        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double" };
-
-        public static string[] primitiveDataTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double", "String" };
-
-        public static string[] compositeDataTypes = { "ArrayList ", "List", "[" };
 
         public AllFactors_Processor()  //Constructor
         {
@@ -118,371 +96,79 @@ namespace ITPM_Code_Complexity_Tool.Models
             }
         }
 
+
+        ComplexitySize size = new ComplexitySize();
+        ComplexityVariables variables = new ComplexityVariables();
+        ComplexityMethods methods = new ComplexityMethods();
+        Inheritance_Detector inheritance = new Inheritance_Detector();
+        ControlStructureDetector controlStructure = new ControlStructureDetector();
+
+
+        ControlStructureWeight Weight = new ControlStructureWeight()
+        {
+            ifElseIfWeight = ifElseIfWeight,
+            forWileDoWhileWeight = forWileDoWhileWeight,
+            SwitchWeight = SwitchWeight,
+            CaseWeight = CaseWeight
+        };
+
+
+
         public void GetKeywordCount(string line)
         {
-            string[] wordOp = line.Trim().Split(new char[] { ' ', '\r', '\n', ',', ';', '"', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 'w', 'x', 'y', 'z' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
-
             try
             {
 
                 foreach (string singleRow in line.Split('\n'))
                 {
-                    for (int i = 0; i < wordAray.Length; i++)
-                    {
+                    size.GetKeywordCount(line);
+                    variables.GetVariablesCount(line);
+                    methods.GetMethodCount(line);
+                    inheritance.Detect(line);
+                    controlStructure.ControStructureDetect(line, Weight);
 
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+                    this.lineNo++;
+                    this.codeLine = size.codeLine;
 
-                        if (singleRow.Contains(wordAray[i]))
-                        {
-                            keywordCount++;
-                        }
-                    }
-                }
-
-                for (int j = 0; j < operatorAray.Length; j++)
-                {
-
-                    for (int i = 0; i < wordOp.Length; i++)
-                    {
-                        wordOp[i].Remove(wordOp[i].Length - 1).Trim();
-
-                        if (wordOp[i] == operatorAray[j])
-                        {
-                            operatorCount++;
-                        }
-
-                    }
-                }
+                    this.CS = size.csOuterAccess;
+                    this.CV = variables.CvouterAccess;
+                    this.CM = methods.CmouterAccess;
+                    this.CI = inheritance.CiouterAccess;
+                    this.Cts = controlStructure.CtsouterAccess;
 
 
-                foreach (string singleRow in line.Split('\n'))
-                {
-                    System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
+                    size.getWeight(weightKeyword, WeightIdentifers, WeightOperators, WeightNumericalVal, WeightStringLiteral);
+                    variables.getWeight(globalVariable, localVariable, primitiveDataTypeVariable, CompositeDataTypeVariable);
+                    methods.getWeight(methodPeReturnType, methodCReturnType, methodVoid, methodPDataTypeParameter, methodCTypeParameter);
 
-                    if (singleRow.Contains('"') && singleRow.Contains("(") && singleRow.Contains(")") && singleRow.Contains(";"))
-                    {
-                        stringLiteral++;
-                    }
-                }
 
-                foreach (string rowLine in line.Split('\n'))
-                {
-                    for (int i = 0; i < identifiresArray.Length; i++)
-                    {
 
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + rowLine);
+                    System.Diagnostics.Debug.WriteLine("Variables in AllFactors : " + this.CV);
 
-                        if (rowLine.Contains(identifiresArray[i]))
-                        {
-                            identifires++;
-                        }
+                    Totalcps = this.CS + this.CV + this.CM + this.CI + this.Cts;
 
-                    }
+                    totalCsColumn = totalCsColumn + this.CS;
+                    totalCvColumn = totalCvColumn + this.CV;
+                    totalCmColumn = totalCmColumn + this.CM;
+                    totalCiColumn = totalCiColumn + this.CI;
+                    totalCtsColumn = totalCtsColumn + this.Cts;
+                    totalTCpsAllFColumn = totalTCpsAllFColumn + Totalcps;
 
-                    if (rowLine.Contains("for"))
-                    {
-                        identifires = identifires + 3;
-                    }
+                    System.Diagnostics.Debug.WriteLine("total column Cs : " + totalCsColumn);
+
+                    completeList.Add(new AllFactors(this.lineNo, this.codeLine, this.CS, this.CV, this.CM, this.CI, this.Cts, this.Totalcps));
+                    AllFactors allFac = new AllFactors(this.totalCsColumn, this.totalCvColumn, this.totalCmColumn, this.totalCiColumn, this.totalCtsColumn, this.totalTCpsAllFColumn);
+                    CS = 0;
+                    CV = 0;
+                    CM = 0;
+                    CI = 0;
+                    Cts = 0;
+                    Totalcps = 0;
 
 
                 }
-
-                foreach (string singleRow in line.Split('\n'))
-                {
-                    for (int i = 0; i < numericalArray.Length; i++)
-                    {
-
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
-
-                        if (singleRow.Contains(numericalArray[i]))
-                        {
-                            numricalCount++;
-                        }
-                    }
-                }
-
-
-                foreach (string rowLine in line.Split('\n'))
-                {
-                    System.Diagnostics.Debug.WriteLine("Line code " + rowLine);
-
-                    for (int i = 0; i < primitiveDataTypes.Length; i++)
-                    {
-                        if (rowLine.Contains("public"))
-                        {
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < primitiveDataTypes.Length; i++)
-                    {
-                        if (rowLine.Contains("private"))
-                        {
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                        }
-
-                    }
-
-                    for (int i = 0; i < primitiveDataTypes.Length; i++)
-                    {
-                        if (rowLine.Contains("protected"))
-                        {
-
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                            if (rowLine.Contains(primitiveDataTypes[i]) && rowLine.Contains("static") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                            {
-                                NoPrimitiveDataTypeVariables++;
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < primitiveDataTypes.Length; i++)
-                    {
-
-                        if (rowLine.Split('.').Contains(primitiveDataTypes[i]) && !rowLine.Split('.').Contains(".") && !rowLine.Split('.').Contains("=") && rowLine.Split('.').Contains("("))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-
-                        if (rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-                        if (rowLine.Contains("static") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-                        if (rowLine.Contains("static") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-                        if (rowLine.Contains("static") && rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-                        if (rowLine.Contains("static") && rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-                        if (rowLine.Contains("final") && rowLine.Contains(primitiveDataTypes[i]) && !rowLine.Contains(".") && !rowLine.Contains("=") && rowLine.Contains(";"))
-                        {
-                            NoPrimitiveDataTypeVariables++;
-                        }
-
-                    }
-
-                }
-
-                foreach (string rowLine in line.Split('\n'))
-                {
-                    
-
-                    for (int i = 0; i < compositeDataTypes.Length; i++)
-                    {
-                        if (rowLine.Contains(compositeDataTypes[i]) && rowLine.Contains("=") && !rowLine.Contains("new") && rowLine.Contains(";") && !rowLine.Contains("."))
-                        {
-                            NoCompositeDataTypeVariables++;
-                        }
-                    }
-                    if (rowLine.Contains("=") && rowLine.Contains("new") && rowLine.Contains("(") && rowLine.Contains(";") && !rowLine.Contains("."))
-                    {
-                        NoCompositeDataTypeVariables++;
-                    }
-                }
-
-
-                foreach (string singleRow in line.Split('\n'))
-                {
-
-                    for (int i = 0; i < primitiveTypes.Length; i++)
-                    {
-
-                        System.Diagnostics.Debug.WriteLine("This is row line: " + singleRow);
-
-                        if (singleRow.Contains("public") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                        if (singleRow.Contains("public") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains(primitiveTypes[i]) && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                        if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("void") && singleRow.Contains("(") && !singleRow.Contains("args"))
-                        {
-                            Npdtp++;
-                        }
-                    }
-                    if (singleRow.Contains("public") && singleRow.Contains("static") && singleRow.Contains("main") && singleRow.Contains("(") && singleRow.Contains("args"))
-                    {
-                        Ncdtp++;
-                    }
-                }
-
-
-                // =====================================================================================================
-
-                // Inheritance Calculator
-
-
-                String[] KEYWORDS = { "extends", "implements", ":" };
-                string[] WORDS = line.Split(' ');
-                //Check if this line contains keywords
-
-                for (int position = 0; position < WORDS.Length; position++)
-                {
-                    foreach (String keyword in KEYWORDS)//Checking for keywords
-                    {
-                        if (WORDS[position] == keyword)//A Keyword on the line is found
-                        {
-
-                            for (int temp = position + 1; temp < WORDS.Length; temp++)//Checking words after keywords
-                            {
-                                if (WORDS[temp] == ",")
-                                {
-                                    if (direct == 0)
-                                    {
-                                        direct = direct + 2;//One defined Class found
-                                        this.totalDirect = this.totalDirect + direct;
-                                    }
-
-                                    else
-                                    {
-                                        direct = direct + 1;
-                                        this.totalDirect = this.totalDirect + direct;
-                                    }
-                                }
-                                else if (direct == 0 && WORDS[temp] == "{")
-                                {
-                                    direct = direct + 1;
-                                    this.totalDirect = this.totalDirect + direct;
-                                }
-
-                            }
-                            ci = direct + indirect;
-                            this.totalCi = this.totalCi + ci;
-                            this.totalCi = 0;
-                        }
-                    }
-                    //Calculate Ci value
-                    if (ci == 0)
-                    {
-                        this.totalCi = 0;
-                    }
-
-                }
-                
-
-                // end of Inheritance calculator
-
-                // =============================================================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // ======================================================================================================
-
-
-
-
-                lineNo++;
-                cs = (Wkw * keywordCount) + (Wid * operatorCount) + (Wop * stringLiteral) + (Wnv * numricalCount) + (Wsl * identifires);
-                totalCS = totalCS + cs;
-
-                Cv = (WeightDueToVScope * ((Wpdv * NoPrimitiveDataTypeVariables) + (Wcdtv * NoCompositeDataTypeVariables)));
-                totalCv = totalCv + Cv;
-
-                Cm = Wmrt + (Wpdtp * Npdtp) + (Wcdtp * Ncdtp);
-                totalCm = totalCm + Cm;
-
-                completeList.Add(new AllFactors(lineNo, line, cs, Cv, Cm, totalCi));
-
-                System.Diagnostics.Debug.WriteLine("Process data: " + cs +" , "+ Cv + " , " +  Cm);
-
-
-
-                Npdtp = 0;
-                Ncdtp = 0;
-                Cm = 0;
-                keywordCount = 0;
-                operatorCount = 0;
-                stringLiteral = 0;
-                numricalCount = 0;
-                identifires = 0;
-                cs = 0;
-                NoPrimitiveDataTypeVariables = 0;
-                NoCompositeDataTypeVariables = 0;
-                Cv = 0;
-
-                
-
             }
-            catch(Exception)
+            catch (Exception e)
             {
 
             }
@@ -490,8 +176,9 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public List<AllFactors> showData()
         {
+
+            // System.Diagnostics.Debug.WriteLine("Am in All factors : " + completeList);
             return completeList;
         }
-
     }
 }

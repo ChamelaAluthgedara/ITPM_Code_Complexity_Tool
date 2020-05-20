@@ -18,11 +18,17 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             detector.SetFileName(name);
             detector.ProcessFile();
             var retVal = detector.showData();
-           // ViewBag.TotalCs = detector.totalCS;
+
+            ViewBag.totalCsColumn = detector.totalCsColumn;
+            ViewBag.totalCvColumn = detector.totalCvColumn;
+            ViewBag.totalCmColumn = detector.totalCmColumn;
+            ViewBag.totalCiColumn = detector.totalCiColumn;
+            ViewBag.totalCtsColumn = detector.totalCtsColumn;
+            ViewBag.totalTCpsAllFColumn = detector.totalTCpsAllFColumn;
+
             return View(retVal);
 
-
-        }
+    }
 
     }
 }

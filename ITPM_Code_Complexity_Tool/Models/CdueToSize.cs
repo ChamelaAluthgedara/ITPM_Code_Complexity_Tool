@@ -42,6 +42,10 @@ namespace ITPM_Code_Complexity_Tool.Models
             
             this.totalCSCal = totalCS;
         }
+        public CdueToSize()
+        {
+
+        }
 
     }
 

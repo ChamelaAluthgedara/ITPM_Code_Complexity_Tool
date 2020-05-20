@@ -22,6 +22,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int k = 0;
 
         int lineNo = 0;
+        public int CmouterAccess;
         public int Cm;
         public int totalCm;
         public int Wmrt;
@@ -281,6 +282,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             Wmrt = 0;
             Npdtp = 0;
             Ncdtp = 0;
+            CmouterAccess = Cm;
             Cm = 0;
             CdueToMethod c = new CdueToMethod(this.totalCm);
 

@@ -25,6 +25,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         int NoPrimitiveDataTypeVariables = 0;
         int NoCompositeDataTypeVariables = 0;
         int Cv = 0;
+        public int CvouterAccess;
 
         private String FILE_NAME;
 
@@ -472,7 +473,10 @@ namespace ITPM_Code_Complexity_Tool.Models
                 completeList.Add(new CdueToVariables(lineNo, line, WeightDueToVScope, NoPrimitiveDataTypeVariables, NoCompositeDataTypeVariables, Cv));
                 NoPrimitiveDataTypeVariables = 0;
                 NoCompositeDataTypeVariables = 0;
+                //System.Diagnostics.Debug.WriteLine("Due to Variables: Im in Variables " + Cv);
+                CvouterAccess = Cv;
                 Cv = 0;
+                
                 CdueToVariables c = new CdueToVariables(this.totalCv);
             }
             finally
