@@ -70,7 +70,11 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int NoPrimitiveDataTypeVariables;
         public int NoCompositeDataTypeVariables;
         public int Cv;
+
         public int totalVCCal;
+        public int totalWeightDueToVScope;
+        public int totalNoPrimitiveDataTypeVariables;
+        public int totalNoCompositeDataTypeVariables;
 
         public static int WeightGlobalVariable = 1;
         public static int WeightLocalVariable = 1;
@@ -90,9 +94,11 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.NoCompositeDataTypeVariables = NoCompositeDataTypeVariables;
             this.Cv = cv;
         }
-        public CdueToVariables(int totalVCCal)
+        public CdueToVariables(int totalVCCal, int totalWeightDueToVScope, int totalNoPrimitiveDataTypeVariables, int totalNoCompositeDataTypeVariables)
         {
-
+            this.totalWeightDueToVScope = totalWeightDueToVScope;
+            this.totalNoPrimitiveDataTypeVariables = totalNoPrimitiveDataTypeVariables;
+            this.totalNoCompositeDataTypeVariables = totalNoCompositeDataTypeVariables;
             this.totalVCCal = totalVCCal;
         }
 
@@ -106,7 +112,13 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int NumberOfPrimitiveDataTypeParameters;
         public int methodReturnType;
         public int Cm;
+
         public int totalCMCal;
+        public int totalNcdtp;
+        public int totalNpdtp;
+        public int totalWmrt;
+
+
         public Boolean voidDetected = false;
 
 
@@ -127,9 +139,11 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.voidDetected = voidDetec;
             this.Cm = Cm;
         }
-        public CdueToMethod(int totalCMCal)
+        public CdueToMethod(int totalCMCal, int totalNcdtp, int totalNpdtp, int totalWmrt)
         {
-
+            this.totalNcdtp = totalNcdtp;
+            this.totalNpdtp = totalNpdtp;
+            this.totalWmrt = totalWmrt;
             this.totalCMCal = totalCMCal;
         }
         public CdueToMethod()

@@ -105,7 +105,14 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             detector.SetFileName(name);
             detector.ProcessFile();
             var retVal = detector.showData();
+
+
             ViewBag.TotalCv = detector.totalCv;
+            ViewBag.totalWeightDueToVScope = detector.totalWeightDueToVScope;
+            ViewBag.totalNoPrimitiveDataTypeVariables = detector.totalNoPrimitiveDataTypeVariables;
+            ViewBag.totalNoCompositeDataTypeVariables = detector.totalNoCompositeDataTypeVariables;
+
+
             return View(retVal);
 
         }
@@ -138,7 +145,13 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             detector.SetFileName(name);
             detector.ProcessFile();
             var retVal = detector.showData();
+
+
             ViewBag.TotalCm = detector.totalCm;
+            ViewBag.totalNcdtp = detector.totalNcdtp;
+            ViewBag.totalNpdtp = detector.totalNpdtp;
+            ViewBag.totalWmrt = detector.totalWmrt;
+
             return View(retVal);
 
 

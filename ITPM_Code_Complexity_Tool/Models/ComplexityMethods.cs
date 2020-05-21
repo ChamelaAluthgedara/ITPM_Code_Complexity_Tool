@@ -35,6 +35,11 @@ namespace ITPM_Code_Complexity_Tool.Models
         static int WprimitiveDatatype;
         static int WcompositeParameter;
 
+        public int totalNcdtp;
+        public int totalNpdtp;
+        public int totalWmrt;
+
+
         List<string> primitiveTypesArray = new List<string>();
 
         private String FILE_NAME;
@@ -276,7 +281,12 @@ namespace ITPM_Code_Complexity_Tool.Models
             System.Diagnostics.Debug.WriteLine(".Void detected: " + voidDetected);
             lineNo++;
             Cm = Wmrt + (WprimitiveDatatype * Npdtp) + (WcompositeParameter * Ncdtp);
+
             totalCm = totalCm + Cm;
+            totalNcdtp = totalNcdtp + Ncdtp;
+            totalNpdtp = totalNpdtp + Npdtp;
+            totalWmrt = totalWmrt + Wmrt;
+
             completeList.Add(new CdueToMethod(lineNo, line, Ncdtp, Npdtp, Wmrt, voidDetected, Cm));
             voidDetected = false;
             Wmrt = 0;
@@ -284,7 +294,7 @@ namespace ITPM_Code_Complexity_Tool.Models
             Ncdtp = 0;
             CmouterAccess = Cm;
             Cm = 0;
-            CdueToMethod c = new CdueToMethod(this.totalCm);
+            CdueToMethod c = new CdueToMethod(this.totalCm, this.totalNcdtp, this.totalNpdtp, this.totalWmrt);
 
         }
 

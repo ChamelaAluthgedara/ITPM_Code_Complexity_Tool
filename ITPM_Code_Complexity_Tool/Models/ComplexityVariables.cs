@@ -10,7 +10,13 @@ namespace ITPM_Code_Complexity_Tool.Models
     public class ComplexityVariables
     {
         int lineNo = 0;
+
         public int totalCv;
+        public int totalWeightDueToVScope;
+        public int totalNoPrimitiveDataTypeVariables;
+        public int totalNoCompositeDataTypeVariables;
+
+
         public static Boolean globalVariable;
         public Boolean detected = false;
 
@@ -20,7 +26,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         static int WeightLocalVariable;
         static int WeightPrimitiveDataTypeVariable;
         static int WeightCompositeDataTypeVariable;
-        static int WeightDueToVScope = 1;
+        static int WeightDueToVScope;
 
         int NoPrimitiveDataTypeVariables = 0;
         int NoCompositeDataTypeVariables = 0;
@@ -327,12 +333,13 @@ namespace ITPM_Code_Complexity_Tool.Models
                                         }
                                         else
                                         {
-                                            if(!rowLine.Contains("int")){
+                                            if (!rowLine.Contains("int"))
+                                            {
                                                 // System.Diagnostics.Debug.WriteLine("split count in local primitive: " + "\n line: " + rowLine);
                                                 NoPrimitiveDataTypeVariables++;
                                                 WeightDueToVScope = WeightLocalVariable;
                                             }
-                                           
+
                                         }
 
                                     }
@@ -469,15 +476,26 @@ namespace ITPM_Code_Complexity_Tool.Models
                 }
                 lineNo++;
                 Cv = (WeightDueToVScope * ((WeightPrimitiveDataTypeVariable * NoPrimitiveDataTypeVariables) + (WeightCompositeDataTypeVariable * NoCompositeDataTypeVariables)));
-                totalCv = totalCv + Cv;
+
+
+
                 completeList.Add(new CdueToVariables(lineNo, line, WeightDueToVScope, NoPrimitiveDataTypeVariables, NoCompositeDataTypeVariables, Cv));
+
+                totalCv = totalCv + Cv;
+                totalWeightDueToVScope = totalWeightDueToVScope + WeightDueToVScope;
+                System.Diagnostics.Debug.WriteLine("totalWeightDueToVScope:: " + totalWeightDueToVScope);
+                totalNoPrimitiveDataTypeVariables = totalNoPrimitiveDataTypeVariables + NoPrimitiveDataTypeVariables;
+                totalNoCompositeDataTypeVariables = totalNoCompositeDataTypeVariables + NoCompositeDataTypeVariables;
+
+
+                WeightDueToVScope = 0;
                 NoPrimitiveDataTypeVariables = 0;
                 NoCompositeDataTypeVariables = 0;
                 //System.Diagnostics.Debug.WriteLine("Due to Variables: Im in Variables " + Cv);
                 CvouterAccess = Cv;
                 Cv = 0;
-                
-                CdueToVariables c = new CdueToVariables(this.totalCv);
+
+                CdueToVariables c = new CdueToVariables(this.totalCv, this.totalWeightDueToVScope, this.totalNoPrimitiveDataTypeVariables, this.totalNoCompositeDataTypeVariables);
             }
             finally
             {
