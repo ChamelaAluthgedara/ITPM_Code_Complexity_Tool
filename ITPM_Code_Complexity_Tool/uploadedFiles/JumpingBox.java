@@ -17,7 +17,7 @@ public class JumpingBox extends java.applet.Applet implements MouseListener, Mou
         addComponentListener(this);
     }
 
-    public void update(int g, float f, int k) {
+    public void update(int g) {
         Dimension newSize = getSize();
         if (size.equals(newSize)) { // Erase old box
             g.setColor(getBackground());

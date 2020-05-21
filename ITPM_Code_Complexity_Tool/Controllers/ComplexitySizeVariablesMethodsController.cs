@@ -57,7 +57,15 @@ namespace ITPM_Code_Complexity_Tool.Controllers
                 detector.SetFileName(name);
                 detector.ProcessFile();
                 var retVal = detector.showData();
+
+
                 ViewBag.TotalCs = detector.totalCS;
+                ViewBag.totalNkw = detector.totalNkw;
+                ViewBag.totalNid = detector.totalNid;
+                ViewBag.totalNop = detector.totalNop;
+                ViewBag.totalNnv = detector.totalNnv;
+                ViewBag.totalNsl = detector.totalNsl;
+
                 return View(retVal);
             }
             catch (Exception)
@@ -87,7 +95,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
                 CompositeDataTypeVariable = Weight.variableCompotiteDataType;
             }
 
-           
+
             w.getWeight(globalVariable, localVariable, primitiveDataTypeVariable, CompositeDataTypeVariable);
 
 

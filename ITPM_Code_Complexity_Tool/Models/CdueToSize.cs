@@ -16,8 +16,15 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int identifires;
         public int stringLiteral;
         public int CI;
-        public  int totalCSCal;
-       
+
+        public int totalNkw;
+        public int totalNid;
+        public int totalNop;
+        public int totalNnv;
+        public int totalNsl;
+        public int totalCSCal;
+
+
 
         public static int Wkw = 1;
         public static int Wid = 1;
@@ -37,9 +44,15 @@ namespace ITPM_Code_Complexity_Tool.Models
             this.identifires = identifires;
             this.CI = cs;
         }
-        public CdueToSize(int totalCS)
+
+
+        public CdueToSize(int totalNkw, int totalNid, int totalNop, int totalNnv, int totalNsl, int totalCS)
         {
-            
+            this.totalNkw = totalNkw;
+            this.totalNid = totalNid;
+            this.totalNop = totalNop;
+            this.totalNnv = totalNnv;
+            this.totalNsl = totalNsl;
             this.totalCSCal = totalCS;
         }
         public CdueToSize()

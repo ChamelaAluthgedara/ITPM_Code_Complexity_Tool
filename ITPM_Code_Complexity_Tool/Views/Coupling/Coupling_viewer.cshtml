@@ -5,6 +5,8 @@
 
 
 @model List<ITPM_Code_Complexity_Tool.Models.Couplings_model>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -63,6 +65,7 @@
         </tr>
 
         @{
+
             foreach (var item in Model)
             {
 
@@ -72,11 +75,11 @@
 
                 //int Nmcrms = item.getRegular_recursive() * int.Parse(session.getAttribute("regularRecursive").toString());
 
-                //int Nrmcrms = item.getRecursive_recursive() * int.Parse(session.getAttribute("recursiveRecursive").toString());
+                // int Nrmcrms = item.getRecursive_recursive() * int.Parse(session.getAttribute("recursiveRecursive").toString());
 
                 //int Nrmcms = item.getRecursive_regular() * int.Parse(session.getAttribute("recursiveRegular").toString());
 
-                //int total = Nr + Nmcms + Nmcrms + Nrmcrms + Nrmcms + (item.getRegular_global() * int.Parse(session.getAttribute("regularGlobal").toString())) + (item.getRegular_regular() * int.Parse(session.getAttribute("recursiveGlobal").toString()));
+                int total = @item.getRecursive() + @item.getRegular_regular() + @item.getRegular_recursive() + @item.getRecursive_recursive() + @item.getRecursive_regular() + @item.getRegular_global() + @item.getRegular_regular();
 
 
 
@@ -97,7 +100,7 @@
                     <td>0</td>
                     <td> @item.getRegular_regular()  </td>
                     <td> 0 </td>
-                    <td>  </td>
+                    <td> @total</td>
                 </tr>
             }
         }
