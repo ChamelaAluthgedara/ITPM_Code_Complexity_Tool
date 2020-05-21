@@ -43,7 +43,7 @@
             <td>Cv</td>
             <td>Cm</td>
             <td>Ci</td>
-            @*<td>Ccp</td>*@
+            <td>Ccp</td>
             <td>Ccs</td>
             <td>TCps</td>
         </tr>
@@ -91,6 +91,15 @@
                     }
                     @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
                     {
+                        <td> @item.CcpAllF </td>
+                    }
+                    else
+                    {
+                        <td>  </td>
+                    }
+
+                    @if (@item.CSAllF != 0 || @item.CVAllF != 0 || @item.CMAllF != 0 || @item.CiAllF != 0 || @item.CcsAllF != 0)
+                    {
                         <td> @item.CcsAllF </td>
                     }
                     else
@@ -99,7 +108,6 @@
                     }
 
 
-                    @*<td> @item.CcpAllF </td>*@
 
 
                     <td> @item.TCpsAllF </td>
@@ -108,20 +116,21 @@
                 </tr>
             }
         }
-        <tr id="ROW1">
+    <tr id="ROW1">
 
 
-            <td style="color:white;font-weight:bold;background-color:black;"> Total </td>
-            <td style="color:white;font-weight:bold;background-color:black;"></td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCsColumn</td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCvColumn</td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCmColumn</td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCiColumn</td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCtsColumn</td>
-            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalTCpsAllFColumn</td>
+        <td style="color:white;font-weight:bold;background-color:black;"> Total </td>
+        <td style="color:white;font-weight:bold;background-color:black;"></td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCsColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCvColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCmColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCiColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCcpColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCtsColumn</td>
+        <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalTCpsAllFColumn</td>
 
 
-        </tr>
+    </tr>
     </table>
 </body>
 

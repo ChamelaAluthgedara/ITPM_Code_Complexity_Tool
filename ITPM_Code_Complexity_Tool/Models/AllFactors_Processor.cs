@@ -52,6 +52,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public int totalCvColumn;
         public int totalCmColumn;
         public int totalCiColumn;
+        public int totalCcpColumn;
         public int totalCtsColumn;
         public int totalTCpsAllFColumn;
 

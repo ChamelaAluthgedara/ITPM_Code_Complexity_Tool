@@ -23,6 +23,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             ViewBag.totalCvColumn = detector.totalCvColumn;
             ViewBag.totalCmColumn = detector.totalCmColumn;
             ViewBag.totalCiColumn = detector.totalCiColumn;
+            ViewBag.totalCcpColumn = /*detector.totalCcpColumn*/0;
             ViewBag.totalCtsColumn = detector.totalCtsColumn;
             ViewBag.totalTCpsAllFColumn = detector.totalTCpsAllFColumn;
 
