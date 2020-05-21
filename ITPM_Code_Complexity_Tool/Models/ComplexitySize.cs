@@ -210,7 +210,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                     {
                         //string[] numberArray = singleRow.Trim().Split(new char[] { ' ', ')', '(', '{', '}', ':', '\r', ';', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'w', 'x', 'y', 'z'}, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-
                         //var result = "1234";
                         var fResult = string.Join(",", singleRow.ToCharArray());
                         int index = fResult.IndexOf(",");
@@ -222,8 +221,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                         {
                             numricalCount++;
                         }
-
-
                   }
                    // System.Diagnostics.Debug.WriteLine("End of for Loop....\n");
                 }

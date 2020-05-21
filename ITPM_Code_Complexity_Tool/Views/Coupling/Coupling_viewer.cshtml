@@ -1,0 +1,107 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@model List<ITPM_Code_Complexity_Tool.Models.Couplings_model>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> Coupling </title>
+</head>
+
+<body>
+
+    <h1> Coupling </h1>
+
+
+    <br /> <br />
+
+
+    <style>
+
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+
+    <table>
+        <tr>
+
+            <td><strong>Line no</strong> </td>
+            <td><strong>Program statements</strong> </td>
+            <td><strong>Nr</strong> </td>
+            <td><strong>Nmcms</strong> </td>
+            <td><strong>Nmcmd</strong> </td>
+            <td><strong>Nmcrms</strong> </td>
+            <td><strong>Nmcrmd</strong> </td>
+            <td><strong>Nrmcrms</strong> </td>
+            <td><strong>Nrmcrmd</strong> </td>
+            <td><strong>Nrmcms</strong> </td>
+            <td><strong>Nrmcmd</strong> </td>
+            <td><strong>Nmrgvs</strong> </td>
+            <td><strong>Nmrgvd</strong> </td>
+            <td><strong>Nrmrgvs</strong> </td>
+            <td><strong>Nrmrgvd</strong> </td>
+            <td><strong>Ccp</strong> </td>
+        </tr>
+
+        @{
+            foreach (var item in Model)
+            {
+
+                //int Nr = item.getRecursive() * int.Parse(session.getAttribute("recursive").toString());
+
+                //int Nmcms = item.getRegular_regular() * int.Parse(session.getAttribute("regularRegular").toString());
+
+                //int Nmcrms = item.getRegular_recursive() * int.Parse(session.getAttribute("regularRecursive").toString());
+
+                //int Nrmcrms = item.getRecursive_recursive() * int.Parse(session.getAttribute("recursiveRecursive").toString());
+
+                //int Nrmcms = item.getRecursive_regular() * int.Parse(session.getAttribute("recursiveRegular").toString());
+
+                //int total = Nr + Nmcms + Nmcrms + Nrmcrms + Nrmcms + (item.getRegular_global() * int.Parse(session.getAttribute("regularGlobal").toString())) + (item.getRegular_regular() * int.Parse(session.getAttribute("recursiveGlobal").toString()));
+
+
+
+
+                <tr style="padding:23px;">
+                    <td> @item.getLineNumber() </td>
+                    <td> @item.getLine() </td>
+                    <td> @item.getRecursive() </td>
+                    <td> @item.getRegular_regular() </td>
+                    <td> 0 </td>
+                    <td> @item.getRegular_recursive() </td>
+                    <td> 0 </td>
+                    <td> @item.getRecursive_recursive() </td>
+                    <td> 0 </td>
+                    <td> @item.getRecursive_regular() </td>
+                    <td> 0 </td>
+                    <td> @item.getRegular_global() </td>
+                    <td>0</td>
+                    <td> @item.getRegular_regular()  </td>
+                    <td> 0 </td>
+                    <td>  </td>
+                </tr>
+            }
+        }
+    </table>
+</body>
+
+</html>

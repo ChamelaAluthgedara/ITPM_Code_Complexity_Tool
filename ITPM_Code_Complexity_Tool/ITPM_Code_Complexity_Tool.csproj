@@ -225,6 +225,7 @@
     <Compile Include="Controllers\AllFactorsController.cs" />
     <Compile Include="Controllers\ComplexitySizeVariablesMethodsController.cs" />
     <Compile Include="Controllers\ControlStrctureController.cs" />
+    <Compile Include="Controllers\CouplingController.cs" />
     <Compile Include="Controllers\InheritanceController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -255,6 +256,8 @@
     <Compile Include="Models\Controlstructure.cs" />
     <Compile Include="Models\ControlStructureDetector.cs" />
     <Compile Include="Models\ControlStructureWeight.cs" />
+    <Compile Include="Models\Coupling.cs" />
+    <Compile Include="Models\Couplings_model.cs" />
     <Compile Include="Models\FileNames.cs" />
     <Compile Include="Models\Inheritance.cs" />
     <Compile Include="Models\Inheritance_Detector.cs" />
@@ -2263,6 +2266,7 @@
     <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightVariables.cshtml" />
     <Content Include="Views\ComplexitySizeVariablesMethods\SetWeightMethods.cshtml" />
     <Content Include="Views\Inheritance\setWeight.cshtml" />
+    <Content Include="Views\Coupling\Coupling_viewer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

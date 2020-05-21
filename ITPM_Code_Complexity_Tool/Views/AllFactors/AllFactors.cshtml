@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<ITPM_Code_Complexity_Tool.Models.AllFactors>
 
 @{
-    Layout = null;
 
-    //var fromURL = Request.Params["fileName"];
+    var fromURL = Request.Params["fileName"];
 
-    //if (fromURL == null)
-    //{
-    //    foreach (var name in ViewBag.FILES_FROM_UPLOAD)
-    //    {
-    //        fromURL = name.FILE_NAME;
-    //    }
+    if (fromURL == null)
+    {
+        foreach (var name in ViewBag.FILES_FROM_UPLOAD)
+        {
+            fromURL = name.FILE_NAME;
+        }
 
-    //}
+    }
 }
 
 <!DOCTYPE html>
@@ -22,6 +21,19 @@
 
     <h1 style="color:white;">Displaying the complexity of a single file due to all the factors</h1>
 
+    @*set weight again*@
+    @*<button type="button" onclick='window.location.href = "../ComplexitySizeVariablesMethods/SetWeightSize?fileName=@fromURL"' class="btn btn-success">
+            Set Weight Again
+        </button>*@
+
+    @*go to toool menu*@
+    <button type="button" onclick='window.location.href = "../Upload/Tool_Home?fileName=@fromURL"' class="btn btn-primary">
+        Go Back To Tool Menu
+    </button>
+
+
+    <br />
+    <br />
 
     <table style="color: black;">
         <tr id="ROW1">
@@ -96,20 +108,20 @@
                 </tr>
             }
         }
-    <tr id="ROW1">
+        <tr id="ROW1">
 
 
-                <td style="color:white;font-weight:bold;background-color:black;"> Total </td>
-                <td style="color:white;font-weight:bold;background-color:black;"></td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCsColumn</td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCvColumn</td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCmColumn</td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCiColumn</td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCtsColumn</td>
-                <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalTCpsAllFColumn</td>
-      
+            <td style="color:white;font-weight:bold;background-color:black;"> Total </td>
+            <td style="color:white;font-weight:bold;background-color:black;"></td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCsColumn</td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCvColumn</td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCmColumn</td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCiColumn</td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalCtsColumn</td>
+            <td style="color:white;font-weight:bold;background-color:red;"> @ViewBag.totalTCpsAllFColumn</td>
 
-    </tr>
+
+        </tr>
     </table>
 </body>
 

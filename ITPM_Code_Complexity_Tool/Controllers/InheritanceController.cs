@@ -15,7 +15,7 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         private int INHERITED_THREE_CLASSES = 3;
         private int INHERITED_MORE_THAN_FOUR_CLASSES = 4;
 
-       
+
         private Models.Inheritance_Detector detector = new Models.Inheritance_Detector();
 
 
@@ -25,13 +25,13 @@ namespace ITPM_Code_Complexity_Tool.Controllers
         {
             //Model Class
             string NAME = "";
-            TempData["FILE"] = "";
+            //TempData["FILE"] = "";
 
-           
+
             if (Request.Params["fileName"] != null)
             {
                 NAME = Request.Params["fileName"];
-                TempData["FILE"] = NAME;
+                //TempData["FILE"] = NAME;
             }
             else
             {
@@ -39,10 +39,10 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             }
 
             //Setting Weight variables
-            if( Request.Params["ONE"] != null)
+            if (Request.Params["ONE"] != null)
             {
 
-                int NO_CLASS = int.Parse( Request.Params["ZERO"] );
+                int NO_CLASS = int.Parse(Request.Params["ZERO"]);
                 int ONE_CLASS = int.Parse(Request.Params["ONE"]);
                 int TWO_CLASSES = int.Parse(Request.Params["TWO"]);
                 int THREE_CLASSES = int.Parse(Request.Params["THREE"]);
@@ -59,13 +59,13 @@ namespace ITPM_Code_Complexity_Tool.Controllers
 
 
             }
-            
 
 
 
 
-        // var detector = new Models.Inheritance_Detector();
-        detector.SetFileName( NAME );
+
+            // var detector = new Models.Inheritance_Detector();
+            detector.SetFileName(NAME);
             detector.ProcessFile();
             var retVal = detector.showData();
             return View(retVal);
@@ -78,20 +78,32 @@ namespace ITPM_Code_Complexity_Tool.Controllers
             ViewData["TWO_CLASS"] = this.INHERITED_TWO_CLASSES;
             ViewData["THREE_CLASS"] = this.INHERITED_THREE_CLASSES;
             ViewData["MORE_THAN_FOUR"] = this.INHERITED_MORE_THAN_FOUR_CLASSES;
-            
+
+            string name2 = Request.Params["fileName"];
+            TempData["FILE"] = name2;
+
             return View();
         }
 
         public ActionResult setIt()
         {
-            int no  =int.Parse( Request.Params["ZERO"] );
+            int no = int.Parse(Request.Params["ZERO"]);
             int one = int.Parse(Request.Params["ONE"]);
             int two = int.Parse(Request.Params["TWO"]);
             int three = int.Parse(Request.Params["THREE"]);
             int four = int.Parse(Request.Params["MORE_FOUR"]);
-            string name2 = TempData["FILE"].ToString();
+            string name2 = Request.Params["fileName"];
+            if (name2 == null)
+            {
+                name2 = TempData["FILE"].ToString();
+            }
+            else
+            {
+                TempData["FILE"] = name2;
+            }
 
-            return Redirect("Inheritance_viewer?fileName=" + name2 + "&ZERO=" + no + "&ONE="+one+"&TWO="+two+"&THREE="+three+"&FOUR="+four );
+
+            return Redirect("Inheritance_viewer?fileName=" + name2 + "&ZERO=" + no + "&ONE=" + one + "&TWO=" + two + "&THREE=" + three + "&FOUR=" + four);
 
 
 
