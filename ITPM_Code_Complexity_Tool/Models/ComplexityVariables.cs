@@ -9,42 +9,41 @@ namespace ITPM_Code_Complexity_Tool.Models
 {
     public class ComplexityVariables
     {
-        int lineNo = 0;
-
-        public int totalCv;
-        public int totalWeightDueToVScope;
+        int lineNo = 0; // read code line number
+        public int totalCv; // total complexity due to variables
+        public int totalWeightDueToVScope; //weight for variable scope
         public int totalNoPrimitiveDataTypeVariables;
         public int totalNoCompositeDataTypeVariables;
 
 
-        public static Boolean globalVariable;
+        public static Boolean globalVariable; // global varibale detector
         public Boolean detected = false;
 
         CdueToVariables c = new CdueToVariables();
 
-        static int WeightGlobalVariable;
-        static int WeightLocalVariable;
-        static int WeightPrimitiveDataTypeVariable;
-        static int WeightCompositeDataTypeVariable;
-        static int WeightDueToVScope;
+        static int WeightGlobalVariable; // dynamic weight for global variable
+        static int WeightLocalVariable; // dynamic weight for local variable
+        static int WeightPrimitiveDataTypeVariable; // dynamic weight for primitive data type variable
+        static int WeightCompositeDataTypeVariable; // dynamic weight for composite data type variable
+        static int WeightDueToVScope; // dynamic weight for variable scope
 
         int NoPrimitiveDataTypeVariables = 0;
         int NoCompositeDataTypeVariables = 0;
         int Cv = 0;
         public int CvouterAccess;
 
-        private String FILE_NAME;
+        private String FILE_NAME; // file name initialization
 
+        // template for primitive data types
         public static string[] primitiveDataTypes = { "int ", "char ", "byte ", "short ", "long ", "boolean ", "float ", "double ", "String " };
-
+        // template for composite data types
         public static string[] compositeDataTypes = { "ArrayList ", "List", "[" };
 
-        List<string> allMethods = new List<string>();
-
-
+        // list for calculated data by line
         List<CdueToVariables> completeList = new List<CdueToVariables>();
 
 
+        // initializing weights
         public void getWeight(int globalVariable, int localVariable, int primitiveDataTypeVariable, int CompositeDataTypeVariable)
         {
             WeightGlobalVariable = globalVariable;
@@ -81,7 +80,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                     while ((line = sr.ReadLine()) != null)
                     {
                         //this.Detect(line);
-                        this.GetVariablesCount(line);
+                        this.GetVariablesCount(line); // parse single row for calculations
                     }
                 }
             }
@@ -95,22 +94,17 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public void GetVariablesCount(string line)
         {
-
-            // Console.WriteLine("Im from GetVariablesCount Called:: " + c.WeightGlobalVariable);
             try
             {
-                //string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
                 try
                 {
                     foreach (string rowLine in line.Split('\n'))
                     {
-
-
-                        if (rowLine.Contains("public") || rowLine.Contains("private") || rowLine.Contains("protected"))
+                        if (rowLine.Contains("public") || rowLine.Contains("private") || rowLine.Contains("protected")) //line filtering
                         {
                             if (globalVariable == false)
                             {
-                                if (rowLine.Contains("class") && !rowLine.Contains("(") && !rowLine.Contains(")"))
+                                if (rowLine.Contains("class") && !rowLine.Contains("(") && !rowLine.Contains(")")) // chck global varibles
                                 {
                                     globalVariable = true;
                                 }
@@ -271,9 +265,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                         {
                             if (globalVariable == false)
                             {
-
-
-
 
                                 //local composite variables
                                 for (int i = 0; i < 1; i++)
@@ -437,9 +428,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                                     }
                                 }
                                 detected = false;
-
-
-
                             }
 
                             if (globalVariable)

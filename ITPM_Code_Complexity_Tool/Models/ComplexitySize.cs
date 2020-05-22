@@ -54,6 +54,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         private String FILE_NAME;
 
+        // static templates
         public static string[] numericalArray = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         public static string[] identifiresArray = { "class", "return", "main", "System", "out", "print", "printf" };
         public static string[] wordAray = { "class", "static", "extends", "java", "public", "private", "protected", "void", "true", "else", "default", "return", "null", "break", "this" };
@@ -107,18 +108,18 @@ namespace ITPM_Code_Complexity_Tool.Models
 
             try
             {
+                // keywords detector
                 foreach (string singleRow in line.Split('\n'))
                 {
                     for (int i = 0; i < wordAray.Length; i++)
                     {
-
-
                         if (singleRow.Contains(wordAray[i]) && !singleRow.Contains("import"))
                         {
                             keywordCount++;
                         }
                     }
                 }
+                // operators detector
                 foreach (string singleRow in line.Split('\n'))
                 {
                     System.Diagnostics.Debug.WriteLine("========================================================================== \n");
@@ -157,7 +158,6 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                         string[] operatorsHodings = singleRow.ToLower().Trim().Split(new char[] { ' ', '"', ')', '(', '{', '}', ':', '\r', '\n', ';', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'w', 'u', 'v', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' }, StringSplitOptions.RemoveEmptyEntries); //Split by words and remove new lines empty entries
 
-
                         for(int i = 0; i < operatorsHodings.Length; i++)
                         {
                             //System.Diagnostics.Debug.WriteLine("line no" + singleRow + ": Operators Holdings " + operatorsHodings[i]);
@@ -178,7 +178,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 }
 
 
-                //----------------------------------------------
+                // string literals detector
                 foreach (string singleRow in line.Split('\n'))
                 {
                     int count = singleRow.Split('"').Length - 1;
@@ -266,6 +266,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                 csOuterAccess = cs;
 
+                // change weights
                 totalNkw = totalNkw + keywordCount;
                 totalNid = totalNid + identifires;
                 totalNsl = totalNsl + stringLiteral;
@@ -279,6 +280,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                 numricalCount = 0;
                 identifires = 0;
                 cs = 0;
+                // pass data to constructor
                 CdueToSize c = new CdueToSize(this.totalNkw, this.totalNid, this.totalNop, this.totalNnv, this.totalNsl, this.totalCS);
             }
             finally
@@ -290,7 +292,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public List<CdueToSize> showData()
         {
             System.Diagnostics.Debug.WriteLine("Am in All Size : " + completeList);
-            return completeList;
+            return completeList; // pass values to controller
         }
 
     }

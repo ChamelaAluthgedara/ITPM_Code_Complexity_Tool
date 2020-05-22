@@ -21,6 +21,7 @@ namespace ITPM_Code_Complexity_Tool.Models
         public Boolean detected = false;
         public int k = 0;
 
+        // variables
         int lineNo = 0;
         public int CmouterAccess;
         public int Cm;
@@ -46,11 +47,16 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         List<CdueToMethod> completeList = new List<CdueToMethod>();
 
+        //primitive type template
+        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double", "String" };
+
+
         public ComplexityMethods()  //Constructor
         {
 
         }
 
+        // weight initialization
         public void getWeight(int methodPeReturnType, int methodCReturnType, int methodVoid, int methodPDataTypeParameter, int methodCTypeParameter)
         {
             Wprimitivedtp = methodPeReturnType;
@@ -66,9 +72,6 @@ namespace ITPM_Code_Complexity_Tool.Models
         {
             this.FILE_NAME = fileName;
         }
-
-        public static string[] primitiveTypes = { "char", "byte", "short", "int", "long", "boolean", "float", "double", "String" };
-
 
         public void ProcessFile()
         {
@@ -104,11 +107,12 @@ namespace ITPM_Code_Complexity_Tool.Models
             try
             {
 
-                foreach (string singleRow in line.Split('\n'))
+                foreach (string singleRow in line.Split('\n')) // gives code line by line
                 {
                     CdueToMethod c2 = new CdueToMethod();
                     c2.voidDetected = false;
 
+                    // method return type detector
                     if (singleRow.Contains("public") || singleRow.Contains("private") || singleRow.Contains("protected"))
                     {
 
@@ -128,6 +132,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                             }
                         }
                     }
+                    // method primitive return type detector
                     foreach (string v in primitiveTypes)
                     {
 
@@ -154,7 +159,7 @@ namespace ITPM_Code_Complexity_Tool.Models
                                     }
                                 }
 
-
+                                //composite return type detector
                                 if (singleRow.Contains(v))
                                 {
                                     //////method return type

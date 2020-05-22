@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ITPM_Code_Complexity_Tool.Models
 {
-    public class CdueToSize
+    public class CdueToSize //complexity due to size
     {
         public int lineNo;
         public String CODELINE;
@@ -62,7 +62,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
     }
 
-    public class CdueToVariables
+    public class CdueToVariables //complexity due to variables
     {
         public int lineNo;
         public String CODELINE;
@@ -104,7 +104,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
     }
 
-    public class CdueToMethod
+    public class CdueToMethod //complexity due to methods
     {
         public int lineNo;
         public String CODELINE;

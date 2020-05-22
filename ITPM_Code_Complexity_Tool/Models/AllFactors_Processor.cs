@@ -125,8 +125,10 @@ namespace ITPM_Code_Complexity_Tool.Models
                     size.GetKeywordCount(line);
                     variables.GetVariablesCount(line);
                     methods.GetMethodCount(line);
-                    inheritance.Detect(line);
-                    controlStructure.ControStructureDetect(line, Weight);
+
+                    inheritance.Detect(line); // inheritance detector has static weights
+
+                    controlStructure.ControStructureDetect(line, Weight);// controlStructure detector has static weights
 
                     this.lineNo++;
                     this.codeLine = size.codeLine;
@@ -138,9 +140,9 @@ namespace ITPM_Code_Complexity_Tool.Models
                     this.Cts = controlStructure.CtsouterAccess;
 
 
-                    size.getWeight(weightKeyword, WeightIdentifers, WeightOperators, WeightNumericalVal, WeightStringLiteral);
-                    variables.getWeight(globalVariable, localVariable, primitiveDataTypeVariable, CompositeDataTypeVariable);
-                    methods.getWeight(methodPeReturnType, methodCReturnType, methodVoid, methodPDataTypeParameter, methodCTypeParameter);
+                    size.getWeight(weightKeyword, WeightIdentifers, WeightOperators, WeightNumericalVal, WeightStringLiteral); //pass weights
+                    variables.getWeight(globalVariable, localVariable, primitiveDataTypeVariable, CompositeDataTypeVariable); //pass weights
+                    methods.getWeight(methodPeReturnType, methodCReturnType, methodVoid, methodPDataTypeParameter, methodCTypeParameter); //pass weights
 
 
 
@@ -148,6 +150,7 @@ namespace ITPM_Code_Complexity_Tool.Models
 
                     Totalcps = this.CS + this.CV + this.CM + this.CI + this.Cts;
 
+                    // table bottom row total column calculation
                     totalCsColumn = totalCsColumn + this.CS;
                     totalCvColumn = totalCvColumn + this.CV;
                     totalCmColumn = totalCmColumn + this.CM;
@@ -165,8 +168,6 @@ namespace ITPM_Code_Complexity_Tool.Models
                     CI = 0;
                     Cts = 0;
                     Totalcps = 0;
-
-
                 }
             }
             catch (Exception e)
@@ -177,8 +178,6 @@ namespace ITPM_Code_Complexity_Tool.Models
 
         public List<AllFactors> showData()
         {
-
-            // System.Diagnostics.Debug.WriteLine("Am in All factors : " + completeList);
             return completeList;
         }
     }
