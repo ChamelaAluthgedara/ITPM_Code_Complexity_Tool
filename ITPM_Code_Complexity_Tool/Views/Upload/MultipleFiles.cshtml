@@ -23,18 +23,19 @@
 
 
 <body>
-    <h2 style="color:white"> Uploaded Files </h2>
-
+    @*<h2 style="color:white"> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uploaded Files </h2>*@
+    <br/><br/><br/>
     <div class="container">
-        <h2 style="color:white">Recent Uploads</h2>
+        <h2 style="color:white;text-align:center;font-weight:bold;font-size:40px;";>Folder Hierarchy</h2>
         <div class="list-group">
-
+            <br /><br />
 
 
             @{
                 foreach (var pop in ViewBag.FILES_FROM_UPLOAD)
                 {
-                    <a href="Tool_Home?fileName=@pop.FILE_NAME" + class="list-group-item"> @pop.FILE_NAME </a>
+
+                    <a style="color:black;font-weight:bold;background-color:aliceblue;text-align:left;text-shadow:inherit;" href="Tool_Home?fileName=@pop.FILE_NAME" + class="list-group-item"> @pop.FILE_NAME </a>
 
                 }
             }
