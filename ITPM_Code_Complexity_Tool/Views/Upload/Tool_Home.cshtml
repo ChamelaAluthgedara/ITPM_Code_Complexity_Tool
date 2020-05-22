@@ -1,6 +1,6 @@
 ﻿@{
-        Layout = null;
-    }
+    Layout = null;
+}
 
 <html>
 
@@ -20,8 +20,6 @@
 
 }
 
-
-
 <head>
     <title>Factors</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -32,11 +30,22 @@
     <link href="~/Content/style1.css" rel="stylesheet" />
     <link rel="stylesheet" href='@Url.Content("~/Content/style1.css")' asp-append-version="true" />
     <!-- Site CSS -->
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> 
 </head>
 <body>
     <br />
-    <h1 style="color:white">Calculate Code Complexity Due To, </h1>
+    <h1 style="color:white">Calculate Code Complexity Due To, </h1> @*go to toool menu*@
+    <button type="button" onclick='window.location.href = "../Upload/UploadFile"' class="btn btn-primary">
+        Upload Another File(s)
+    </button>
+    @if (@ViewBag.multipleTrue == 1)
+    {
+        <button type="button" onclick='window.location.href = "../Upload/MultipleFiles"' class="btn btn-primary">
+            Go To Folder Hierarchy
+        </button>
+    }
+
+
     <div class="row">
         <div class="col-md-4">
             <div class="card1">
